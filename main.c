@@ -19,6 +19,7 @@
 
 #include "system.h"        /* System funct/params, like osc/peripheral config */
 #include "user.h"          /* User funct/params, such as InitApp */
+#define _XTAL_FREQ 8000000
 
 /******************************************************************************/
 /* User Global Variable Declaration                                           */
