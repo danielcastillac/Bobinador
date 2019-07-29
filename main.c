@@ -24,9 +24,13 @@
 /******************************************************************************/
 /* User Global Variable Declaration                                           */
 /******************************************************************************/
+unsigned int motor1; // Cycle number for motor 1
+unsigned int motor2; // Cycle number for motor 2
+bool RA0state = 0; // Current state of STEP pin for motor 1
+bool DIR_1 = 0; // Direction of motor 1
 
 /* i.e. uint8_t <variable_name>; */
-
+extern unsigned int overflow;
 /******************************************************************************/
 /* Main Program                                                               */
 /******************************************************************************/
@@ -43,8 +47,19 @@ void main(void)
 
     while(1)
     {
-
+        switch (overflow) {
+        /* Motor control routine */
+            case motor1:
+                LATAbits.LA0 = !RA0state; // Invert state
+                break;
+        }
+        
+        LATAbits.LA1 = DIR_1; // Set motor 1 direction
+    
+        if(overflow == 255) {
+            /* Restart counter for motor control */
+            overflow = 0; 
+        }
     }
-
 }
 
