@@ -3196,9 +3196,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "50
 [e $ ! == % _overflow -> -> 2 `i `ui -> -> 0 `i `ui 326  ]
 {
-[; ;main.c: 51: LATAbits.LA0 = !(RA0state);
+[; ;main.c: 51: LATAbits.LA0 = (unsigned) !RA0state;
 "51
-[e = . . _LATAbits 1 0 -> -> ! != -> _RA0state `i -> -> -> 0 `i `uc `i `i `uc ]
+[e = . . _LATAbits 1 0 -> -> -> ! != -> _RA0state `i -> -> -> 0 `i `uc `i `i `ui `uc ]
 "52
 }
 [e :U 326 ]

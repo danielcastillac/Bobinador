@@ -11,11 +11,6 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\Daniel\AppData\Local\Temp\s64k.obj
-idloc IDLOC 0 200000 200000 8 1
-init CODE 0 E E 4 1
-reset_vec CODE 0 0 0 4 1
-config CONFIG 0 300000 300000 E 1
 $dist/C18_18F87K22/production\Bobinador.production.obj
 cinit CODE 0 138 138 2E 1
 intcode_body CODE 0 12 12 A2 1
@@ -28,6 +23,11 @@ temp COMRAM 1 1C 1C 1 1
 intcode CODE 0 8 8 6 1
 dataCOMRAM COMRAM 1 1A 1A 2 1
 bssCOMRAM COMRAM 1 14 14 6 1
+$C:\Users\Daniel\AppData\Local\Temp\s69g.obj
+idloc IDLOC 0 200000 200000 8 1
+init CODE 0 E E 4 1
+reset_vec CODE 0 0 0 4 1
+config CONFIG 0 300000 300000 E 1
 # %UNUSED Section
 # This section enumerates the unused ranges of each CLASS. Each entry
 # is described on a single line as follows:
@@ -113,30 +113,30 @@ FC text0 CODE >44:D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\m
 126 text0 CODE >56:D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\main.c
 12E text0 CODE >58:D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\main.c
 136 text0 CODE >48:D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\main.c
-138 cinit CODE >1749:C:\Users\Daniel\AppData\Local\Temp\s64k.
-138 cinit CODE >1751:C:\Users\Daniel\AppData\Local\Temp\s64k.
-138 cinit CODE >1754:C:\Users\Daniel\AppData\Local\Temp\s64k.
-138 cinit CODE >1786:C:\Users\Daniel\AppData\Local\Temp\s64k.
-13A cinit CODE >1787:C:\Users\Daniel\AppData\Local\Temp\s64k.
-13C cinit CODE >1788:C:\Users\Daniel\AppData\Local\Temp\s64k.
-13E cinit CODE >1789:C:\Users\Daniel\AppData\Local\Temp\s64k.
-140 cinit CODE >1790:C:\Users\Daniel\AppData\Local\Temp\s64k.
-142 cinit CODE >1791:C:\Users\Daniel\AppData\Local\Temp\s64k.
-144 cinit CODE >1792:C:\Users\Daniel\AppData\Local\Temp\s64k.
-146 cinit CODE >1793:C:\Users\Daniel\AppData\Local\Temp\s64k.
-14A cinit CODE >1794:C:\Users\Daniel\AppData\Local\Temp\s64k.
-14C cinit CODE >1795:C:\Users\Daniel\AppData\Local\Temp\s64k.
-150 cinit CODE >1799:C:\Users\Daniel\AppData\Local\Temp\s64k.
-152 cinit CODE >1800:C:\Users\Daniel\AppData\Local\Temp\s64k.
-154 cinit CODE >1801:C:\Users\Daniel\AppData\Local\Temp\s64k.
-156 cinit CODE >1802:C:\Users\Daniel\AppData\Local\Temp\s64k.
-158 cinit CODE >1803:C:\Users\Daniel\AppData\Local\Temp\s64k.
-15A cinit CODE >1804:C:\Users\Daniel\AppData\Local\Temp\s64k.
-15C cinit CODE >1810:C:\Users\Daniel\AppData\Local\Temp\s64k.
-15C cinit CODE >1812:C:\Users\Daniel\AppData\Local\Temp\s64k.
-15E cinit CODE >1813:C:\Users\Daniel\AppData\Local\Temp\s64k.
-160 cinit CODE >1814:C:\Users\Daniel\AppData\Local\Temp\s64k.
-162 cinit CODE >1815:C:\Users\Daniel\AppData\Local\Temp\s64k.
+138 cinit CODE >1749:C:\Users\Daniel\AppData\Local\Temp\s69g.
+138 cinit CODE >1751:C:\Users\Daniel\AppData\Local\Temp\s69g.
+138 cinit CODE >1754:C:\Users\Daniel\AppData\Local\Temp\s69g.
+138 cinit CODE >1786:C:\Users\Daniel\AppData\Local\Temp\s69g.
+13A cinit CODE >1787:C:\Users\Daniel\AppData\Local\Temp\s69g.
+13C cinit CODE >1788:C:\Users\Daniel\AppData\Local\Temp\s69g.
+13E cinit CODE >1789:C:\Users\Daniel\AppData\Local\Temp\s69g.
+140 cinit CODE >1790:C:\Users\Daniel\AppData\Local\Temp\s69g.
+142 cinit CODE >1791:C:\Users\Daniel\AppData\Local\Temp\s69g.
+144 cinit CODE >1792:C:\Users\Daniel\AppData\Local\Temp\s69g.
+146 cinit CODE >1793:C:\Users\Daniel\AppData\Local\Temp\s69g.
+14A cinit CODE >1794:C:\Users\Daniel\AppData\Local\Temp\s69g.
+14C cinit CODE >1795:C:\Users\Daniel\AppData\Local\Temp\s69g.
+150 cinit CODE >1799:C:\Users\Daniel\AppData\Local\Temp\s69g.
+152 cinit CODE >1800:C:\Users\Daniel\AppData\Local\Temp\s69g.
+154 cinit CODE >1801:C:\Users\Daniel\AppData\Local\Temp\s69g.
+156 cinit CODE >1802:C:\Users\Daniel\AppData\Local\Temp\s69g.
+158 cinit CODE >1803:C:\Users\Daniel\AppData\Local\Temp\s69g.
+15A cinit CODE >1804:C:\Users\Daniel\AppData\Local\Temp\s69g.
+15C cinit CODE >1810:C:\Users\Daniel\AppData\Local\Temp\s69g.
+15C cinit CODE >1812:C:\Users\Daniel\AppData\Local\Temp\s69g.
+15E cinit CODE >1813:C:\Users\Daniel\AppData\Local\Temp\s69g.
+160 cinit CODE >1814:C:\Users\Daniel\AppData\Local\Temp\s69g.
+162 cinit CODE >1815:C:\Users\Daniel\AppData\Local\Temp\s69g.
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -155,7 +155,7 @@ __Hspace_1 1D 0 ABS 0 - dist/C18_18F87K22/production\Bobinador.production.obj
 __Hspace_2 0 0 ABS 0 - dist/C18_18F87K22/production\Bobinador.production.obj
 __CFG_IESO$OFF 0 0 ABS 0 - dist/C18_18F87K22/production\Bobinador.production.obj
 __Hibigdata 0 0 CODE 0 ibigdata dist/C18_18F87K22/production\Bobinador.production.obj
-__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\Daniel\AppData\Local\Temp\s64k.obj
+__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\Daniel\AppData\Local\Temp\s69g.obj
 __Heeprom_data 0 0 EEDATA 0 eeprom_data dist/C18_18F87K22/production\Bobinador.production.obj
 __CFG_MCLRE$ON 0 0 ABS 0 - dist/C18_18F87K22/production\Bobinador.production.obj
 _overflow 16 0 COMRAM 1 bssCOMRAM dist/C18_18F87K22/production\Bobinador.production.obj
@@ -164,21 +164,21 @@ _LATA F89 0 ABS 0 - dist/C18_18F87K22/production\Bobinador.production.obj
 _LATB F8A 0 ABS 0 - dist/C18_18F87K22/production\Bobinador.production.obj
 _LATC F8B 0 ABS 0 - dist/C18_18F87K22/production\Bobinador.production.obj
 _TMR0 FD6 0 ABS 0 - dist/C18_18F87K22/production\Bobinador.production.obj
-___sp 0 0 STACK 2 stack C:\Users\Daniel\AppData\Local\Temp\s64k.obj
+___sp 0 0 STACK 2 stack C:\Users\Daniel\AppData\Local\Temp\s69g.obj
 _main F8 0 CODE 0 text0 dist/C18_18F87K22/production\Bobinador.production.obj
 btemp 1C 0 COMRAM 1 temp dist/C18_18F87K22/production\Bobinador.production.obj
-start E 0 CODE 0 init C:\Users\Daniel\AppData\Local\Temp\s64k.obj
+start E 0 CODE 0 init C:\Users\Daniel\AppData\Local\Temp\s69g.obj
 __size_of_main 0 0 ABS 0 - dist/C18_18F87K22/production\Bobinador.production.obj
 __HbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/C18_18F87K22/production\Bobinador.production.obj
 __Hpowerup E 0 CODE 0 powerup dist/C18_18F87K22/production\Bobinador.production.obj
 __end_of_ConfigureOscillator 16A 0 CODE 0 text2 dist/C18_18F87K22/production\Bobinador.production.obj
 _T0CONbits FD5 0 ABS 0 - dist/C18_18F87K22/production\Bobinador.production.obj
 __HdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/C18_18F87K22/production\Bobinador.production.obj
-__accesstop 60 0 ABS 0 - C:\Users\Daniel\AppData\Local\Temp\s64k.obj
-intlevel0 0 0 CODE 0 text C:\Users\Daniel\AppData\Local\Temp\s64k.obj
-intlevel1 0 0 CODE 0 text C:\Users\Daniel\AppData\Local\Temp\s64k.obj
-intlevel2 0 0 CODE 0 text C:\Users\Daniel\AppData\Local\Temp\s64k.obj
-intlevel3 0 0 CODE 0 text C:\Users\Daniel\AppData\Local\Temp\s64k.obj
+__accesstop 60 0 ABS 0 - C:\Users\Daniel\AppData\Local\Temp\s69g.obj
+intlevel0 0 0 CODE 0 text C:\Users\Daniel\AppData\Local\Temp\s69g.obj
+intlevel1 0 0 CODE 0 text C:\Users\Daniel\AppData\Local\Temp\s69g.obj
+intlevel2 0 0 CODE 0 text C:\Users\Daniel\AppData\Local\Temp\s69g.obj
+intlevel3 0 0 CODE 0 text C:\Users\Daniel\AppData\Local\Temp\s69g.obj
 __LbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/C18_18F87K22/production\Bobinador.production.obj
 __CFG_USBDIV$1 0 0 ABS 0 - dist/C18_18F87K22/production\Bobinador.production.obj
 _InitApp B4 0 CODE 0 text1 dist/C18_18F87K22/production\Bobinador.production.obj
@@ -193,8 +193,8 @@ __Hifardata 0 0 CODE 0 ifardata dist/C18_18F87K22/production\Bobinador.productio
 __Hclrtext 0 0 ABS 0 clrtext dist/C18_18F87K22/production\Bobinador.production.obj
 __pidataCOMRAM 166 0 CODE 0 idataCOMRAM dist/C18_18F87K22/production\Bobinador.production.obj
 _ADCON1 FC1 0 ABS 0 - dist/C18_18F87K22/production\Bobinador.production.obj
-___inthi_sp 0 0 STACK 2 stack C:\Users\Daniel\AppData\Local\Temp\s64k.obj
-___intlo_sp 0 0 STACK 2 stack C:\Users\Daniel\AppData\Local\Temp\s64k.obj
+___inthi_sp 0 0 STACK 2 stack C:\Users\Daniel\AppData\Local\Temp\s69g.obj
+___intlo_sp 0 0 STACK 2 stack C:\Users\Daniel\AppData\Local\Temp\s69g.obj
 __LdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/C18_18F87K22/production\Bobinador.production.obj
 __Hintcode_body 0 0 ABS 0 intcode_body dist/C18_18F87K22/production\Bobinador.production.obj
 __Lintsave_regs 0 0 BIGRAM 1 intsave_regs dist/C18_18F87K22/production\Bobinador.production.obj
@@ -231,7 +231,7 @@ __Htext1 0 0 ABS 0 text1 dist/C18_18F87K22/production\Bobinador.production.obj
 __Htext2 0 0 ABS 0 text2 dist/C18_18F87K22/production\Bobinador.production.obj
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/C18_18F87K22/production\Bobinador.production.obj
 __Hbigram 0 0 ABS 0 bigram dist/C18_18F87K22/production\Bobinador.production.obj
-__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\Daniel\AppData\Local\Temp\s64k.obj
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\Daniel\AppData\Local\Temp\s69g.obj
 __Hcomram 0 0 ABS 0 comram dist/C18_18F87K22/production\Bobinador.production.obj
 __Hconfig 30000E 0 CONFIG 0 config dist/C18_18F87K22/production\Bobinador.production.obj
 __CFG_LPT1OSC$OFF 0 0 ABS 0 - dist/C18_18F87K22/production\Bobinador.production.obj
@@ -306,8 +306,8 @@ _LATAbits F89 0 ABS 0 - dist/C18_18F87K22/production\Bobinador.production.obj
 __Lfarbss 0 0 FARRAM 0 farbss dist/C18_18F87K22/production\Bobinador.production.obj
 __Lfardata 0 0 FARRAM 0 fardata dist/C18_18F87K22/production\Bobinador.production.obj
 __CFG_CCP2MX$ON 0 0 ABS 0 - dist/C18_18F87K22/production\Bobinador.production.obj
-stackhi 7FF 0 ABS 0 - C:\Users\Daniel\AppData\Local\Temp\s64k.obj
-stacklo 60 0 ABS 0 - C:\Users\Daniel\AppData\Local\Temp\s64k.obj
+stackhi 7FF 0 ABS 0 - C:\Users\Daniel\AppData\Local\Temp\s69g.obj
+stacklo 60 0 ABS 0 - C:\Users\Daniel\AppData\Local\Temp\s69g.obj
 __Lintcode 8 0 CODE 0 intcode dist/C18_18F87K22/production\Bobinador.production.obj
 __Lintret 0 0 ABS 0 intret dist/C18_18F87K22/production\Bobinador.production.obj
 __Lirdata 0 0 CODE 0 irdata dist/C18_18F87K22/production\Bobinador.production.obj
@@ -334,7 +334,7 @@ __ptext1 B4 0 CODE 0 text1 dist/C18_18F87K22/production\Bobinador.production.obj
 __ptext2 168 0 CODE 0 text2 dist/C18_18F87K22/production\Bobinador.production.obj
 __end_of_InitApp F8 0 CODE 0 text1 dist/C18_18F87K22/production\Bobinador.production.obj
 __Lstruct 0 0 COMRAM 1 struct dist/C18_18F87K22/production\Bobinador.production.obj
-__ramtop 800 0 RAM 0 ramtop C:\Users\Daniel\AppData\Local\Temp\s64k.obj
+__ramtop 800 0 RAM 0 ramtop C:\Users\Daniel\AppData\Local\Temp\s69g.obj
 __Lpowerup E 0 CODE 0 powerup dist/C18_18F87K22/production\Bobinador.production.obj
 __Leeprom_data 0 0 EEDATA 0 eeprom_data dist/C18_18F87K22/production\Bobinador.production.obj
 __size_of_ConfigureOscillator 0 0 ABS 0 - dist/C18_18F87K22/production\Bobinador.production.obj
