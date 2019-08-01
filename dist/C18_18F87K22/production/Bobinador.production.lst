@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.45 build -152302408 
-                                                                                               Thu Aug 01 12:27:18 2019
+                                                                                               Thu Aug 01 12:48:15 2019
 
 Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160504
      1                           	processor	18F2550
@@ -231,7 +231,7 @@ Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160
    217  000152  8289               	bsf	3977,1,c	;volatile
    218  000154                     u46:
    219                           
-   220                           ;main.c: 49: while (1) {
+   220                           ;main.c: 50: while (1) {
    221  000154  D7FF               	goto	u46
    222  000156                     __end_of_main:
    223                           	opt stack 0
@@ -309,43 +309,43 @@ Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160
    295                           ;user.c: 40: TRISAbits.RA0 = 0;
    296  0000EC  9092               	bcf	3986,0,c	;volatile
    297                           
-   298                           ;user.c: 42: TRISAbits.RA1 = 0;
+   298                           ;user.c: 41: TRISAbits.RA1 = 0;
    299  0000EE  9292               	bcf	3986,1,c	;volatile
    300                           
-   301                           ;user.c: 44: RCONbits.IPEN = 0;
+   301                           ;user.c: 43: RCONbits.IPEN = 0;
    302  0000F0  9ED0               	bcf	4048,7,c	;volatile
    303                           
-   304                           ;user.c: 46: INTCONbits.GIE = 1;
+   304                           ;user.c: 45: INTCONbits.GIE = 1;
    305  0000F2  8EF2               	bsf	intcon,7,c	;volatile
    306                           
-   307                           ;user.c: 47: INTCONbits.PEIE = 0;
+   307                           ;user.c: 46: INTCONbits.PEIE = 0;
    308  0000F4  9CF2               	bcf	intcon,6,c	;volatile
    309                           
-   310                           ;user.c: 48: INTCONbits.TMR0IE = 1;
+   310                           ;user.c: 47: INTCONbits.TMR0IE = 1;
    311  0000F6  8AF2               	bsf	intcon,5,c	;volatile
    312                           
-   313                           ;user.c: 49: INTCONbits.TMR0IF = 0;
+   313                           ;user.c: 48: INTCONbits.TMR0IF = 0;
    314  0000F8  94F2               	bcf	intcon,2,c	;volatile
    315                           
-   316                           ;user.c: 50: INTCON2bits.TMR0IP = 1;
+   316                           ;user.c: 49: INTCON2bits.TMR0IP = 1;
    317  0000FA  84F1               	bsf	intcon2,2,c	;volatile
    318                           
-   319                           ;user.c: 51: T0CONbits.T08BIT = 1;
+   319                           ;user.c: 50: T0CONbits.T08BIT = 1;
    320  0000FC  8CD5               	bsf	4053,6,c	;volatile
    321                           
-   322                           ;user.c: 52: T0CONbits.T0CS = 0;
+   322                           ;user.c: 51: T0CONbits.T0CS = 0;
    323  0000FE  9AD5               	bcf	4053,5,c	;volatile
    324                           
-   325                           ;user.c: 53: T0CONbits.PSA = 0;
+   325                           ;user.c: 52: T0CONbits.PSA = 0;
    326  000100  96D5               	bcf	4053,3,c	;volatile
    327                           
-   328                           ;user.c: 54: T0CONbits.T0PS = 0b101;
+   328                           ;user.c: 53: T0CONbits.T0PS = 0b101;
    329  000102  50D5               	movf	4053,w,c	;volatile
    330  000104  0BF8               	andlw	-8
    331  000106  0905               	iorlw	5
    332  000108  6ED5               	movwf	4053,c	;volatile
    333                           
-   334                           ;user.c: 55: TMR0 = 0x6;
+   334                           ;user.c: 54: TMR0 = 0x6;
    335  00010A  0E00               	movlw	0
    336  00010C  6ED7               	movwf	4055,c	;volatile
    337  00010E  0E06               	movlw	6
@@ -486,18 +486,18 @@ Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160
    472  000054  C01E  F012         	movff	btemp+2,??_high_isr+17
    473  000058  C01F  F013         	movff	btemp+3,??_high_isr+18
    474                           
-   475                           ;interrupts.c: 29: if(INTCONbits.TMR0IF) {
+   475                           ;interrupts.c: 29: if (INTCONbits.TMR0IF) {
    476  00005C  A4F2               	btfss	intcon,2,c	;volatile
    477  00005E  D012               	goto	i2l15
    478                           
    479                           ;interrupts.c: 31: INTCONbits.TMR0IF = 0;
    480  000060  94F2               	bcf	intcon,2,c	;volatile
    481                           
-   482                           ;interrupts.c: 33: overflow++;
+   482                           ;interrupts.c: 32: overflow++;
    483  000062  4A16               	infsnz	_overflow,f,c
    484  000064  2A17               	incf	_overflow+1,f,c
    485                           
-   486                           ;interrupts.c: 34: LATAbits.LA0 = !PORTAbits.RA0;
+   486                           ;interrupts.c: 33: LATAbits.LA0 = !PORTAbits.RA0;
    487  000066  B080               	btfsc	3968,0,c	;volatile
    488  000068  D003               	goto	i2u2_40
    489  00006A  6A01               	clrf	??_high_isr& (0+255),c
@@ -512,7 +512,7 @@ Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160
    498  000078  1801               	xorwf	??_high_isr,w,c
    499  00007A  6E89               	movwf	3977,c	;volatile
    500                           
-   501                           ;interrupts.c: 35: TMR0 = 50;
+   501                           ;interrupts.c: 34: TMR0 = 50;
    502  00007C  0E00               	movlw	0
    503  00007E  6ED7               	movwf	4055,c	;volatile
    504  000080  0E32               	movlw	50
@@ -774,7 +774,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.45 build -152302408 
-Symbol Table                                                                                   Thu Aug 01 12:27:18 2019
+Symbol Table                                                                                   Thu Aug 01 12:48:15 2019
 
                           u45 0152                            u46 0154                   __CFG_BORV$3 000000  
                 __CFG_CP0$OFF 000000                  __CFG_CP1$OFF 000000                  __CFG_CP2$OFF 000000  

@@ -3189,18 +3189,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 48: LATAbits.LA1 = DIR_1;
 "48
 [e = . . _LATAbits 1 1 _DIR_1 ]
-[; ;main.c: 49: while (1) {
-"49
+[; ;main.c: 50: while (1) {
+"50
 [e :U 324 ]
 {
-"51
+"52
 }
 [e :U 323 ]
-"49
+"50
 [e $U 324  ]
 [e :U 325 ]
-[; ;main.c: 51: }
 [; ;main.c: 52: }
-"52
+[; ;main.c: 53: }
+"53
 [e :UE 322 ]
 }

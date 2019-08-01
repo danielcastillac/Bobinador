@@ -44,9 +44,10 @@ void main(void) {
     InitApp();
 
     /* TODO <INSERT USER APPLICATION CODE HERE> */
-    
+
     LATAbits.LA1 = DIR_1; // Set motor 1 direction
+    
     while (1) {
-        
+
     }
 }

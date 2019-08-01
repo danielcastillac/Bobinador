@@ -38,7 +38,6 @@ void InitApp(void)
     ADCON1 = 0x0F; // All ports digital
     /* Initialize peripherals */
     TRISAbits.RA0 = 0; // Motor 1, STEP output
-    
     TRISAbits.RA1 = 0; // Motor 1, DIR output
     /* Configure the IPEN bit (1=on) in RCON to turn on/off int priorities */
     RCONbits.IPEN = 0; // Disable interrupt priorities
@@ -53,5 +52,4 @@ void InitApp(void)
     T0CONbits.PSA = 0; // Prescaler is assigned
     T0CONbits.T0PS = 0b101; // Prescaler value 1:64
     TMR0 = 0x6; // Preload value
-    // T0CONbits.TMR0ON = 1; // Enable timer by default
 }

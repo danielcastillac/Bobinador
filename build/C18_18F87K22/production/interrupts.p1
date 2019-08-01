@@ -3194,27 +3194,27 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 28: void interrupt high_isr(void) {
 [e :U _high_isr ]
 [f ]
-[; ;interrupts.c: 29: if(INTCONbits.TMR0IF) {
+[; ;interrupts.c: 29: if (INTCONbits.TMR0IF) {
 "29
 [e $ ! != -> . . _INTCONbits 0 2 `i -> -> -> 0 `i `Vuc `i 323  ]
 {
 [; ;interrupts.c: 31: INTCONbits.TMR0IF = 0;
 "31
 [e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-[; ;interrupts.c: 33: overflow++;
-"33
+[; ;interrupts.c: 32: overflow++;
+"32
 [e ++ _overflow -> -> 1 `i `ui ]
-[; ;interrupts.c: 34: LATAbits.LA0 = !PORTAbits.RA0;
-"34
+[; ;interrupts.c: 33: LATAbits.LA0 = !PORTAbits.RA0;
+"33
 [e = . . _LATAbits 1 0 -> -> ! != -> . . _PORTAbits 0 0 `i -> -> -> 0 `i `Vuc `i `i `uc ]
-[; ;interrupts.c: 35: TMR0 = 50;
-"35
+[; ;interrupts.c: 34: TMR0 = 50;
+"34
 [e = _TMR0 -> -> 50 `i `us ]
-"37
+"35
 }
 [e :U 323 ]
+[; ;interrupts.c: 35: }
 [; ;interrupts.c: 37: }
-[; ;interrupts.c: 39: }
-"39
+"37
 [e :UE 322 ]
 }

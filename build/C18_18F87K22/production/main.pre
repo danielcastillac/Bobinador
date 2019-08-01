@@ -4385,8 +4385,8 @@ InitApp();
 
 
 LATAbits.LA1 = DIR_1;
+
 while (1) {
 
 }
 }
-
