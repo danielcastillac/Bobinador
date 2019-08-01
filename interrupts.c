@@ -29,7 +29,11 @@ void interrupt high_isr(void) {
     if(INTCONbits.TMR0IF) {
         /* Timer0 ISR for motor control time-step */
         INTCONbits.TMR0IF = 0; // Restart TMR0 interrupt flag
-        T0CONbits.TMR0ON = 1; // Enable timer0
+        //T0CONbits.TMR0ON = 1; // Enable timer0
         overflow++;
-        }
+        LATAbits.LA0 = !PORTAbits.RA0; // Invert state
+        TMR0 = 50;
+        
+    }
+    
 }

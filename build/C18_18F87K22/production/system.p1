@@ -1,4 +1,15 @@
 Version 3.2 HI-TECH Software Intermediate Code
+"6809 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
+[s S299 :2 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 ]
+[n S299 . SCS IOFS OSTS IRCF IDLEN ]
+"6816
+[s S300 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S300 . SCS0 SCS1 FLTS . IRCF0 IRCF1 IRCF2 ]
+"6808
+[u S298 `S299 1 `S300 1 ]
+[n S298 . . . ]
+"6826
+[v _OSCCONbits `VS298 ~T0 @X0 0 e@4051 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -3142,7 +3153,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;system.c: 25: {
 [e :U _ConfigureOscillator ]
 [f ]
-[; ;system.c: 31: }
-"31
+[; ;system.c: 27: OSCCONbits.IRCF = 0b111;
+"27
+[e = . . _OSCCONbits 0 3 -> -> 7 `i `uc ]
+[; ;system.c: 28: OSCCONbits.SCS = 0b11;
+"28
+[e = . . _OSCCONbits 0 0 -> -> 3 `i `uc ]
+[; ;system.c: 32: }
+"32
 [e :UE 322 ]
 }

@@ -3261,45 +3261,42 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user.c: 40: TRISAbits.RA0 = 0;
 "40
 [e = . . _TRISAbits 1 0 -> -> 0 `i `uc ]
-[; ;user.c: 41: TRISAbits.RA1 = 0;
-"41
+[; ;user.c: 42: TRISAbits.RA1 = 0;
+"42
 [e = . . _TRISAbits 1 1 -> -> 0 `i `uc ]
-[; ;user.c: 43: RCONbits.IPEN = 0;
-"43
+[; ;user.c: 44: RCONbits.IPEN = 0;
+"44
 [e = . . _RCONbits 5 7 -> -> 0 `i `uc ]
-[; ;user.c: 45: INTCONbits.GIE = 1;
-"45
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;user.c: 46: INTCONbits.PEIE = 0;
+[; ;user.c: 46: INTCONbits.GIE = 1;
 "46
-[e = . . _INTCONbits 1 6 -> -> 0 `i `uc ]
-[; ;user.c: 47: INTCONbits.TMR0IE = 1;
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;user.c: 47: INTCONbits.PEIE = 0;
 "47
-[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
-[; ;user.c: 48: INTCONbits.TMR0IF = 0;
+[e = . . _INTCONbits 1 6 -> -> 0 `i `uc ]
+[; ;user.c: 48: INTCONbits.TMR0IE = 1;
 "48
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-[; ;user.c: 49: INTCON2bits.TMR0IP = 1;
+[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
+[; ;user.c: 49: INTCONbits.TMR0IF = 0;
 "49
-[e = . . _INTCON2bits 1 2 -> -> 1 `i `uc ]
-[; ;user.c: 50: T0CONbits.T08BIT = 0;
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+[; ;user.c: 50: INTCON2bits.TMR0IP = 1;
 "50
-[e = . . _T0CONbits 0 4 -> -> 0 `i `uc ]
-[; ;user.c: 51: T0CONbits.T0CS = 0;
+[e = . . _INTCON2bits 1 2 -> -> 1 `i `uc ]
+[; ;user.c: 51: T0CONbits.T08BIT = 1;
 "51
-[e = . . _T0CONbits 0 3 -> -> 0 `i `uc ]
-[; ;user.c: 52: T0CONbits.PSA = 0;
+[e = . . _T0CONbits 0 4 -> -> 1 `i `uc ]
+[; ;user.c: 52: T0CONbits.T0CS = 0;
 "52
-[e = . . _T0CONbits 0 1 -> -> 0 `i `uc ]
-[; ;user.c: 53: T0CONbits.T0PS = 0b000;
+[e = . . _T0CONbits 0 3 -> -> 0 `i `uc ]
+[; ;user.c: 53: T0CONbits.PSA = 0;
 "53
-[e = . . _T0CONbits 0 0 -> -> 0 `i `uc ]
-[; ;user.c: 54: TMR0 = 0x9E58;
+[e = . . _T0CONbits 0 1 -> -> 0 `i `uc ]
+[; ;user.c: 54: T0CONbits.T0PS = 0b101;
 "54
-[e = _TMR0 -> -> 40536 `ui `us ]
-[; ;user.c: 55: T0CONbits.TMR0ON = 1;
+[e = . . _T0CONbits 0 0 -> -> 5 `i `uc ]
+[; ;user.c: 55: TMR0 = 0x6;
 "55
-[e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
+[e = _TMR0 -> -> 6 `i `us ]
 [; ;user.c: 57: }
 "57
 [e :UE 322 ]

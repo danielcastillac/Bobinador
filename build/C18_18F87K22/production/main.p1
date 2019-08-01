@@ -4,8 +4,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ConfigureOscillator `(v ~T0 @X0 0 ef ]
 "14 user.h
 [v _InitApp `(v ~T0 @X0 0 ef ]
-"33 main.c
-[v _overflow `ui ~T0 @X0 0 e ]
 "2551 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [s S105 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S105 . LATA0 LATA1 LATA2 LATA3 LATA4 LATA5 LATA6 ]
@@ -3188,43 +3186,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 44: InitApp();
 "44
 [e ( _InitApp ..  ]
-[; ;main.c: 48: while (1) {
+[; ;main.c: 48: LATAbits.LA1 = DIR_1;
 "48
+[e = . . _LATAbits 1 1 _DIR_1 ]
+[; ;main.c: 49: while (1) {
+"49
 [e :U 324 ]
 {
-[; ;main.c: 50: if (overflow % 2 == 0) {
-"50
-[e $ ! == % _overflow -> -> 2 `i `ui -> -> 0 `i `ui 326  ]
-{
-[; ;main.c: 51: LATAbits.LA0 = (unsigned) !RA0state;
 "51
-[e = . . _LATAbits 1 0 -> -> -> ! != -> _RA0state `i -> -> -> 0 `i `uc `i `i `ui `uc ]
-"52
-}
-[e :U 326 ]
-[; ;main.c: 52: }
-[; ;main.c: 54: LATAbits.LA1 = DIR_1;
-"54
-[e = . . _LATAbits 1 1 _DIR_1 ]
-[; ;main.c: 56: if (overflow == 255) {
-"56
-[e $ ! == _overflow -> -> 255 `i `ui 327  ]
-{
-[; ;main.c: 58: overflow = 0;
-"58
-[e = _overflow -> -> 0 `i `ui ]
-"59
-}
-[e :U 327 ]
-"60
 }
 [e :U 323 ]
-"48
+"49
 [e $U 324  ]
 [e :U 325 ]
-[; ;main.c: 59: }
-[; ;main.c: 60: }
-[; ;main.c: 61: }
-"61
+[; ;main.c: 51: }
+[; ;main.c: 52: }
+"52
 [e :UE 322 ]
 }

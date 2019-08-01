@@ -4384,18 +4384,9 @@ InitApp();
 
 
 
+LATAbits.LA1 = DIR_1;
 while (1) {
 
-if (overflow % 2 == 0) {
-LATAbits.LA0 = (unsigned) !RA0state;
-}
-
-LATAbits.LA1 = DIR_1;
-
-if (overflow == 255) {
-
-overflow = 0;
-}
 }
 }
 

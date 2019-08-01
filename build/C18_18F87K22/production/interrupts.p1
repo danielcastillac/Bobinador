@@ -13,17 +13,39 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S314 . . . . ]
 "7431
 [v _INTCONbits `VS314 ~T0 @X0 0 e@4082 ]
-"6892
-[s S302 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S302 . T0PS PSA T0SE T0CS T08BIT TMR0ON ]
-"6900
-[s S303 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S303 . T0PS0 T0PS1 T0PS2 ]
-"6891
-[u S301 `S302 1 `S303 1 ]
-[n S301 . . . ]
-"6906
-[v _T0CONbits `VS301 ~T0 @X0 0 e@4053 ]
+"2551
+[s S105 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S105 . LATA0 LATA1 LATA2 LATA3 LATA4 LATA5 LATA6 ]
+"2560
+[s S106 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S106 . LA0 LA1 LA2 LA3 LA4 LA5 LA6 ]
+"2550
+[u S104 `S105 1 `S106 1 ]
+[n S104 . . . ]
+"2570
+[v _LATAbits `VS104 ~T0 @X0 0 e@3977 ]
+"2121
+[s S85 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S85 . RA0 RA1 RA2 RA3 RA4 RA5 RA6 ]
+"2130
+[s S86 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S86 . AN0 AN1 AN2 AN3 T0CKI AN4 OSC2 ]
+"2139
+[s S87 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S87 . . VREFM VREFP . LVDIN ]
+"2146
+[s S88 :5 `uc 1 :1 `uc 1 ]
+[n S88 . . HLVDIN ]
+"2150
+[s S89 :1 `uc 1 ]
+[n S89 . ULPWUIN ]
+"2120
+[u S84 `S85 1 `S86 1 `S87 1 `S88 1 `S89 1 ]
+[n S84 . . . . . . ]
+"2154
+[v _PORTAbits `VS84 ~T0 @X0 0 e@3968 ]
+"6956
+[v _TMR0 `Vus ~T0 @X0 0 e@4054 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -3179,17 +3201,20 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 31: INTCONbits.TMR0IF = 0;
 "31
 [e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-[; ;interrupts.c: 32: T0CONbits.TMR0ON = 1;
-"32
-[e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
 [; ;interrupts.c: 33: overflow++;
 "33
 [e ++ _overflow -> -> 1 `i `ui ]
+[; ;interrupts.c: 34: LATAbits.LA0 = !PORTAbits.RA0;
 "34
+[e = . . _LATAbits 1 0 -> -> ! != -> . . _PORTAbits 0 0 `i -> -> -> 0 `i `Vuc `i `i `uc ]
+[; ;interrupts.c: 35: TMR0 = 50;
+"35
+[e = _TMR0 -> -> 50 `i `us ]
+"37
 }
 [e :U 323 ]
-[; ;interrupts.c: 34: }
-[; ;interrupts.c: 35: }
-"35
+[; ;interrupts.c: 37: }
+[; ;interrupts.c: 39: }
+"39
 [e :UE 322 ]
 }

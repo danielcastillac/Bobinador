@@ -44,19 +44,9 @@ void main(void) {
     InitApp();
 
     /* TODO <INSERT USER APPLICATION CODE HERE> */
-
+    
+    LATAbits.LA1 = DIR_1; // Set motor 1 direction
     while (1) {
-
-        if (overflow % 2 == 0) {
-            LATAbits.LA0 = (unsigned) !RA0state; // Invert state
-        }
-
-        LATAbits.LA1 = DIR_1; // Set motor 1 direction
-
-        if (overflow == 255) {
-            /* Restart counter for motor control */
-            overflow = 0;
-        }
+        
     }
 }
-

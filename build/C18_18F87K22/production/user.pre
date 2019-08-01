@@ -4376,6 +4376,7 @@ LATC = 0;
 ADCON1 = 0x0F;
 
 TRISAbits.RA0 = 0;
+
 TRISAbits.RA1 = 0;
 
 RCONbits.IPEN = 0;
@@ -4385,12 +4386,10 @@ INTCONbits.PEIE = 0;
 INTCONbits.TMR0IE = 1;
 INTCONbits.TMR0IF = 0;
 INTCON2bits.TMR0IP = 1;
-T0CONbits.T08BIT = 0;
+T0CONbits.T08BIT = 1;
 T0CONbits.T0CS = 0;
 T0CONbits.PSA = 0;
-T0CONbits.T0PS = 0b000;
-TMR0 = 0x9E58;
-T0CONbits.TMR0ON = 1;
+T0CONbits.T0PS = 0b101;
+TMR0 = 0x6;
 
 }
-
