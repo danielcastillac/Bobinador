@@ -94,6 +94,39 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _T0CONbits `VS301 ~T0 @X0 0 e@4053 ]
 "6956
 [v _TMR0 `Vus ~T0 @X0 0 e@4054 ]
+"3266
+[s S126 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S126 . TRISC0 TRISC1 TRISC2 . TRISC6 TRISC7 ]
+"3274
+[s S127 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S127 . RC0 RC1 RC2 . RC6 RC7 ]
+"3265
+[u S125 `S126 1 `S127 1 ]
+[n S125 . . . ]
+"3283
+[v _TRISCbits `VS125 ~T0 @X0 0 e@3988 ]
+"7798
+[v _BRGH `Vb ~T0 @X0 0 e@32098 ]
+"7796
+[v _BRG16 `Vb ~T0 @X0 0 e@32195 ]
+"4471
+[v _SPBRG `Vuc ~T0 @X0 0 e@4015 ]
+"8708
+[v _SPEN `Vb ~T0 @X0 0 e@32095 ]
+"8762
+[v _SYNC `Vb ~T0 @X0 0 e@32100 ]
+"8956
+[v _TXEN `Vb ~T0 @X0 0 e@32101 ]
+"7902
+[v _CREN `Vb ~T0 @X0 0 e@32092 ]
+"8944
+[v _TX9 `Vb ~T0 @X0 0 e@32102 ]
+"8668
+[v _RX9 `Vb ~T0 @X0 0 e@32094 ]
+"8642
+[v _RCIE `Vb ~T0 @X0 0 e@31981 ]
+"8960
+[v _TXIE `Vb ~T0 @X0 0 e@31980 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -3231,73 +3264,110 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user.h: 14: void InitApp(void);
 "28 user.c
 [v _InitApp `(v ~T0 @X0 1 ef ]
-"29
 {
-[; ;user.c: 28: void InitApp(void)
-[; ;user.c: 29: {
+[; ;user.c: 28: void InitApp(void) {
 [e :U _InitApp ]
 [f ]
-[; ;user.c: 31: PORTA = 0;
-"31
+[; ;user.c: 30: PORTA = 0;
+"30
 [e = _PORTA -> -> 0 `i `uc ]
-[; ;user.c: 32: LATA = 0;
-"32
+[; ;user.c: 31: LATA = 0;
+"31
 [e = _LATA -> -> 0 `i `uc ]
-[; ;user.c: 33: PORTB = 0;
-"33
+[; ;user.c: 32: PORTB = 0;
+"32
 [e = _PORTB -> -> 0 `i `uc ]
-[; ;user.c: 34: LATB = 0;
-"34
+[; ;user.c: 33: LATB = 0;
+"33
 [e = _LATB -> -> 0 `i `uc ]
-[; ;user.c: 35: PORTC = 0;
-"35
+[; ;user.c: 34: PORTC = 0;
+"34
 [e = _PORTC -> -> 0 `i `uc ]
-[; ;user.c: 36: LATC = 0;
-"36
+[; ;user.c: 35: LATC = 0;
+"35
 [e = _LATC -> -> 0 `i `uc ]
-[; ;user.c: 38: ADCON1 = 0x0F;
-"38
+[; ;user.c: 37: ADCON1 = 0x0F;
+"37
 [e = _ADCON1 -> -> 15 `i `uc ]
-[; ;user.c: 40: TRISAbits.RA0 = 0;
-"40
+[; ;user.c: 39: TRISAbits.RA0 = 0;
+"39
 [e = . . _TRISAbits 1 0 -> -> 0 `i `uc ]
-[; ;user.c: 41: TRISAbits.RA1 = 0;
-"41
+[; ;user.c: 40: TRISAbits.RA1 = 0;
+"40
 [e = . . _TRISAbits 1 1 -> -> 0 `i `uc ]
-[; ;user.c: 43: RCONbits.IPEN = 0;
-"43
+[; ;user.c: 42: RCONbits.IPEN = 0;
+"42
 [e = . . _RCONbits 5 7 -> -> 0 `i `uc ]
-[; ;user.c: 45: INTCONbits.GIE = 1;
-"45
+[; ;user.c: 44: INTCONbits.GIE = 1;
+"44
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;user.c: 46: INTCONbits.PEIE = 0;
+[; ;user.c: 45: INTCONbits.PEIE = 1;
+"45
+[e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
+[; ;user.c: 46: INTCONbits.TMR0IE = 1;
 "46
-[e = . . _INTCONbits 1 6 -> -> 0 `i `uc ]
-[; ;user.c: 47: INTCONbits.TMR0IE = 1;
-"47
 [e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
-[; ;user.c: 48: INTCONbits.TMR0IF = 0;
-"48
+[; ;user.c: 47: INTCONbits.TMR0IF = 0;
+"47
 [e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-[; ;user.c: 49: INTCON2bits.TMR0IP = 1;
-"49
+[; ;user.c: 48: INTCON2bits.TMR0IP = 1;
+"48
 [e = . . _INTCON2bits 1 2 -> -> 1 `i `uc ]
-[; ;user.c: 50: T0CONbits.T08BIT = 1;
-"50
+[; ;user.c: 49: T0CONbits.T08BIT = 1;
+"49
 [e = . . _T0CONbits 0 4 -> -> 1 `i `uc ]
-[; ;user.c: 51: T0CONbits.T0CS = 0;
-"51
+[; ;user.c: 50: T0CONbits.T0CS = 0;
+"50
 [e = . . _T0CONbits 0 3 -> -> 0 `i `uc ]
-[; ;user.c: 52: T0CONbits.PSA = 0;
-"52
+[; ;user.c: 51: T0CONbits.PSA = 0;
+"51
 [e = . . _T0CONbits 0 1 -> -> 0 `i `uc ]
-[; ;user.c: 53: T0CONbits.T0PS = 0b101;
-"53
+[; ;user.c: 52: T0CONbits.T0PS = 0b101;
+"52
 [e = . . _T0CONbits 0 0 -> -> 5 `i `uc ]
-[; ;user.c: 54: TMR0 = 0x6;
-"54
+[; ;user.c: 53: TMR0 = 0x6;
+"53
 [e = _TMR0 -> -> 6 `i `us ]
-[; ;user.c: 55: }
+[; ;user.c: 55: TRISCbits.RC6 = 0;
 "55
+[e = . . _TRISCbits 1 4 -> -> 0 `i `uc ]
+[; ;user.c: 56: TRISCbits.RC7 = 1;
+"56
+[e = . . _TRISCbits 1 5 -> -> 1 `i `uc ]
+[; ;user.c: 57: BRGH = 1;
+"57
+[e = _BRGH -> -> 1 `i `b ]
+[; ;user.c: 58: BRG16 = 1;
+"58
+[e = _BRG16 -> -> 1 `i `b ]
+[; ;user.c: 59: SPBRG = 207;
+"59
+[e = _SPBRG -> -> 207 `i `uc ]
+[; ;user.c: 60: SPEN = 1;
+"60
+[e = _SPEN -> -> 1 `i `b ]
+[; ;user.c: 61: SYNC = 0;
+"61
+[e = _SYNC -> -> 0 `i `b ]
+[; ;user.c: 62: TXEN = 1;
+"62
+[e = _TXEN -> -> 1 `i `b ]
+[; ;user.c: 63: CREN = 1;
+"63
+[e = _CREN -> -> 1 `i `b ]
+[; ;user.c: 64: TX9 = 0;
+"64
+[e = _TX9 -> -> 0 `i `b ]
+[; ;user.c: 65: RX9 = 0;
+"65
+[e = _RX9 -> -> 0 `i `b ]
+[; ;user.c: 67: RCIE = 1;
+"67
+[e = _RCIE -> -> 1 `i `b ]
+[; ;user.c: 68: TXIE = 0;
+"68
+[e = _TXIE -> -> 0 `i `b ]
+[; ;user.c: 69: }
+"69
 [e :UE 322 ]
 }

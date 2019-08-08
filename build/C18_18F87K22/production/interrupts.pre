@@ -4359,7 +4359,10 @@ typedef uint16_t uintptr_t;
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\stdbool.h"
 typedef unsigned char bool;
 
-# 24 "interrupts.c"
+# 23 "interrupts.c"
+char palabra[20];
+unsigned int n = 0;
+char recibi = 0;
 unsigned int overflow = 0;
 
 
@@ -4371,6 +4374,20 @@ INTCONbits.TMR0IF = 0;
 overflow++;
 LATAbits.LA0 = !PORTAbits.RA0;
 TMR0 = 50;
+} else if (PIR1bits.RCIF) {
+
+PIR1bits.RCIF = 0;
+palabra[n] = RCREG;
+n++;
+if (RCREG == '\r') {
+TXREG = palabra[0];
+while(TXIF==0);
+recibi = 1;
+n=0;
+}
+
+
+
 }
 
 }

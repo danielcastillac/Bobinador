@@ -4363,8 +4363,7 @@ typedef unsigned char bool;
 void InitApp(void);
 
 # 28 "user.c"
-void InitApp(void)
-{
+void InitApp(void) {
 
 PORTA = 0;
 LATA = 0;
@@ -4381,7 +4380,7 @@ TRISAbits.RA1 = 0;
 RCONbits.IPEN = 0;
 
 INTCONbits.GIE = 1;
-INTCONbits.PEIE = 0;
+INTCONbits.PEIE = 1;
 INTCONbits.TMR0IE = 1;
 INTCONbits.TMR0IF = 0;
 INTCON2bits.TMR0IP = 1;
@@ -4390,4 +4389,19 @@ T0CONbits.T0CS = 0;
 T0CONbits.PSA = 0;
 T0CONbits.T0PS = 0b101;
 TMR0 = 0x6;
+
+TRISCbits.RC6 = 0;
+TRISCbits.RC7 = 1;
+BRGH = 1;
+BRG16 = 1;
+SPBRG = 207;
+SPEN = 1;
+SYNC = 0;
+TXEN = 1;
+CREN = 1;
+TX9 = 0;
+RX9 = 0;
+
+RCIE = 1;
+TXIE = 0;
 }

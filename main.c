@@ -29,8 +29,14 @@ unsigned int motor2; // Cycle number for motor 2
 bool RA0state = false; // Current state of STEP pin for motor 1
 bool DIR_1 = 0; // Direction of motor 1
 
+int get_value;
+
 /* i.e. uint8_t <variable_name>; */
 extern unsigned int overflow;
+extern char recibi;
+extern char palabra[20];
+extern unsigned int n;
+
 /******************************************************************************/
 /* Main Program                                                               */
 
@@ -45,9 +51,26 @@ void main(void) {
 
     /* TODO <INSERT USER APPLICATION CODE HERE> */
 
-    LATAbits.LA1 = DIR_1; // Set motor 1 direction
-    
     while (1) {
+                
+        LATAbits.LA1 = DIR_1; // Set motor 1 direction
+        
+        if (recibi == 1) {
+            recibi = 0;
+            switch (palabra[n]) {
+                /* Selection for specific set of instructions */
+                case 49:
+                    
+                    DIR_1 = 1;
+                    break;
+                case 50:
+                    
+                    DIR_1 = 0;
+                    break;
+            }
+
+        }
+
 
     }
 }

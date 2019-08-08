@@ -23,9 +23,9 @@
 [v ___flmul __flmul `(d  1 e 3 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
-"28 D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\interrupts.c
+"30 D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\interrupts.c
 [v _high_isr high_isr `II(v  1 e 1 0 ]
-"39 D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\main.c
+"45 D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\main.c
 [v _main main `(v  1 e 1 0 ]
 "24 D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\system.c
 [v _ConfigureOscillator ConfigureOscillator `(v  1 e 1 0 ]
@@ -92,7 +92,7 @@
 [v _LATB LATB `VEuc  1 e 1 @3978 ]
 "2757
 [v _LATC LATC `VEuc  1 e 1 @3979 ]
-[s S279 . 1 `uc 1 TRISA0 1 0 :1:0 
+[s S324 . 1 `uc 1 TRISA0 1 0 :1:0 
 `uc 1 TRISA1 1 0 :1:1 
 `uc 1 TRISA2 1 0 :1:2 
 `uc 1 TRISA3 1 0 :1:3 
@@ -101,26 +101,64 @@
 `uc 1 TRISA6 1 0 :1:6 
 ]
 "2865
-[u S295 . 1 `S279 1 . 1 0 `S106 1 . 1 0 ]
-[v _TRISAbits TRISAbits `VES295  1 e 1 @3986 ]
+[u S340 . 1 `S324 1 . 1 0 `S106 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES340  1 e 1 @3986 ]
+[s S531 . 1 `uc 1 TRISC0 1 0 :1:0 
+`uc 1 TRISC1 1 0 :1:1 
+`uc 1 TRISC2 1 0 :1:2 
+`uc 1 . 1 0 :3:3 
+`uc 1 TRISC6 1 0 :1:6 
+`uc 1 TRISC7 1 0 :1:7 
+]
+"3283
+[s S538 . 1 `uc 1 RC0 1 0 :1:0 
+`uc 1 RC1 1 0 :1:1 
+`uc 1 RC2 1 0 :1:2 
+`uc 1 . 1 0 :3:3 
+`uc 1 RC6 1 0 :1:6 
+`uc 1 RC7 1 0 :1:7 
+]
+[u S545 . 1 `S531 1 . 1 0 `S538 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES545  1 e 1 @3988 ]
+[s S168 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSPIF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+]
+"3560
+[s S176 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 TX1IF 1 0 :1:4 
+`uc 1 RC1IF 1 0 :1:5 
+]
+[u S180 . 1 `S168 1 . 1 0 `S176 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES180  1 e 1 @3998 ]
+"4447
+[v _TXREG TXREG `VEuc  1 e 1 @4013 ]
+"4459
+[v _RCREG RCREG `VEuc  1 e 1 @4014 ]
+"4471
+[v _SPBRG SPBRG `VEuc  1 e 1 @4015 ]
 "5398
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
-[s S315 . 1 `uc 1 NOT_BOR 1 0 :1:0 
+[s S360 . 1 `uc 1 NOT_BOR 1 0 :1:0 
 ]
 "6405
-[s S317 . 1 `uc 1 . 1 0 :1:0 
+[s S362 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 NOT_POR 1 0 :1:1 
 ]
-[s S320 . 1 `uc 1 . 1 0 :2:0 
+[s S365 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_PD 1 0 :1:2 
 ]
-[s S323 . 1 `uc 1 . 1 0 :3:0 
+[s S368 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 NOT_TO 1 0 :1:3 
 ]
-[s S326 . 1 `uc 1 . 1 0 :4:0 
+[s S371 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 NOT_RI 1 0 :1:4 
 ]
-[s S329 . 1 `uc 1 nBOR 1 0 :1:0 
+[s S374 . 1 `uc 1 nBOR 1 0 :1:0 
 `uc 1 nPOR 1 0 :1:1 
 `uc 1 nPD 1 0 :1:2 
 `uc 1 nTO 1 0 :1:3 
@@ -129,10 +167,10 @@
 `uc 1 SBOREN 1 0 :1:6 
 `uc 1 IPEN 1 0 :1:7 
 ]
-[s S338 . 1 `uc 1 . 1 0 :7:0 
+[s S383 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 NOT_IPEN 1 0 :1:7 
 ]
-[s S341 . 1 `uc 1 BOR 1 0 :1:0 
+[s S386 . 1 `uc 1 BOR 1 0 :1:0 
 `uc 1 POR 1 0 :1:1 
 `uc 1 PD 1 0 :1:2 
 `uc 1 TO 1 0 :1:3 
@@ -140,16 +178,16 @@
 `uc 1 . 1 0 :2:5 
 `uc 1 nIPEN 1 0 :1:7 
 ]
-[u S349 . 1 `S315 1 . 1 0 `S317 1 . 1 0 `S320 1 . 1 0 `S323 1 . 1 0 `S326 1 . 1 0 `S329 1 . 1 0 `S338 1 . 1 0 `S341 1 . 1 0 ]
-[v _RCONbits RCONbits `VES349  1 e 1 @4048 ]
-[s S234 . 1 `uc 1 SCS 1 0 :2:0 
+[u S394 . 1 `S360 1 . 1 0 `S362 1 . 1 0 `S365 1 . 1 0 `S368 1 . 1 0 `S371 1 . 1 0 `S374 1 . 1 0 `S383 1 . 1 0 `S386 1 . 1 0 ]
+[v _RCONbits RCONbits `VES394  1 e 1 @4048 ]
+[s S279 . 1 `uc 1 SCS 1 0 :2:0 
 `uc 1 IOFS 1 0 :1:2 
 `uc 1 OSTS 1 0 :1:3 
 `uc 1 IRCF 1 0 :3:4 
 `uc 1 IDLEN 1 0 :1:7 
 ]
 "6826
-[s S240 . 1 `uc 1 SCS0 1 0 :1:0 
+[s S285 . 1 `uc 1 SCS0 1 0 :1:0 
 `uc 1 SCS1 1 0 :1:1 
 `uc 1 FLTS 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -157,9 +195,9 @@
 `uc 1 IRCF1 1 0 :1:5 
 `uc 1 IRCF2 1 0 :1:6 
 ]
-[u S248 . 1 `S234 1 . 1 0 `S240 1 . 1 0 ]
-[v _OSCCONbits OSCCONbits `VES248  1 e 1 @4051 ]
-[s S459 . 1 `uc 1 T0PS 1 0 :3:0 
+[u S293 . 1 `S279 1 . 1 0 `S285 1 . 1 0 ]
+[v _OSCCONbits OSCCONbits `VES293  1 e 1 @4051 ]
+[s S504 . 1 `uc 1 T0PS 1 0 :3:0 
 `uc 1 PSA 1 0 :1:3 
 `uc 1 T0SE 1 0 :1:4 
 `uc 1 T0CS 1 0 :1:5 
@@ -167,19 +205,19 @@
 `uc 1 TMR0ON 1 0 :1:7 
 ]
 "6906
-[s S466 . 1 `uc 1 T0PS0 1 0 :1:0 
+[s S511 . 1 `uc 1 T0PS0 1 0 :1:0 
 `uc 1 T0PS1 1 0 :1:1 
 `uc 1 T0PS2 1 0 :1:2 
 ]
-[u S470 . 1 `S459 1 . 1 0 `S466 1 . 1 0 ]
-[v _T0CONbits T0CONbits `VES470  1 e 1 @4053 ]
+[u S515 . 1 `S504 1 . 1 0 `S511 1 . 1 0 ]
+[v _T0CONbits T0CONbits `VES515  1 e 1 @4053 ]
 "6956
 [v _TMR0 TMR0 `VEus  1 e 2 @4054 ]
-[s S420 . 1 `uc 1 . 1 0 :7:0 
+[s S465 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 NOT_RBPU 1 0 :1:7 
 ]
 "7349
-[s S423 . 1 `uc 1 RBIP 1 0 :1:0 
+[s S468 . 1 `uc 1 RBIP 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 TMR0IP 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -188,13 +226,13 @@
 `uc 1 INTEDG0 1 0 :1:6 
 `uc 1 nRBPU 1 0 :1:7 
 ]
-[s S432 . 1 `uc 1 . 1 0 :2:0 
+[s S477 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 T0IP 1 0 :1:2 
 `uc 1 . 1 0 :4:3 
 `uc 1 RBPU 1 0 :1:7 
 ]
-[u S437 . 1 `S420 1 . 1 0 `S423 1 . 1 0 `S432 1 . 1 0 ]
-[v _INTCON2bits INTCON2bits `VES437  1 e 1 @4081 ]
+[u S482 . 1 `S465 1 . 1 0 `S468 1 . 1 0 `S477 1 . 1 0 ]
+[v _INTCON2bits INTCON2bits `VES482  1 e 1 @4081 ]
 [s S21 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
@@ -220,27 +258,55 @@
 ]
 [u S43 . 1 `S21 1 . 1 0 `S30 1 . 1 0 `S39 1 . 1 0 ]
 [v _INTCONbits INTCONbits `VES43  1 e 1 @4082 ]
-"24 D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\interrupts.c
+"7796
+[v _BRG16 BRG16 `VEb  1 e 0 @32195 ]
+"7798
+[v _BRGH BRGH `VEb  1 e 0 @32098 ]
+"7902
+[v _CREN CREN `VEb  1 e 0 @32092 ]
+"8642
+[v _RCIE RCIE `VEb  1 e 0 @31981 ]
+"8668
+[v _RX9 RX9 `VEb  1 e 0 @32094 ]
+"8708
+[v _SPEN SPEN `VEb  1 e 0 @32095 ]
+"8762
+[v _SYNC SYNC `VEb  1 e 0 @32100 ]
+"8944
+[v _TX9 TX9 `VEb  1 e 0 @32102 ]
+"8956
+[v _TXEN TXEN `VEb  1 e 0 @32101 ]
+"8960
+[v _TXIE TXIE `VEb  1 e 0 @31980 ]
+"8962
+[v _TXIF TXIF `VEb  1 e 0 @31988 ]
+"23 D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\interrupts.c
+[v _palabra palabra `[20]uc  1 e 20 0 ]
+"24
+[v _n n `ui  1 e 2 0 ]
+"25
+[v _recibi recibi `uc  1 e 1 0 ]
+"26
 [v _overflow overflow `ui  1 e 2 0 ]
 "30 D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\main.c
 [v _DIR_1 DIR_1 `uc  1 e 1 0 ]
-"39
+"45
 [v _main main `(v  1 e 1 0 ]
 {
-"53
+"80
 } 0
 "28 D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\user.c
 [v _InitApp InitApp `(v  1 e 1 0 ]
 {
-"55
+"69
 } 0
 "24 D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\system.c
 [v _ConfigureOscillator ConfigureOscillator `(v  1 e 1 0 ]
 {
 "32
 } 0
-"28 D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\interrupts.c
+"30 D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\interrupts.c
 [v _high_isr high_isr `II(v  1 e 1 0 ]
 {
-"37
+"53
 } 0

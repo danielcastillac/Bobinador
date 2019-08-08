@@ -46,6 +46,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _PORTAbits `VS84 ~T0 @X0 0 e@3968 ]
 "6956
 [v _TMR0 `Vus ~T0 @X0 0 e@4054 ]
+"3545
+[s S138 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S138 . TMR1IF TMR2IF CCP1IF SSPIF TXIF RCIF ADIF ]
+"3554
+[s S139 :4 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S139 . . TX1IF RC1IF ]
+"3544
+[u S137 `S138 1 `S139 1 ]
+[n S137 . . . ]
+"3560
+[v _PIR1bits `VS137 ~T0 @X0 0 e@3998 ]
+"4459
+[v _RCREG `Vuc ~T0 @X0 0 e@4014 ]
+"4447
+[v _TXREG `Vuc ~T0 @X0 0 e@4013 ]
+"8962
+[v _TXIF `Vb ~T0 @X0 0 e@31988 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -3180,41 +3197,97 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
-"24 interrupts.c
+"23 interrupts.c
+[v _palabra `uc ~T0 @X0 -> 20 `i e ]
+[; ;interrupts.c: 23: char palabra[20];
+"24
+[v _n `ui ~T0 @X0 1 e ]
+[i _n
+-> -> 0 `i `ui
+]
+[; ;interrupts.c: 24: unsigned int n = 0;
+"25
+[v _recibi `uc ~T0 @X0 1 e ]
+[i _recibi
+-> -> 0 `i `uc
+]
+[; ;interrupts.c: 25: char recibi = 0;
+"26
 [v _overflow `ui ~T0 @X0 1 e ]
 [i _overflow
 -> -> 0 `i `ui
 ]
-[; ;interrupts.c: 24: unsigned int overflow = 0;
+[; ;interrupts.c: 26: unsigned int overflow = 0;
 [v $root$_high_isr `(v ~T0 @X0 0 e ]
-[v F3355 `(v ~T0 @X0 1 tf ]
-"28
-[v _high_isr `IF3355 ~T0 @X0 1 e ]
+[v F3358 `(v ~T0 @X0 1 tf ]
+"30
+[v _high_isr `IF3358 ~T0 @X0 1 e ]
 {
-[; ;interrupts.c: 28: void interrupt high_isr(void) {
+[; ;interrupts.c: 30: void interrupt high_isr(void) {
 [e :U _high_isr ]
 [f ]
-[; ;interrupts.c: 29: if (INTCONbits.TMR0IF) {
-"29
+[; ;interrupts.c: 31: if (INTCONbits.TMR0IF) {
+"31
 [e $ ! != -> . . _INTCONbits 0 2 `i -> -> -> 0 `i `Vuc `i 323  ]
 {
-[; ;interrupts.c: 31: INTCONbits.TMR0IF = 0;
-"31
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-[; ;interrupts.c: 32: overflow++;
-"32
-[e ++ _overflow -> -> 1 `i `ui ]
-[; ;interrupts.c: 33: LATAbits.LA0 = !PORTAbits.RA0;
+[; ;interrupts.c: 33: INTCONbits.TMR0IF = 0;
 "33
-[e = . . _LATAbits 1 0 -> -> ! != -> . . _PORTAbits 0 0 `i -> -> -> 0 `i `Vuc `i `i `uc ]
-[; ;interrupts.c: 34: TMR0 = 50;
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+[; ;interrupts.c: 34: overflow++;
 "34
-[e = _TMR0 -> -> 50 `i `us ]
+[e ++ _overflow -> -> 1 `i `ui ]
+[; ;interrupts.c: 35: LATAbits.LA0 = !PORTAbits.RA0;
 "35
-}
-[e :U 323 ]
-[; ;interrupts.c: 35: }
-[; ;interrupts.c: 37: }
+[e = . . _LATAbits 1 0 -> -> ! != -> . . _PORTAbits 0 0 `i -> -> -> 0 `i `Vuc `i `i `uc ]
+[; ;interrupts.c: 36: TMR0 = 50;
+"36
+[e = _TMR0 -> -> 50 `i `us ]
 "37
+}
+[; ;interrupts.c: 37: } else if (PIR1bits.RCIF) {
+[e $U 324  ]
+[e :U 323 ]
+[e $ ! != -> . . _PIR1bits 0 5 `i -> -> -> 0 `i `Vuc `i 325  ]
+{
+[; ;interrupts.c: 39: PIR1bits.RCIF = 0;
+"39
+[e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
+[; ;interrupts.c: 40: palabra[n] = RCREG;
+"40
+[e = *U + &U _palabra * -> _n `ux -> -> # *U &U _palabra `ui `ux _RCREG ]
+[; ;interrupts.c: 41: n++;
+"41
+[e ++ _n -> -> 1 `i `ui ]
+[; ;interrupts.c: 42: if (RCREG == '\r') {
+"42
+[e $ ! == -> _RCREG `ui -> 13 `ui 326  ]
+{
+[; ;interrupts.c: 43: TXREG = palabra[0];
+"43
+[e = _TXREG *U + &U _palabra * -> -> -> 0 `i `ui `ux -> -> # *U &U _palabra `ui `ux ]
+[; ;interrupts.c: 44: while(TXIF==0);
+"44
+[e $U 327  ]
+[e :U 328 ]
+[e :U 327 ]
+[e $ == -> _TXIF `i -> 0 `i 328  ]
+[e :U 329 ]
+[; ;interrupts.c: 45: recibi = 1;
+"45
+[e = _recibi -> -> 1 `i `uc ]
+[; ;interrupts.c: 46: n=0;
+"46
+[e = _n -> -> 0 `i `ui ]
+"47
+}
+[e :U 326 ]
+"51
+}
+[e :U 325 ]
+"53
+[e :U 324 ]
+[; ;interrupts.c: 47: }
+[; ;interrupts.c: 51: }
+[; ;interrupts.c: 53: }
 [e :UE 322 ]
 }

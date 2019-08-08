@@ -20,7 +20,9 @@
 /******************************************************************************/
 /* Interrupt Routines                                                         */
 /******************************************************************************/
-
+char palabra[20];
+unsigned int n = 0;
+char recibi = 0;
 unsigned int overflow = 0; // TMR0 overflow counter
 
 /* High-priority service */
@@ -32,6 +34,16 @@ void interrupt high_isr(void) {
         overflow++;
         LATAbits.LA0 = !PORTAbits.RA0; // Invert state
         TMR0 = 50;
+    } else if (PIR1bits.RCIF) {
+        /* Recieve interrupt flag */
+        PIR1bits.RCIF = 0;
+        palabra[n] = RCREG;
+        n++;
+        if (RCREG == '\r') {
+            TXREG = palabra[0];
+            while(TXIF==0);
+            recibi = 1;
+            n=0;
+        }
     }
-
 }
