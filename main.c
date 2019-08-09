@@ -34,6 +34,7 @@ extern unsigned int overflow;
 extern char recibi;
 extern char palabra[20];
 extern unsigned int n;
+extern unsigned int ADC_value;
 
 /******************************************************************************/
 /* Main Program                                                               */
@@ -65,9 +66,9 @@ void main(void) {
                     DIR_1 = 0;
                     break;
             }
-        }
-        else if(GODONE==0){
-            GODONE=1;
+        } else if (GODONE == 0) {
+            /* Restart ADC data gattering */
+            GODONE = 1;
         }
     }
 }

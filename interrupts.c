@@ -26,7 +26,6 @@ char recibi = 0;
 unsigned int overflow = 0; // TMR0 overflow counter
 unsigned int ADC_value;
 
-
 /* High-priority service */
 
 void interrupt high_isr(void) {
@@ -37,7 +36,7 @@ void interrupt high_isr(void) {
         LATAbits.LA2 = !PORTAbits.RA2; // Invert state
         TMR0 = 50;
     } else if (PIR1bits.RCIF) {
-        /* Recieve ISR */
+        /* Recieve bluetooth ISR */
         PIR1bits.RCIF = 0; // Restart Recieve interrupt flag
         palabra[n] = RCREG; // Save recieve char in buffer variable
         n++;
@@ -49,8 +48,16 @@ void interrupt high_isr(void) {
         }
     } else if (PIR1bits.ADIF) {
         /* A/D converter ISR */
-        PIR1bits.ADIF=0; // Restart A/D flag
-        ADC_value=ADRES;
-        
+        PIR1bits.ADIF = 0; // Restart A/D flag
+        ADC_value = ADRES;
+
+    } else if (INTCON3bits.INT1IF) {
+        /* Final de carrera 1 ISR */
+        INTCON3bits.INT1IF = 0;
+
+    } else if (INTCON3bits.INT2IF) {
+        /* Final de carrera 2 ISR */
+        INTCON3bits.INT2IF = 0;
+
     }
 }
