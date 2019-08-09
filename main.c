@@ -29,8 +29,6 @@ unsigned int motor2; // Cycle number for motor 2
 bool RA0state = false; // Current state of STEP pin for motor 1
 bool DIR_1 = 0; // Direction of motor 1
 
-int get_value;
-
 /* i.e. uint8_t <variable_name>; */
 extern unsigned int overflow;
 extern char recibi;
@@ -49,28 +47,24 @@ void main(void) {
     /* Initialize I/O and Peripherals for application */
     InitApp();
 
-    /* TODO <INSERT USER APPLICATION CODE HERE> */
-
     while (1) {
-                
+
         LATAbits.LA1 = DIR_1; // Set motor 1 direction
-        
+
         if (recibi == 1) {
+            /* Bluetooth reception routine */
             recibi = 0;
             switch (palabra[n]) {
-                /* Selection for specific set of instructions */
+                    /* Selection for specific set of instructions */
                 case 49:
-                    
+
                     DIR_1 = 1;
                     break;
                 case 50:
-                    
+
                     DIR_1 = 0;
                     break;
             }
-
         }
-
-
     }
 }

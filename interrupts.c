@@ -35,15 +35,15 @@ void interrupt high_isr(void) {
         LATAbits.LA0 = !PORTAbits.RA0; // Invert state
         TMR0 = 50;
     } else if (PIR1bits.RCIF) {
-        /* Recieve interrupt flag */
-        PIR1bits.RCIF = 0;
-        palabra[n] = RCREG;
+        /* Recieve ISR */
+        PIR1bits.RCIF = 0; // Restart Recieve interrupt flag
+        palabra[n] = RCREG; // Save recieve char in buffer variable
         n++;
         if (RCREG == '\r') {
-            TXREG = palabra[0];
-            while(TXIF==0);
+            TXREG = palabra[0]; // Retransmit to check connection
+            while (TXIF == 0);
             recibi = 1;
-            n=0;
+            n = 0;
         }
     }
 }
