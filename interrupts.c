@@ -52,11 +52,11 @@ void interrupt high_isr(void) {
         ADC_value = ADRES;
 
     } else if (INTCON3bits.INT1IF) {
-        /* Final de carrera 1 ISR */
+        /* Limit switch 1 ISR */
         INTCON3bits.INT1IF = 0;
 
     } else if (INTCON3bits.INT2IF) {
-        /* Final de carrera 2 ISR */
+        /* Limit switch 2 ISR */
         INTCON3bits.INT2IF = 0;
 
     }
