@@ -4364,6 +4364,8 @@ char palabra[20];
 unsigned int n = 0;
 char recibi = 0;
 unsigned int overflow = 0;
+unsigned int ADC_value;
+
 
 
 
@@ -4385,5 +4387,10 @@ while (TXIF == 0);
 recibi = 1;
 n = 0;
 }
+} else if (PIR1bits.ADIF) {
+
+PIR1bits.ADIF=0;
+ADC_value=ADRES;
+
 }
 }

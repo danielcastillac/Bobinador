@@ -66,5 +66,8 @@ void main(void) {
                     break;
             }
         }
+        else if(GODONE==0){
+            GODONE=1;
+        }
     }
 }

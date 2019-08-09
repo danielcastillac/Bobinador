@@ -34,9 +34,15 @@ void InitApp(void) {
     PORTC = 0;
     LATC = 0;
     /* Setup analog functionality and port direction */
-    ADCON1 = 0x0F; // All ports digital
+    ADCON1 = 0b1110; // All ports digital excepto AN0
+    TRISAbits.TRISA0 = 1; // A/D input pin
+    ADCON0bits.CHS = 0; // A/D Channel 0
+    ADCON2=0b10101100;
+    PIE1bits.ADIE=1; // A/D Interrupt Enable bit
+    PIR1bits.ADIF=0; // A/D interrupt flag
+    ADCON0bits.ADON = 1; // A/D enable
     /* Initialize peripherals */
-    TRISAbits.RA0 = 0; // Motor 1, STEP output
+    TRISAbits.RA2 = 0; // Motor 1, STEP output
     TRISAbits.RA1 = 0; // Motor 1, DIR output
     /* Configure the IPEN bit (1=on) in RCON to turn on/off int priorities */
     RCONbits.IPEN = 0; // Disable interrupt priorities
@@ -63,7 +69,7 @@ void InitApp(void) {
     CREN = 1; // Enable reception
     TX9 = 0; // 8-bit reception selected
     RX9 = 0; // 8-bit reception mode selected
-    
     RCIE = 1; // Enable recieve interrupt bit
-    TXIE = 0; // Enable transmit interrupt bit
+    TXIE = 0; // Disable transmit interrupt bit
+    
 }

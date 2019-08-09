@@ -20,10 +20,12 @@
 /******************************************************************************/
 /* Interrupt Routines                                                         */
 /******************************************************************************/
-char palabra[20];
+char palabra[20]; // Buffer variable for reception
 unsigned int n = 0;
 char recibi = 0;
 unsigned int overflow = 0; // TMR0 overflow counter
+unsigned int ADC_value;
+
 
 /* High-priority service */
 
@@ -32,7 +34,7 @@ void interrupt high_isr(void) {
         /* Timer0 ISR for motor control time-step */
         INTCONbits.TMR0IF = 0; // Restart TMR0 interrupt flag
         overflow++;
-        LATAbits.LA0 = !PORTAbits.RA0; // Invert state
+        LATAbits.LA2 = !PORTAbits.RA2; // Invert state
         TMR0 = 50;
     } else if (PIR1bits.RCIF) {
         /* Recieve ISR */
@@ -45,5 +47,10 @@ void interrupt high_isr(void) {
             recibi = 1;
             n = 0;
         }
+    } else if (PIR1bits.ADIF) {
+        /* A/D converter ISR */
+        PIR1bits.ADIF=0; // Restart A/D flag
+        ADC_value=ADRES;
+        
     }
 }

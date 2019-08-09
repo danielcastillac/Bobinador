@@ -1,132 +1,4 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"2115 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
-[v _PORTA `Vuc ~T0 @X0 0 e@3968 ]
-"2545
-[v _LATA `Vuc ~T0 @X0 0 e@3977 ]
-"2254
-[v _PORTB `Vuc ~T0 @X0 0 e@3969 ]
-"2645
-[v _LATB `Vuc ~T0 @X0 0 e@3978 ]
-"2364
-[v _PORTC `Vuc ~T0 @X0 0 e@3970 ]
-"2757
-[v _LATC `Vuc ~T0 @X0 0 e@3979 ]
-"5398
-[v _ADCON1 `Vuc ~T0 @X0 0 e@4033 ]
-"2846
-[s S114 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S114 . TRISA0 TRISA1 TRISA2 TRISA3 TRISA4 TRISA5 TRISA6 ]
-"2855
-[s S115 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S115 . RA0 RA1 RA2 RA3 RA4 RA5 RA6 ]
-"2845
-[u S113 `S114 1 `S115 1 ]
-[n S113 . . . ]
-"2865
-[v _TRISAbits `VS113 ~T0 @X0 0 e@3986 ]
-"6362
-[s S277 :1 `uc 1 ]
-[n S277 . NOT_BOR ]
-"6365
-[s S278 :1 `uc 1 :1 `uc 1 ]
-[n S278 . . NOT_POR ]
-"6369
-[s S279 :2 `uc 1 :1 `uc 1 ]
-[n S279 . . NOT_PD ]
-"6373
-[s S280 :3 `uc 1 :1 `uc 1 ]
-[n S280 . . NOT_TO ]
-"6377
-[s S281 :4 `uc 1 :1 `uc 1 ]
-[n S281 . . NOT_RI ]
-"6381
-[s S282 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S282 . nBOR nPOR nPD nTO nRI . SBOREN IPEN ]
-"6391
-[s S283 :7 `uc 1 :1 `uc 1 ]
-[n S283 . . NOT_IPEN ]
-"6395
-[s S284 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
-[n S284 . BOR POR PD TO RI . nIPEN ]
-"6361
-[u S276 `S277 1 `S278 1 `S279 1 `S280 1 `S281 1 `S282 1 `S283 1 `S284 1 ]
-[n S276 . . . . . . . . . ]
-"6405
-[v _RCONbits `VS276 ~T0 @X0 0 e@4048 ]
-"7405
-[s S315 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S315 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
-"7415
-[s S316 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S316 . . INT0F T0IF . INT0E T0IE PEIE GIE ]
-"7425
-[s S317 :6 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S317 . . GIEL GIEH ]
-"7404
-[u S314 `S315 1 `S316 1 `S317 1 ]
-[n S314 . . . . ]
-"7431
-[v _INTCONbits `VS314 ~T0 @X0 0 e@4082 ]
-"7328
-[s S311 :7 `uc 1 :1 `uc 1 ]
-[n S311 . . NOT_RBPU ]
-"7332
-[s S312 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S312 . RBIP . TMR0IP . INTEDG2 INTEDG1 INTEDG0 nRBPU ]
-"7342
-[s S313 :2 `uc 1 :1 `uc 1 :4 `uc 1 :1 `uc 1 ]
-[n S313 . . T0IP . RBPU ]
-"7327
-[u S310 `S311 1 `S312 1 `S313 1 ]
-[n S310 . . . . ]
-"7349
-[v _INTCON2bits `VS310 ~T0 @X0 0 e@4081 ]
-"6892
-[s S302 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S302 . T0PS PSA T0SE T0CS T08BIT TMR0ON ]
-"6900
-[s S303 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S303 . T0PS0 T0PS1 T0PS2 ]
-"6891
-[u S301 `S302 1 `S303 1 ]
-[n S301 . . . ]
-"6906
-[v _T0CONbits `VS301 ~T0 @X0 0 e@4053 ]
-"6956
-[v _TMR0 `Vus ~T0 @X0 0 e@4054 ]
-"3266
-[s S126 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S126 . TRISC0 TRISC1 TRISC2 . TRISC6 TRISC7 ]
-"3274
-[s S127 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S127 . RC0 RC1 RC2 . RC6 RC7 ]
-"3265
-[u S125 `S126 1 `S127 1 ]
-[n S125 . . . ]
-"3283
-[v _TRISCbits `VS125 ~T0 @X0 0 e@3988 ]
-"7798
-[v _BRGH `Vb ~T0 @X0 0 e@32098 ]
-"7796
-[v _BRG16 `Vb ~T0 @X0 0 e@32195 ]
-"4471
-[v _SPBRG `Vuc ~T0 @X0 0 e@4015 ]
-"8708
-[v _SPEN `Vb ~T0 @X0 0 e@32095 ]
-"8762
-[v _SYNC `Vb ~T0 @X0 0 e@32100 ]
-"8956
-[v _TXEN `Vb ~T0 @X0 0 e@32101 ]
-"7902
-[v _CREN `Vb ~T0 @X0 0 e@32092 ]
-"8944
-[v _TX9 `Vb ~T0 @X0 0 e@32102 ]
-"8668
-[v _RX9 `Vb ~T0 @X0 0 e@32094 ]
-"8642
-[v _RCIE `Vb ~T0 @X0 0 e@31981 ]
-"8960
-[v _TXIE `Vb ~T0 @X0 0 e@31980 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -3232,142 +3104,77 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic18.h: 164: extern __nonreentrant void _delay(unsigned long);
 [; ;pic18.h: 166: extern __nonreentrant void _delaywdt(unsigned long);
 [; ;pic18.h: 168: extern __nonreentrant void _delay3(unsigned char);
-[; ;stdint.h: 13: typedef signed char int8_t;
-[; ;stdint.h: 20: typedef signed int int16_t;
-[; ;stdint.h: 28: typedef signed short long int int24_t;
-[; ;stdint.h: 36: typedef signed long int int32_t;
-[; ;stdint.h: 43: typedef unsigned char uint8_t;
-[; ;stdint.h: 49: typedef unsigned int uint16_t;
-[; ;stdint.h: 56: typedef unsigned short long int uint24_t;
-[; ;stdint.h: 63: typedef unsigned long int uint32_t;
-[; ;stdint.h: 71: typedef signed char int_least8_t;
-[; ;stdint.h: 78: typedef signed int int_least16_t;
-[; ;stdint.h: 90: typedef signed short long int int_least24_t;
-[; ;stdint.h: 98: typedef signed long int int_least32_t;
-[; ;stdint.h: 105: typedef unsigned char uint_least8_t;
-[; ;stdint.h: 111: typedef unsigned int uint_least16_t;
-[; ;stdint.h: 121: typedef unsigned short long int uint_least24_t;
-[; ;stdint.h: 128: typedef unsigned long int uint_least32_t;
-[; ;stdint.h: 137: typedef signed char int_fast8_t;
-[; ;stdint.h: 144: typedef signed int int_fast16_t;
-[; ;stdint.h: 156: typedef signed short long int int_fast24_t;
-[; ;stdint.h: 164: typedef signed long int int_fast32_t;
-[; ;stdint.h: 171: typedef unsigned char uint_fast8_t;
-[; ;stdint.h: 177: typedef unsigned int uint_fast16_t;
-[; ;stdint.h: 187: typedef unsigned short long int uint_fast24_t;
-[; ;stdint.h: 194: typedef unsigned long int uint_fast32_t;
-[; ;stdint.h: 200: typedef int32_t intmax_t;
-[; ;stdint.h: 205: typedef uint32_t uintmax_t;
-[; ;stdint.h: 210: typedef int16_t intptr_t;
-[; ;stdint.h: 215: typedef uint16_t uintptr_t;
-[; ;stdbool.h: 12: typedef unsigned char bool;
-[; ;user.h: 14: void InitApp(void);
-"28 user.c
-[v _InitApp `(v ~T0 @X0 1 ef ]
-{
-[; ;user.c: 28: void InitApp(void) {
-[e :U _InitApp ]
-[f ]
-[; ;user.c: 30: PORTA = 0;
-"30
-[e = _PORTA -> -> 0 `i `uc ]
-[; ;user.c: 31: LATA = 0;
-"31
-[e = _LATA -> -> 0 `i `uc ]
-[; ;user.c: 32: PORTB = 0;
-"32
-[e = _PORTB -> -> 0 `i `uc ]
-[; ;user.c: 33: LATB = 0;
-"33
-[e = _LATB -> -> 0 `i `uc ]
-[; ;user.c: 34: PORTC = 0;
-"34
-[e = _PORTC -> -> 0 `i `uc ]
-[; ;user.c: 35: LATC = 0;
-"35
-[e = _LATC -> -> 0 `i `uc ]
-[; ;user.c: 37: ADCON1 = 0x0F;
-"37
-[e = _ADCON1 -> -> 15 `i `uc ]
-[; ;user.c: 40: TRISAbits.RA2 = 0;
-"40
-[e = . . _TRISAbits 1 2 -> -> 0 `i `uc ]
-[; ;user.c: 41: TRISAbits.RA1 = 0;
-"41
-[e = . . _TRISAbits 1 1 -> -> 0 `i `uc ]
-[; ;user.c: 43: RCONbits.IPEN = 0;
-"43
-[e = . . _RCONbits 5 7 -> -> 0 `i `uc ]
-[; ;user.c: 45: INTCONbits.GIE = 1;
-"45
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;user.c: 46: INTCONbits.PEIE = 1;
-"46
-[e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-[; ;user.c: 47: INTCONbits.TMR0IE = 1;
-"47
-[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
-[; ;user.c: 48: INTCONbits.TMR0IF = 0;
-"48
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-[; ;user.c: 49: INTCON2bits.TMR0IP = 1;
-"49
-[e = . . _INTCON2bits 1 2 -> -> 1 `i `uc ]
-[; ;user.c: 50: T0CONbits.T08BIT = 1;
-"50
-[e = . . _T0CONbits 0 4 -> -> 1 `i `uc ]
-[; ;user.c: 51: T0CONbits.T0CS = 0;
-"51
-[e = . . _T0CONbits 0 3 -> -> 0 `i `uc ]
-[; ;user.c: 52: T0CONbits.PSA = 0;
-"52
-[e = . . _T0CONbits 0 1 -> -> 0 `i `uc ]
-[; ;user.c: 53: T0CONbits.T0PS = 0b101;
-"53
-[e = . . _T0CONbits 0 0 -> -> 5 `i `uc ]
-[; ;user.c: 54: TMR0 = 0x6;
-"54
-[e = _TMR0 -> -> 6 `i `us ]
-[; ;user.c: 56: TRISCbits.RC6 = 0;
+"55 configuration_bits.c
+[p x PLLDIV=1 ]
 "56
-[e = . . _TRISCbits 1 4 -> -> 0 `i `uc ]
-[; ;user.c: 57: TRISCbits.RC7 = 1;
+[p x CPUDIV=OSC1_PLL2 ]
 "57
-[e = . . _TRISCbits 1 5 -> -> 1 `i `uc ]
-[; ;user.c: 58: BRGH = 1;
-"58
-[e = _BRGH -> -> 1 `i `b ]
-[; ;user.c: 59: BRG16 = 1;
-"59
-[e = _BRG16 -> -> 1 `i `b ]
-[; ;user.c: 60: SPBRG = 207;
+[p x USBDIV=1 ]
 "60
-[e = _SPBRG -> -> 207 `i `uc ]
-[; ;user.c: 61: SPEN = 1;
+[p x FOSC=INTOSC_EC ]
 "61
-[e = _SPEN -> -> 1 `i `b ]
-[; ;user.c: 62: SYNC = 0;
+[p x FCMEN=OFF ]
 "62
-[e = _SYNC -> -> 0 `i `b ]
-[; ;user.c: 63: TXEN = 1;
-"63
-[e = _TXEN -> -> 1 `i `b ]
-[; ;user.c: 64: CREN = 1;
-"64
-[e = _CREN -> -> 1 `i `b ]
-[; ;user.c: 65: TX9 = 0;
+[p x IESO=OFF ]
 "65
-[e = _TX9 -> -> 0 `i `b ]
-[; ;user.c: 66: RX9 = 0;
+[p x PWRT=OFF ]
 "66
-[e = _RX9 -> -> 0 `i `b ]
-[; ;user.c: 67: RCIE = 1;
+[p x BOR=OFF ]
 "67
-[e = _RCIE -> -> 1 `i `b ]
-[; ;user.c: 68: TXIE = 0;
+[p x BORV=3 ]
 "68
-[e = _TXIE -> -> 0 `i `b ]
-[; ;user.c: 70: }
-"70
-[e :UE 322 ]
-}
+[p x VREGEN=OFF ]
+"71
+[p x WDT=OFF ]
+"72
+[p x WDTPS=32768 ]
+"75
+[p x CCP2MX=ON ]
+"76
+[p x PBADEN=OFF ]
+"77
+[p x LPT1OSC=OFF ]
+"78
+[p x MCLRE=ON ]
+"81
+[p x STVREN=OFF ]
+"82
+[p x LVP=OFF ]
+"83
+[p x XINST=OFF ]
+"86
+[p x CP0=OFF ]
+"87
+[p x CP1=OFF ]
+"88
+[p x CP2=OFF ]
+"89
+[p x CP3=OFF ]
+"92
+[p x CPB=OFF ]
+"93
+[p x CPD=OFF ]
+"96
+[p x WRT0=OFF ]
+"97
+[p x WRT1=OFF ]
+"98
+[p x WRT2=OFF ]
+"99
+[p x WRT3=OFF ]
+"102
+[p x WRTC=OFF ]
+"103
+[p x WRTB=OFF ]
+"104
+[p x WRTD=OFF ]
+"107
+[p x EBTR0=OFF ]
+"108
+[p x EBTR1=OFF ]
+"109
+[p x EBTR2=OFF ]
+"110
+[p x EBTR3=OFF ]
+"113
+[p x EBTRB=OFF ]

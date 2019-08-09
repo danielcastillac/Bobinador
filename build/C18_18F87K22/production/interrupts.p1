@@ -3236,9 +3236,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 34: overflow++;
 "34
 [e ++ _overflow -> -> 1 `i `ui ]
-[; ;interrupts.c: 35: LATAbits.LA0 = !PORTAbits.RA0;
+[; ;interrupts.c: 35: LATAbits.LA2 = !PORTAbits.RA2;
 "35
-[e = . . _LATAbits 1 0 -> -> ! != -> . . _PORTAbits 0 0 `i -> -> -> 0 `i `Vuc `i `i `uc ]
+[e = . . _LATAbits 1 2 -> -> ! != -> . . _PORTAbits 0 2 `i -> -> -> 0 `i `Vuc `i `i `uc ]
 [; ;interrupts.c: 36: TMR0 = 50;
 "36
 [e = _TMR0 -> -> 50 `i `us ]
@@ -3265,7 +3265,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 43: TXREG = palabra[0];
 "43
 [e = _TXREG *U + &U _palabra * -> -> -> 0 `i `ui `ux -> -> # *U &U _palabra `ui `ux ]
-[; ;interrupts.c: 44: while(TXIF==0);
+[; ;interrupts.c: 44: while (TXIF == 0);
 "44
 [e $U 327  ]
 [e :U 328 ]
@@ -3275,19 +3275,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 45: recibi = 1;
 "45
 [e = _recibi -> -> 1 `i `uc ]
-[; ;interrupts.c: 46: n=0;
+[; ;interrupts.c: 46: n = 0;
 "46
 [e = _n -> -> 0 `i `ui ]
 "47
 }
 [e :U 326 ]
-"51
+"48
 }
 [e :U 325 ]
-"53
+"49
 [e :U 324 ]
 [; ;interrupts.c: 47: }
-[; ;interrupts.c: 51: }
-[; ;interrupts.c: 53: }
+[; ;interrupts.c: 48: }
+[; ;interrupts.c: 49: }
 [e :UE 322 ]
 }

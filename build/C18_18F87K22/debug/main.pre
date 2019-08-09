@@ -1,5 +1,5 @@
 
-# 1 "interrupts.c"
+# 1 "main.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -4359,31 +4359,53 @@ typedef uint16_t uintptr_t;
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\stdbool.h"
 typedef unsigned char bool;
 
-# 23 "interrupts.c"
-char palabra[20];
-unsigned int n = 0;
-char recibi = 0;
-unsigned int overflow = 0;
+# 19 "system.h"
+void ConfigureOscillator(void);
+
+# 14 "user.h"
+void InitApp(void);
+
+# 27 "main.c"
+unsigned int motor1 = 1;
+unsigned int motor2;
+bool RA0state = 0;
+bool DIR_1 = 0;
 
 
+extern unsigned int overflow;
+extern char recibi;
+extern char palabra[20];
+extern unsigned int n;
 
-void interrupt high_isr(void) {
-if (INTCONbits.TMR0IF) {
+# 43
+void main(void) {
 
-INTCONbits.TMR0IF = 0;
-overflow++;
-LATAbits.LA2 = !PORTAbits.RA2;
-TMR0 = 50;
-} else if (PIR1bits.RCIF) {
+ConfigureOscillator();
 
-PIR1bits.RCIF = 0;
-palabra[n] = RCREG;
-n++;
-if (RCREG == '\r') {
-TXREG = palabra[0];
-while (TXIF == 0);
-recibi = 1;
-n = 0;
+
+InitApp();
+
+while (1) {
+
+LATAbits.LA1 = DIR_1;
+
+if (recibi == 1) {
+
+recibi = 0;
+switch (palabra[n]) {
+
+case 49:
+
+DIR_1 = 1;
+break;
+case 50:
+
+DIR_1 = 0;
+break;
+}
+}
+else if(GODONE==0){
+GODONE=1;
 }
 }
 }

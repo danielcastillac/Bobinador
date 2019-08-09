@@ -4371,15 +4371,13 @@ unsigned int motor2;
 bool RA0state = 0;
 bool DIR_1 = 0;
 
-int get_value;
-
 
 extern unsigned int overflow;
 extern char recibi;
 extern char palabra[20];
 extern unsigned int n;
 
-# 45
+# 43
 void main(void) {
 
 ConfigureOscillator();
@@ -4387,13 +4385,12 @@ ConfigureOscillator();
 
 InitApp();
 
-
-
 while (1) {
 
 LATAbits.LA1 = DIR_1;
 
 if (recibi == 1) {
+
 recibi = 0;
 switch (palabra[n]) {
 
@@ -4406,9 +4403,6 @@ case 50:
 DIR_1 = 0;
 break;
 }
-
 }
-
-# 79
 }
 }

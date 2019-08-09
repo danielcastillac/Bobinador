@@ -1,59 +1,5 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"2115 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
-[v _PORTA `Vuc ~T0 @X0 0 e@3968 ]
-"2545
-[v _LATA `Vuc ~T0 @X0 0 e@3977 ]
-"2254
-[v _PORTB `Vuc ~T0 @X0 0 e@3969 ]
-"2645
-[v _LATB `Vuc ~T0 @X0 0 e@3978 ]
-"2364
-[v _PORTC `Vuc ~T0 @X0 0 e@3970 ]
-"2757
-[v _LATC `Vuc ~T0 @X0 0 e@3979 ]
-"5398
-[v _ADCON1 `Vuc ~T0 @X0 0 e@4033 ]
-"2846
-[s S114 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S114 . TRISA0 TRISA1 TRISA2 TRISA3 TRISA4 TRISA5 TRISA6 ]
-"2855
-[s S115 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S115 . RA0 RA1 RA2 RA3 RA4 RA5 RA6 ]
-"2845
-[u S113 `S114 1 `S115 1 ]
-[n S113 . . . ]
-"2865
-[v _TRISAbits `VS113 ~T0 @X0 0 e@3986 ]
-"6362
-[s S277 :1 `uc 1 ]
-[n S277 . NOT_BOR ]
-"6365
-[s S278 :1 `uc 1 :1 `uc 1 ]
-[n S278 . . NOT_POR ]
-"6369
-[s S279 :2 `uc 1 :1 `uc 1 ]
-[n S279 . . NOT_PD ]
-"6373
-[s S280 :3 `uc 1 :1 `uc 1 ]
-[n S280 . . NOT_TO ]
-"6377
-[s S281 :4 `uc 1 :1 `uc 1 ]
-[n S281 . . NOT_RI ]
-"6381
-[s S282 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S282 . nBOR nPOR nPD nTO nRI . SBOREN IPEN ]
-"6391
-[s S283 :7 `uc 1 :1 `uc 1 ]
-[n S283 . . NOT_IPEN ]
-"6395
-[s S284 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
-[n S284 . BOR POR PD TO RI . nIPEN ]
-"6361
-[u S276 `S277 1 `S278 1 `S279 1 `S280 1 `S281 1 `S282 1 `S283 1 `S284 1 ]
-[n S276 . . . . . . . . . ]
-"6405
-[v _RCONbits `VS276 ~T0 @X0 0 e@4048 ]
-"7405
+"7405 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [s S315 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S315 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
 "7415
@@ -67,66 +13,58 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S314 . . . . ]
 "7431
 [v _INTCONbits `VS314 ~T0 @X0 0 e@4082 ]
-"7328
-[s S311 :7 `uc 1 :1 `uc 1 ]
-[n S311 . . NOT_RBPU ]
-"7332
-[s S312 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S312 . RBIP . TMR0IP . INTEDG2 INTEDG1 INTEDG0 nRBPU ]
-"7342
-[s S313 :2 `uc 1 :1 `uc 1 :4 `uc 1 :1 `uc 1 ]
-[n S313 . . T0IP . RBPU ]
-"7327
-[u S310 `S311 1 `S312 1 `S313 1 ]
-[n S310 . . . . ]
-"7349
-[v _INTCON2bits `VS310 ~T0 @X0 0 e@4081 ]
-"6892
-[s S302 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S302 . T0PS PSA T0SE T0CS T08BIT TMR0ON ]
-"6900
-[s S303 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S303 . T0PS0 T0PS1 T0PS2 ]
-"6891
-[u S301 `S302 1 `S303 1 ]
-[n S301 . . . ]
-"6906
-[v _T0CONbits `VS301 ~T0 @X0 0 e@4053 ]
+"2551
+[s S105 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S105 . LATA0 LATA1 LATA2 LATA3 LATA4 LATA5 LATA6 ]
+"2560
+[s S106 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S106 . LA0 LA1 LA2 LA3 LA4 LA5 LA6 ]
+"2550
+[u S104 `S105 1 `S106 1 ]
+[n S104 . . . ]
+"2570
+[v _LATAbits `VS104 ~T0 @X0 0 e@3977 ]
+"2121
+[s S85 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S85 . RA0 RA1 RA2 RA3 RA4 RA5 RA6 ]
+"2130
+[s S86 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S86 . AN0 AN1 AN2 AN3 T0CKI AN4 OSC2 ]
+"2139
+[s S87 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S87 . . VREFM VREFP . LVDIN ]
+"2146
+[s S88 :5 `uc 1 :1 `uc 1 ]
+[n S88 . . HLVDIN ]
+"2150
+[s S89 :1 `uc 1 ]
+[n S89 . ULPWUIN ]
+"2120
+[u S84 `S85 1 `S86 1 `S87 1 `S88 1 `S89 1 ]
+[n S84 . . . . . . ]
+"2154
+[v _PORTAbits `VS84 ~T0 @X0 0 e@3968 ]
 "6956
 [v _TMR0 `Vus ~T0 @X0 0 e@4054 ]
-"3266
-[s S126 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S126 . TRISC0 TRISC1 TRISC2 . TRISC6 TRISC7 ]
-"3274
-[s S127 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S127 . RC0 RC1 RC2 . RC6 RC7 ]
-"3265
-[u S125 `S126 1 `S127 1 ]
-[n S125 . . . ]
-"3283
-[v _TRISCbits `VS125 ~T0 @X0 0 e@3988 ]
-"7798
-[v _BRGH `Vb ~T0 @X0 0 e@32098 ]
-"7796
-[v _BRG16 `Vb ~T0 @X0 0 e@32195 ]
-"4471
-[v _SPBRG `Vuc ~T0 @X0 0 e@4015 ]
-"8708
-[v _SPEN `Vb ~T0 @X0 0 e@32095 ]
-"8762
-[v _SYNC `Vb ~T0 @X0 0 e@32100 ]
-"8956
-[v _TXEN `Vb ~T0 @X0 0 e@32101 ]
-"7902
-[v _CREN `Vb ~T0 @X0 0 e@32092 ]
-"8944
-[v _TX9 `Vb ~T0 @X0 0 e@32102 ]
-"8668
-[v _RX9 `Vb ~T0 @X0 0 e@32094 ]
-"8642
-[v _RCIE `Vb ~T0 @X0 0 e@31981 ]
-"8960
-[v _TXIE `Vb ~T0 @X0 0 e@31980 ]
+"3545
+[s S138 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S138 . TMR1IF TMR2IF CCP1IF SSPIF TXIF RCIF ADIF ]
+"3554
+[s S139 :4 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S139 . . TX1IF RC1IF ]
+"3544
+[u S137 `S138 1 `S139 1 ]
+[n S137 . . . ]
+"3560
+[v _PIR1bits `VS137 ~T0 @X0 0 e@3998 ]
+"4459
+[v _RCREG `Vuc ~T0 @X0 0 e@4014 ]
+"4447
+[v _TXREG `Vuc ~T0 @X0 0 e@4013 ]
+"8962
+[v _TXIF `Vb ~T0 @X0 0 e@31988 ]
+"5602
+[v _ADRES `Vus ~T0 @X0 0 e@4035 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -3261,113 +3199,114 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
-[; ;user.h: 14: void InitApp(void);
-"28 user.c
-[v _InitApp `(v ~T0 @X0 1 ef ]
-{
-[; ;user.c: 28: void InitApp(void) {
-[e :U _InitApp ]
-[f ]
-[; ;user.c: 30: PORTA = 0;
-"30
-[e = _PORTA -> -> 0 `i `uc ]
-[; ;user.c: 31: LATA = 0;
-"31
-[e = _LATA -> -> 0 `i `uc ]
-[; ;user.c: 32: PORTB = 0;
+"23 interrupts.c
+[v _palabra `uc ~T0 @X0 -> 20 `i e ]
+[; ;interrupts.c: 23: char palabra[20];
+"24
+[v _n `ui ~T0 @X0 1 e ]
+[i _n
+-> -> 0 `i `ui
+]
+[; ;interrupts.c: 24: unsigned int n = 0;
+"25
+[v _recibi `uc ~T0 @X0 1 e ]
+[i _recibi
+-> -> 0 `i `uc
+]
+[; ;interrupts.c: 25: char recibi = 0;
+"26
+[v _overflow `ui ~T0 @X0 1 e ]
+[i _overflow
+-> -> 0 `i `ui
+]
+[; ;interrupts.c: 26: unsigned int overflow = 0;
+"27
+[v _ADC_value `ui ~T0 @X0 1 e ]
+[; ;interrupts.c: 27: unsigned int ADC_value;
+[v $root$_high_isr `(v ~T0 @X0 0 e ]
+[v F3359 `(v ~T0 @X0 1 tf ]
 "32
-[e = _PORTB -> -> 0 `i `uc ]
-[; ;user.c: 33: LATB = 0;
+[v _high_isr `IF3359 ~T0 @X0 1 e ]
+{
+[; ;interrupts.c: 32: void interrupt high_isr(void) {
+[e :U _high_isr ]
+[f ]
+[; ;interrupts.c: 33: if (INTCONbits.TMR0IF) {
 "33
-[e = _LATB -> -> 0 `i `uc ]
-[; ;user.c: 34: PORTC = 0;
-"34
-[e = _PORTC -> -> 0 `i `uc ]
-[; ;user.c: 35: LATC = 0;
+[e $ ! != -> . . _INTCONbits 0 2 `i -> -> -> 0 `i `Vuc `i 323  ]
+{
+[; ;interrupts.c: 35: INTCONbits.TMR0IF = 0;
 "35
-[e = _LATC -> -> 0 `i `uc ]
-[; ;user.c: 37: ADCON1 = 0x0F;
-"37
-[e = _ADCON1 -> -> 15 `i `uc ]
-[; ;user.c: 40: TRISAbits.RA2 = 0;
-"40
-[e = . . _TRISAbits 1 2 -> -> 0 `i `uc ]
-[; ;user.c: 41: TRISAbits.RA1 = 0;
-"41
-[e = . . _TRISAbits 1 1 -> -> 0 `i `uc ]
-[; ;user.c: 43: RCONbits.IPEN = 0;
-"43
-[e = . . _RCONbits 5 7 -> -> 0 `i `uc ]
-[; ;user.c: 45: INTCONbits.GIE = 1;
-"45
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;user.c: 46: INTCONbits.PEIE = 1;
-"46
-[e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-[; ;user.c: 47: INTCONbits.TMR0IE = 1;
-"47
-[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
-[; ;user.c: 48: INTCONbits.TMR0IF = 0;
-"48
 [e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-[; ;user.c: 49: INTCON2bits.TMR0IP = 1;
+[; ;interrupts.c: 36: overflow++;
+"36
+[e ++ _overflow -> -> 1 `i `ui ]
+[; ;interrupts.c: 37: LATAbits.LA2 = !PORTAbits.RA2;
+"37
+[e = . . _LATAbits 1 2 -> -> ! != -> . . _PORTAbits 0 2 `i -> -> -> 0 `i `Vuc `i `i `uc ]
+[; ;interrupts.c: 38: TMR0 = 50;
+"38
+[e = _TMR0 -> -> 50 `i `us ]
+"39
+}
+[; ;interrupts.c: 39: } else if (PIR1bits.RCIF) {
+[e $U 324  ]
+[e :U 323 ]
+[e $ ! != -> . . _PIR1bits 0 5 `i -> -> -> 0 `i `Vuc `i 325  ]
+{
+[; ;interrupts.c: 41: PIR1bits.RCIF = 0;
+"41
+[e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
+[; ;interrupts.c: 42: palabra[n] = RCREG;
+"42
+[e = *U + &U _palabra * -> _n `ux -> -> # *U &U _palabra `ui `ux _RCREG ]
+[; ;interrupts.c: 43: n++;
+"43
+[e ++ _n -> -> 1 `i `ui ]
+[; ;interrupts.c: 44: if (RCREG == '\r') {
+"44
+[e $ ! == -> _RCREG `ui -> 13 `ui 326  ]
+{
+[; ;interrupts.c: 45: TXREG = palabra[0];
+"45
+[e = _TXREG *U + &U _palabra * -> -> -> 0 `i `ui `ux -> -> # *U &U _palabra `ui `ux ]
+[; ;interrupts.c: 46: while (TXIF == 0);
+"46
+[e $U 327  ]
+[e :U 328 ]
+[e :U 327 ]
+[e $ == -> _TXIF `i -> 0 `i 328  ]
+[e :U 329 ]
+[; ;interrupts.c: 47: recibi = 1;
+"47
+[e = _recibi -> -> 1 `i `uc ]
+[; ;interrupts.c: 48: n = 0;
+"48
+[e = _n -> -> 0 `i `ui ]
 "49
-[e = . . _INTCON2bits 1 2 -> -> 1 `i `uc ]
-[; ;user.c: 50: T0CONbits.T08BIT = 1;
+}
+[e :U 326 ]
 "50
-[e = . . _T0CONbits 0 4 -> -> 1 `i `uc ]
-[; ;user.c: 51: T0CONbits.T0CS = 0;
-"51
-[e = . . _T0CONbits 0 3 -> -> 0 `i `uc ]
-[; ;user.c: 52: T0CONbits.PSA = 0;
+}
+[; ;interrupts.c: 49: }
+[; ;interrupts.c: 50: } else if (PIR1bits.ADIF) {
+[e $U 330  ]
+[e :U 325 ]
+[e $ ! != -> . . _PIR1bits 0 6 `i -> -> -> 0 `i `Vuc `i 331  ]
+{
+[; ;interrupts.c: 52: PIR1bits.ADIF=0;
 "52
-[e = . . _T0CONbits 0 1 -> -> 0 `i `uc ]
-[; ;user.c: 53: T0CONbits.T0PS = 0b101;
+[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
+[; ;interrupts.c: 53: ADC_value=ADRES;
 "53
-[e = . . _T0CONbits 0 0 -> -> 5 `i `uc ]
-[; ;user.c: 54: TMR0 = 0x6;
-"54
-[e = _TMR0 -> -> 6 `i `us ]
-[; ;user.c: 56: TRISCbits.RC6 = 0;
+[e = _ADC_value -> _ADRES `ui ]
+"55
+}
+[e :U 331 ]
 "56
-[e = . . _TRISCbits 1 4 -> -> 0 `i `uc ]
-[; ;user.c: 57: TRISCbits.RC7 = 1;
-"57
-[e = . . _TRISCbits 1 5 -> -> 1 `i `uc ]
-[; ;user.c: 58: BRGH = 1;
-"58
-[e = _BRGH -> -> 1 `i `b ]
-[; ;user.c: 59: BRG16 = 1;
-"59
-[e = _BRG16 -> -> 1 `i `b ]
-[; ;user.c: 60: SPBRG = 207;
-"60
-[e = _SPBRG -> -> 207 `i `uc ]
-[; ;user.c: 61: SPEN = 1;
-"61
-[e = _SPEN -> -> 1 `i `b ]
-[; ;user.c: 62: SYNC = 0;
-"62
-[e = _SYNC -> -> 0 `i `b ]
-[; ;user.c: 63: TXEN = 1;
-"63
-[e = _TXEN -> -> 1 `i `b ]
-[; ;user.c: 64: CREN = 1;
-"64
-[e = _CREN -> -> 1 `i `b ]
-[; ;user.c: 65: TX9 = 0;
-"65
-[e = _TX9 -> -> 0 `i `b ]
-[; ;user.c: 66: RX9 = 0;
-"66
-[e = _RX9 -> -> 0 `i `b ]
-[; ;user.c: 67: RCIE = 1;
-"67
-[e = _RCIE -> -> 1 `i `b ]
-[; ;user.c: 68: TXIE = 0;
-"68
-[e = _TXIE -> -> 0 `i `b ]
-[; ;user.c: 70: }
-"70
+[e :U 330 ]
+[e :U 324 ]
+[; ;interrupts.c: 55: }
+[; ;interrupts.c: 56: }
 [e :UE 322 ]
 }

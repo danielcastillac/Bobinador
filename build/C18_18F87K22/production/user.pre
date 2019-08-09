@@ -4374,7 +4374,8 @@ LATC = 0;
 
 ADCON1 = 0x0F;
 
-TRISAbits.RA0 = 0;
+
+TRISAbits.RA2 = 0;
 TRISAbits.RA1 = 0;
 
 RCONbits.IPEN = 0;
@@ -4401,7 +4402,7 @@ TXEN = 1;
 CREN = 1;
 TX9 = 0;
 RX9 = 0;
-
 RCIE = 1;
 TXIE = 0;
+
 }
