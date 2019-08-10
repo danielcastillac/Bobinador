@@ -3197,7 +3197,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 35: unsigned int speed;
 "36
 [v _PWM_duty `ui ~T0 @X0 1 e ]
-[; ;main.c: 36: unsigned int PWM_duty;
+[i _PWM_duty
+-> -> 50 `i `ui
+]
+[; ;main.c: 36: unsigned int PWM_duty = 50;
 [; ;main.c: 39: extern unsigned int overflow;
 [; ;main.c: 40: extern char recibi;
 [; ;main.c: 41: extern char palabra[20];

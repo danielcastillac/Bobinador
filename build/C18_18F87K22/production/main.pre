@@ -4375,7 +4375,7 @@ unsigned int diameter;
 unsigned int length;
 unsigned int turns;
 unsigned int speed;
-unsigned int PWM_duty;
+unsigned int PWM_duty = 50;
 
 
 extern unsigned int overflow;

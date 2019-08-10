@@ -33,7 +33,7 @@ unsigned int diameter;
 unsigned int length;
 unsigned int turns;
 unsigned int speed;
-unsigned int PWM_duty;
+unsigned int PWM_duty = 50;
 
 /* i.e. uint8_t <variable_name>; */
 extern unsigned int overflow;

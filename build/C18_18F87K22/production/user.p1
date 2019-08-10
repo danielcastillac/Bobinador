@@ -204,8 +204,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TXIE `Vb ~T0 @X0 0 e@31980 ]
 "6115
 [v _PR2 `Vuc ~T0 @X0 0 e@4043 ]
-"5313
-[v _CCPR1L `Vuc ~T0 @X0 0 e@4030 ]
 "5248
 [s S218 :4 `uc 1 :2 `uc 1 ]
 [n S218 . CCP1M DC1B ]
@@ -3525,9 +3523,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user.c: 87: PR2 = 99;
 "87
 [e = _PR2 -> -> 99 `i `uc ]
-[; ;user.c: 88: CCPR1L = 50;
-"88
-[e = _CCPR1L -> -> 50 `i `uc ]
 [; ;user.c: 89: CCP1CONbits.DC1B = 0;
 "89
 [e = . . _CCP1CONbits 0 1 -> -> 0 `i `uc ]
