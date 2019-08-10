@@ -3229,70 +3229,56 @@ Version 3.2 HI-TECH Software Intermediate Code
 "65
 [e $ ! == -> *U + &U _palabra * -> -> -> 0 `i `ui `ux -> -> # *U &U _palabra `ui `ux `ui -> 66 `ui 327  ]
 {
-[; ;main.c: 67: DIR_1 = 1;
-"67
-[e = _DIR_1 -> -> 1 `i `uc ]
-"69
+"68
 }
-[; ;main.c: 69: } else if (palabra[0] == 'A') {
+[; ;main.c: 68: } else if (palabra[0] == 'A') {
 [e $U 328  ]
 [e :U 327 ]
 [e $ ! == -> *U + &U _palabra * -> -> -> 0 `i `ui `ux -> -> # *U &U _palabra `ui `ux `ui -> 65 `ui 329  ]
 {
-[; ;main.c: 71: caliber = ((palabra[1] - 48) * 10) + ((palabra[2] - 48));
-"71
+[; ;main.c: 70: caliber = ((palabra[1] - 48) * 10) + ((palabra[2] - 48));
+"70
 [e = _caliber -> + * - -> *U + &U _palabra * -> -> -> 1 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 10 `i - -> *U + &U _palabra * -> -> -> 2 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i `ui ]
-[; ;main.c: 72: diameter = ((palabra[3] - 48) * 1000) + ((palabra[4] - 48) * 100) + ((palabra[5] - 48) * 10) + ((palabra[6] - 48));
-"72
+[; ;main.c: 71: diameter = ((palabra[3] - 48) * 1000) + ((palabra[4] - 48) * 100) + ((palabra[5] - 48) * 10) + ((palabra[6] - 48));
+"71
 [e = _diameter -> + + + * - -> *U + &U _palabra * -> -> -> 3 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 1000 `i * - -> *U + &U _palabra * -> -> -> 4 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 100 `i * - -> *U + &U _palabra * -> -> -> 5 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 10 `i - -> *U + &U _palabra * -> -> -> 6 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i `ui ]
-[; ;main.c: 73: length = ((palabra[7] - 48) * 10000) + ((palabra[8] - 48) * 1000) + ((palabra[9] - 48) * 100) + ((palabra[10] - 48) * 10) + ((palabra[11] - 48));
-"73
+[; ;main.c: 72: length = ((palabra[7] - 48) * 10000) + ((palabra[8] - 48) * 1000) + ((palabra[9] - 48) * 100) + ((palabra[10] - 48) * 10) + ((palabra[11] - 48));
+"72
 [e = _length -> + + + + * - -> *U + &U _palabra * -> -> -> 7 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 10000 `i * - -> *U + &U _palabra * -> -> -> 8 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 1000 `i * - -> *U + &U _palabra * -> -> -> 9 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 100 `i * - -> *U + &U _palabra * -> -> -> 10 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 10 `i - -> *U + &U _palabra * -> -> -> 11 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i `ui ]
-[; ;main.c: 74: turns = ((palabra[12] - 48) * 1000) + ((palabra[13] - 48) * 100) + ((palabra[14] - 48) * 10) + ((palabra[15] - 48));
-"74
+[; ;main.c: 73: turns = ((palabra[12] - 48) * 1000) + ((palabra[13] - 48) * 100) + ((palabra[14] - 48) * 10) + ((palabra[15] - 48));
+"73
 [e = _turns -> + + + * - -> *U + &U _palabra * -> -> -> 12 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 1000 `i * - -> *U + &U _palabra * -> -> -> 13 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 100 `i * - -> *U + &U _palabra * -> -> -> 14 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 10 `i - -> *U + &U _palabra * -> -> -> 15 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i `ui ]
-[; ;main.c: 75: speed = palabra[15];
-"75
+[; ;main.c: 74: speed = palabra[15];
+"74
 [e = _speed -> *U + &U _palabra * -> -> -> 15 `i `ui `ux -> -> # *U &U _palabra `ui `ux `ui ]
-[; ;main.c: 77: if (caliber == 20 && diameter == 2000) {
-"77
-[e $ ! && == _caliber -> -> 20 `i `ui == _diameter -> -> 2000 `i `ui 330  ]
-{
-[; ;main.c: 78: DIR_1 = 0;
-"78
-[e = _DIR_1 -> -> 0 `i `uc ]
-"79
-}
-[e :U 330 ]
-"81
+"76
 }
 [e :U 329 ]
-"84
+"79
 [e :U 328 ]
 }
-[; ;main.c: 79: }
-[; ;main.c: 81: }
-[; ;main.c: 84: } else if (GODONE == 0) {
-[e $U 331  ]
+[; ;main.c: 76: }
+[; ;main.c: 79: } else if (GODONE == 0) {
+[e $U 330  ]
 [e :U 326 ]
-[e $ ! == -> _GODONE `i -> 0 `i 332  ]
+[e $ ! == -> _GODONE `i -> 0 `i 331  ]
 {
-[; ;main.c: 86: GODONE = 1;
-"86
+[; ;main.c: 81: GODONE = 1;
+"81
 [e = _GODONE -> -> 1 `i `b ]
-"87
+"82
 }
-[e :U 332 ]
-"88
 [e :U 331 ]
+"83
+[e :U 330 ]
 }
 [e :U 323 ]
 "57
 [e $U 324  ]
 [e :U 325 ]
-[; ;main.c: 87: }
-[; ;main.c: 88: }
-[; ;main.c: 89: }
-"89
+[; ;main.c: 82: }
+[; ;main.c: 83: }
+[; ;main.c: 84: }
+"84
 [e :UE 322 ]
 }

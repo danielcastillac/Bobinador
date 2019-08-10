@@ -1,10 +1,19 @@
 Version 3.2 HI-TECH Software Intermediate Code
-[p mainexit ]
-"19 system.h
-[v _ConfigureOscillator `(v ~T0 @X0 0 ef ]
-"14 user.h
-[v _InitApp `(v ~T0 @X0 0 ef ]
-"2551 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
+"7405 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
+[s S315 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S315 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
+"7415
+[s S316 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S316 . . INT0F T0IF . INT0E T0IE PEIE GIE ]
+"7425
+[s S317 :6 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S317 . . GIEL GIEH ]
+"7404
+[u S314 `S315 1 `S316 1 `S317 1 ]
+[n S314 . . . . ]
+"7431
+[v _INTCONbits `VS314 ~T0 @X0 0 e@4082 ]
+"2551
 [s S105 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S105 . LATA0 LATA1 LATA2 LATA3 LATA4 LATA5 LATA6 ]
 "2560
@@ -15,12 +24,58 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S104 . . . ]
 "2570
 [v _LATAbits `VS104 ~T0 @X0 0 e@3977 ]
-"39 main.c
-[v _recibi `uc ~T0 @X0 0 e ]
-"40
-[v _palabra `uc ~T0 @X0 -> 0 `x e ]
-"8268 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
-[v _GODONE `Vb ~T0 @X0 0 e@32273 ]
+"2121
+[s S85 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S85 . RA0 RA1 RA2 RA3 RA4 RA5 RA6 ]
+"2130
+[s S86 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S86 . AN0 AN1 AN2 AN3 T0CKI AN4 OSC2 ]
+"2139
+[s S87 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S87 . . VREFM VREFP . LVDIN ]
+"2146
+[s S88 :5 `uc 1 :1 `uc 1 ]
+[n S88 . . HLVDIN ]
+"2150
+[s S89 :1 `uc 1 ]
+[n S89 . ULPWUIN ]
+"2120
+[u S84 `S85 1 `S86 1 `S87 1 `S88 1 `S89 1 ]
+[n S84 . . . . . . ]
+"2154
+[v _PORTAbits `VS84 ~T0 @X0 0 e@3968 ]
+"6956
+[v _TMR0 `Vus ~T0 @X0 0 e@4054 ]
+"3545
+[s S138 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S138 . TMR1IF TMR2IF CCP1IF SSPIF TXIF RCIF ADIF ]
+"3554
+[s S139 :4 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S139 . . TX1IF RC1IF ]
+"3544
+[u S137 `S138 1 `S139 1 ]
+[n S137 . . . ]
+"3560
+[v _PIR1bits `VS137 ~T0 @X0 0 e@3998 ]
+"4459
+[v _RCREG `Vuc ~T0 @X0 0 e@4014 ]
+"4447
+[v _TXREG `Vuc ~T0 @X0 0 e@4013 ]
+"8962
+[v _TXIF `Vb ~T0 @X0 0 e@31988 ]
+"5602
+[v _ADRES `Vus ~T0 @X0 0 e@4035 ]
+"7236
+[s S308 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S308 . INT1IF INT2IF . INT1IE INT2IE . INT1IP INT2IP ]
+"7246
+[s S309 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S309 . INT1F INT2F . INT1E INT2E . INT1P INT2P ]
+"7235
+[u S307 `S308 1 `S309 1 ]
+[n S307 . . . ]
+"7257
+[v _INTCON3bits `VS307 ~T0 @X0 0 e@4080 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -3155,144 +3210,136 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
-[; ;system.h: 19: void ConfigureOscillator(void);
-[; ;user.h: 14: void InitApp(void);
-"27 main.c
-[v _motor1 `ui ~T0 @X0 1 e ]
-[i _motor1
--> -> 1 `i `ui
+"23 interrupts.c
+[v _palabra `uc ~T0 @X0 -> 20 `i e ]
+[; ;interrupts.c: 23: char palabra[20];
+"24
+[v _n `ui ~T0 @X0 1 e ]
+[i _n
+-> -> 0 `i `ui
 ]
-[; ;main.c: 27: unsigned int motor1 = 1;
-"28
-[v _motor2 `ui ~T0 @X0 1 e ]
-[; ;main.c: 28: unsigned int motor2;
-"29
-[v _RA0state `uc ~T0 @X0 1 e ]
-[i _RA0state
+[; ;interrupts.c: 24: unsigned int n = 0;
+"25
+[v _recibi `uc ~T0 @X0 1 e ]
+[i _recibi
 -> -> 0 `i `uc
 ]
-[; ;main.c: 29: bool RA0state = 0;
-"30
-[v _DIR_1 `uc ~T0 @X0 1 e ]
-[i _DIR_1
--> -> 0 `i `uc
+[; ;interrupts.c: 25: char recibi = 0;
+"26
+[v _overflow `ui ~T0 @X0 1 e ]
+[i _overflow
+-> -> 0 `i `ui
 ]
-[; ;main.c: 30: bool DIR_1 = 0;
+[; ;interrupts.c: 26: unsigned int overflow = 0;
+"27
+[v _ADC_value `ui ~T0 @X0 1 e ]
+[; ;interrupts.c: 27: unsigned int ADC_value;
+[v $root$_high_isr `(v ~T0 @X0 0 e ]
+[v F3359 `(v ~T0 @X0 1 tf ]
 "31
-[v _caliber `ui ~T0 @X0 1 e ]
-[; ;main.c: 31: unsigned int caliber;
-"32
-[v _diameter `ui ~T0 @X0 1 e ]
-[; ;main.c: 32: unsigned int diameter;
-"33
-[v _length `ui ~T0 @X0 1 e ]
-[; ;main.c: 33: unsigned int length;
-"34
-[v _turns `ui ~T0 @X0 1 e ]
-[; ;main.c: 34: unsigned int turns;
-"35
-[v _speed `ui ~T0 @X0 1 e ]
-[; ;main.c: 35: unsigned int speed;
-[; ;main.c: 38: extern unsigned int overflow;
-[; ;main.c: 39: extern char recibi;
-[; ;main.c: 40: extern char palabra[20];
-[; ;main.c: 41: extern unsigned int n;
-[; ;main.c: 42: extern unsigned int ADC_value;
-[v $root$_main `(v ~T0 @X0 0 e ]
-"50
-[v _main `(v ~T0 @X0 1 ef ]
+[v _high_isr `IF3359 ~T0 @X0 1 e ]
 {
-[; ;main.c: 50: void main(void) {
-[e :U _main ]
+[; ;interrupts.c: 31: void interrupt high_isr(void) {
+[e :U _high_isr ]
 [f ]
-[; ;main.c: 52: ConfigureOscillator();
-"52
-[e ( _ConfigureOscillator ..  ]
-[; ;main.c: 55: InitApp();
-"55
-[e ( _InitApp ..  ]
-[; ;main.c: 57: while (1) {
-"57
-[e :U 324 ]
+[; ;interrupts.c: 32: if (INTCONbits.TMR0IF) {
+"32
+[e $ ! != -> . . _INTCONbits 0 2 `i -> -> -> 0 `i `Vuc `i 323  ]
 {
-[; ;main.c: 59: LATAbits.LA1 = DIR_1;
-"59
-[e = . . _LATAbits 1 1 _DIR_1 ]
-[; ;main.c: 61: if (recibi == 1) {
-"61
-[e $ ! == -> _recibi `i -> 1 `i 326  ]
-{
-[; ;main.c: 63: recibi = 0;
-"63
-[e = _recibi -> -> 0 `i `uc ]
-[; ;main.c: 65: if (palabra[0] == 'B') {
-"65
-[e $ ! == -> *U + &U _palabra * -> -> -> 0 `i `ui `ux -> -> # *U &U _palabra `ui `ux `ui -> 66 `ui 327  ]
-{
-[; ;main.c: 67: DIR_1 = 1;
-"67
-[e = _DIR_1 -> -> 1 `i `uc ]
-"69
+[; ;interrupts.c: 34: INTCONbits.TMR0IF = 0;
+"34
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+[; ;interrupts.c: 35: overflow++;
+"35
+[e ++ _overflow -> -> 1 `i `ui ]
+[; ;interrupts.c: 36: LATAbits.LA2 = !PORTAbits.RA2;
+"36
+[e = . . _LATAbits 1 2 -> -> ! != -> . . _PORTAbits 0 2 `i -> -> -> 0 `i `Vuc `i `i `uc ]
+[; ;interrupts.c: 37: TMR0 = 50;
+"37
+[e = _TMR0 -> -> 50 `i `us ]
+"38
 }
-[; ;main.c: 69: } else if (palabra[0] == 'A') {
-[e $U 328  ]
-[e :U 327 ]
-[e $ ! == -> *U + &U _palabra * -> -> -> 0 `i `ui `ux -> -> # *U &U _palabra `ui `ux `ui -> 65 `ui 329  ]
-{
-[; ;main.c: 71: caliber = ((palabra[1] - 48) * 10) + ((palabra[2] - 48));
-"71
-[e = _caliber -> + * - -> *U + &U _palabra * -> -> -> 1 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 10 `i - -> *U + &U _palabra * -> -> -> 2 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i `ui ]
-[; ;main.c: 72: diameter = ((palabra[3] - 48) * 1000) + ((palabra[4] - 48) * 100) + ((palabra[5] - 48) * 10) + ((palabra[6] - 48));
-"72
-[e = _diameter -> + + + * - -> *U + &U _palabra * -> -> -> 3 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 1000 `i * - -> *U + &U _palabra * -> -> -> 4 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 100 `i * - -> *U + &U _palabra * -> -> -> 5 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 10 `i - -> *U + &U _palabra * -> -> -> 6 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i `ui ]
-[; ;main.c: 73: length = ((palabra[7] - 48) * 10000) + ((palabra[8] - 48) * 1000) + ((palabra[9] - 48) * 100) + ((palabra[10] - 48) * 10) + ((palabra[11] - 48));
-"73
-[e = _length -> + + + + * - -> *U + &U _palabra * -> -> -> 7 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 10000 `i * - -> *U + &U _palabra * -> -> -> 8 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 1000 `i * - -> *U + &U _palabra * -> -> -> 9 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 100 `i * - -> *U + &U _palabra * -> -> -> 10 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 10 `i - -> *U + &U _palabra * -> -> -> 11 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i `ui ]
-[; ;main.c: 74: turns = ((palabra[12] - 48) * 1000) + ((palabra[13] - 48) * 100) + ((palabra[14] - 48) * 10) + ((palabra[15] - 48));
-"74
-[e = _turns -> + + + * - -> *U + &U _palabra * -> -> -> 12 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 1000 `i * - -> *U + &U _palabra * -> -> -> 13 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 100 `i * - -> *U + &U _palabra * -> -> -> 14 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 10 `i - -> *U + &U _palabra * -> -> -> 15 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i `ui ]
-[; ;main.c: 75: speed = palabra[15];
-"75
-[e = _speed -> *U + &U _palabra * -> -> -> 15 `i `ui `ux -> -> # *U &U _palabra `ui `ux `ui ]
-[; ;main.c: 77: if (caliber == 20 && diameter == 2000) {
-"77
-[e $ ! && == _caliber -> -> 20 `i `ui == _diameter -> -> 2000 `i `ui 330  ]
-{
-[; ;main.c: 78: DIR_1 = 0;
-"78
-[e = _DIR_1 -> -> 0 `i `uc ]
-"79
-}
-[e :U 330 ]
-"81
-}
-[e :U 329 ]
-"84
-[e :U 328 ]
-}
-[; ;main.c: 79: }
-[; ;main.c: 81: }
-[; ;main.c: 84: } else if (GODONE == 0) {
-[e $U 331  ]
-[e :U 326 ]
-[e $ ! == -> _GODONE `i -> 0 `i 332  ]
-{
-[; ;main.c: 86: GODONE = 1;
-"86
-[e = _GODONE -> -> 1 `i `b ]
-"87
-}
-[e :U 332 ]
-"88
-[e :U 331 ]
-}
-[e :U 323 ]
-"57
+[; ;interrupts.c: 38: } else if (PIR1bits.RCIF) {
 [e $U 324  ]
+[e :U 323 ]
+[e $ ! != -> . . _PIR1bits 0 5 `i -> -> -> 0 `i `Vuc `i 325  ]
+{
+[; ;interrupts.c: 40: PIR1bits.RCIF = 0;
+"40
+[e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
+[; ;interrupts.c: 41: palabra[n] = RCREG;
+"41
+[e = *U + &U _palabra * -> _n `ux -> -> # *U &U _palabra `ui `ux _RCREG ]
+[; ;interrupts.c: 42: n++;
+"42
+[e ++ _n -> -> 1 `i `ui ]
+[; ;interrupts.c: 43: if (RCREG == '\r') {
+"43
+[e $ ! == -> _RCREG `ui -> 13 `ui 326  ]
+{
+[; ;interrupts.c: 44: TXREG = palabra[0];
+"44
+[e = _TXREG *U + &U _palabra * -> -> -> 0 `i `ui `ux -> -> # *U &U _palabra `ui `ux ]
+[; ;interrupts.c: 45: while (TXIF == 0);
+"45
+[e $U 327  ]
+[e :U 328 ]
+[e :U 327 ]
+[e $ == -> _TXIF `i -> 0 `i 328  ]
+[e :U 329 ]
+[; ;interrupts.c: 46: recibi = 1;
+"46
+[e = _recibi -> -> 1 `i `uc ]
+[; ;interrupts.c: 47: n = 0;
+"47
+[e = _n -> -> 0 `i `ui ]
+"48
+}
+[e :U 326 ]
+"49
+}
+[; ;interrupts.c: 48: }
+[; ;interrupts.c: 49: } else if (PIR1bits.ADIF) {
+[e $U 330  ]
 [e :U 325 ]
-[; ;main.c: 87: }
-[; ;main.c: 88: }
-[; ;main.c: 89: }
-"89
+[e $ ! != -> . . _PIR1bits 0 6 `i -> -> -> 0 `i `Vuc `i 331  ]
+{
+[; ;interrupts.c: 51: PIR1bits.ADIF = 0;
+"51
+[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
+[; ;interrupts.c: 52: ADC_value = ADRES;
+"52
+[e = _ADC_value -> _ADRES `ui ]
+"54
+}
+[; ;interrupts.c: 54: } else if (INTCON3bits.INT1IF) {
+[e $U 332  ]
+[e :U 331 ]
+[e $ ! != -> . . _INTCON3bits 0 0 `i -> -> -> 0 `i `Vuc `i 333  ]
+{
+[; ;interrupts.c: 56: INTCON3bits.INT1IF = 0;
+"56
+[e = . . _INTCON3bits 0 0 -> -> 0 `i `uc ]
+"58
+}
+[; ;interrupts.c: 58: } else if (INTCON3bits.INT2IF) {
+[e $U 334  ]
+[e :U 333 ]
+[e $ ! != -> . . _INTCON3bits 0 1 `i -> -> -> 0 `i `Vuc `i 335  ]
+{
+[; ;interrupts.c: 60: INTCON3bits.INT2IF = 0;
+"60
+[e = . . _INTCON3bits 0 1 -> -> 0 `i `uc ]
+"62
+}
+[e :U 335 ]
+"63
+[e :U 334 ]
+[e :U 332 ]
+[e :U 330 ]
+[e :U 324 ]
+[; ;interrupts.c: 62: }
+[; ;interrupts.c: 63: }
 [e :UE 322 ]
 }

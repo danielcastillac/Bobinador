@@ -1,5 +1,5 @@
 
-# 1 "main.c"
+# 1 "system.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -4362,65 +4362,12 @@ typedef unsigned char bool;
 # 19 "system.h"
 void ConfigureOscillator(void);
 
-# 14 "user.h"
-void InitApp(void);
+# 24 "system.c"
+void ConfigureOscillator(void)
+{
 
-# 27 "main.c"
-unsigned int motor1 = 1;
-unsigned int motor2;
-bool RA0state = 0;
-bool DIR_1 = 0;
-unsigned int caliber;
-unsigned int diameter;
-unsigned int length;
-unsigned int turns;
-unsigned int speed;
+OSCCONbits.IRCF = 0b111;
+OSCCONbits.SCS = 0b11;
 
-
-extern unsigned int overflow;
-extern char recibi;
-extern char palabra[20];
-extern unsigned int n;
-extern unsigned int ADC_value;
-
-# 50
-void main(void) {
-
-ConfigureOscillator();
-
-
-InitApp();
-
-while (1) {
-
-LATAbits.LA1 = DIR_1;
-
-if (recibi == 1) {
-
-recibi = 0;
-
-if (palabra[0] == 'B') {
-
-DIR_1 = 1;
-
-} else if (palabra[0] == 'A') {
-
-caliber = ((palabra[1] - 48) * 10) + ((palabra[2] - 48));
-diameter = ((palabra[3] - 48) * 1000) + ((palabra[4] - 48) * 100) + ((palabra[5] - 48) * 10) + ((palabra[6] - 48));
-length = ((palabra[7] - 48) * 10000) + ((palabra[8] - 48) * 1000) + ((palabra[9] - 48) * 100) + ((palabra[10] - 48) * 10) + ((palabra[11] - 48));
-turns = ((palabra[12] - 48) * 1000) + ((palabra[13] - 48) * 100) + ((palabra[14] - 48) * 10) + ((palabra[15] - 48));
-speed = palabra[15];
-
-if (caliber == 20 && diameter == 2000) {
-DIR_1 = 0;
-}
-
-}
-
-
-} else if (GODONE == 0) {
-
-GODONE = 1;
-}
-}
+# 32
 }

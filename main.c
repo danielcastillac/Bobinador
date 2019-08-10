@@ -64,15 +64,20 @@ void main(void) {
 
             if (palabra[0] == 'B') {
                 // Its controlling LED intensity
-
+                DIR_1 = 1;
+                
             } else if (palabra[0] == 'A') {
-                // Its trasmiting data
+                // Its trasmiting the parameters
                 caliber = ((palabra[1] - 48) * 10) + ((palabra[2] - 48)); // 2 digits
                 diameter = ((palabra[3] - 48) * 1000) + ((palabra[4] - 48) * 100) + ((palabra[5] - 48) * 10) + ((palabra[6] - 48)); // 4 digits (int not float)
                 length = ((palabra[7] - 48) * 10000) + ((palabra[8] - 48) * 1000) + ((palabra[9] - 48) * 100) + ((palabra[10] - 48) * 10) + ((palabra[11] - 48)); // 5 digits (int not float)
                 turns = ((palabra[12] - 48) * 1000) + ((palabra[13] - 48) * 100) + ((palabra[14] - 48) * 10) + ((palabra[15] - 48)); // 4 digits
                 speed = palabra[15]; // 1 digit: 1: low; 2: medium, 3: high
 
+                if (caliber == 20 && diameter == 2000) {
+                    DIR_1 = 0;
+                }
+                
             }
 
 
