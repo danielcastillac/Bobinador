@@ -24,6 +24,81 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S113 . . . ]
 "2865
 [v _TRISAbits `VS113 ~T0 @X0 0 e@3986 ]
+"5489
+[s S228 :1 `uc 1 :1 `uc 1 ]
+[n S228 . . GO_NOT_DONE ]
+"5493
+[s S229 :1 `uc 1 :1 `uc 1 :4 `uc 1 ]
+[n S229 . ADON GO_nDONE CHS ]
+"5498
+[s S230 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S230 . . GO_DONE CHS0 CHS1 CHS2 CHS3 ]
+"5506
+[s S231 :1 `uc 1 :1 `uc 1 ]
+[n S231 . . DONE ]
+"5510
+[s S232 :1 `uc 1 :1 `uc 1 ]
+[n S232 . . GO ]
+"5514
+[s S233 :1 `uc 1 :1 `uc 1 ]
+[n S233 . . NOT_DONE ]
+"5518
+[s S234 :1 `uc 1 :1 `uc 1 ]
+[n S234 . . nDONE ]
+"5522
+[s S235 :1 `uc 1 :1 `uc 1 ]
+[n S235 . . GODONE ]
+"5488
+[u S227 `S228 1 `S229 1 `S230 1 `S231 1 `S232 1 `S233 1 `S234 1 `S235 1 ]
+[n S227 . . . . . . . . . ]
+"5527
+[v _ADCON0bits `VS227 ~T0 @X0 0 e@4034 ]
+"5327
+[v _ADCON2 `Vuc ~T0 @X0 0 e@4032 ]
+"3474
+[s S135 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S135 . TMR1IE TMR2IE CCP1IE SSPIE TXIE RCIE ADIE ]
+"3483
+[s S136 :4 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S136 . . TX1IE RC1IE ]
+"3473
+[u S134 `S135 1 `S136 1 ]
+[n S134 . . . ]
+"3489
+[v _PIE1bits `VS134 ~T0 @X0 0 e@3997 ]
+"3545
+[s S138 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S138 . TMR1IF TMR2IF CCP1IF SSPIF TXIF RCIF ADIF ]
+"3554
+[s S139 :4 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S139 . . TX1IF RC1IF ]
+"3544
+[u S137 `S138 1 `S139 1 ]
+[n S137 . . . ]
+"3560
+[v _PIR1bits `VS137 ~T0 @X0 0 e@3998 ]
+"3266
+[s S126 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S126 . TRISC0 TRISC1 TRISC2 . TRISC6 TRISC7 ]
+"3274
+[s S127 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S127 . RC0 RC1 RC2 . RC6 RC7 ]
+"3265
+[u S125 `S126 1 `S127 1 ]
+[n S125 . . . ]
+"3283
+[v _TRISCbits `VS125 ~T0 @X0 0 e@3988 ]
+"3044
+[s S120 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S120 . TRISB0 TRISB1 TRISB2 TRISB3 TRISB4 TRISB5 TRISB6 TRISB7 ]
+"3054
+[s S121 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S121 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
+"3043
+[u S119 `S120 1 `S121 1 ]
+[n S119 . . . ]
+"3065
+[v _TRISBbits `VS119 ~T0 @X0 0 e@3987 ]
 "6362
 [s S277 :1 `uc 1 ]
 [n S277 . NOT_BOR ]
@@ -94,17 +169,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _T0CONbits `VS301 ~T0 @X0 0 e@4053 ]
 "6956
 [v _TMR0 `Vus ~T0 @X0 0 e@4054 ]
-"3266
-[s S126 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S126 . TRISC0 TRISC1 TRISC2 . TRISC6 TRISC7 ]
-"3274
-[s S127 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S127 . RC0 RC1 RC2 . RC6 RC7 ]
-"3265
-[u S125 `S126 1 `S127 1 ]
-[n S125 . . . ]
-"3283
-[v _TRISCbits `VS125 ~T0 @X0 0 e@3988 ]
+"7236
+[s S308 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S308 . INT1IF INT2IF . INT1IE INT2IE . INT1IP INT2IP ]
+"7246
+[s S309 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S309 . INT1F INT2F . INT1E INT2E . INT1P INT2P ]
+"7235
+[u S307 `S308 1 `S309 1 ]
+[n S307 . . . ]
+"7257
+[v _INTCON3bits `VS307 ~T0 @X0 0 e@4080 ]
 "7798
 [v _BRGH `Vb ~T0 @X0 0 e@32098 ]
 "7796
@@ -3286,88 +3361,136 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user.c: 35: LATC = 0;
 "35
 [e = _LATC -> -> 0 `i `uc ]
-[; ;user.c: 37: ADCON1 = 0x0F;
+[; ;user.c: 37: ADCON1 = 0b1110;
 "37
-[e = _ADCON1 -> -> 15 `i `uc ]
-[; ;user.c: 40: TRISAbits.RA2 = 0;
+[e = _ADCON1 -> -> 14 `i `uc ]
+[; ;user.c: 38: TRISAbits.TRISA0 = 1;
+"38
+[e = . . _TRISAbits 0 0 -> -> 1 `i `uc ]
+[; ;user.c: 39: ADCON0bits.CHS = 0;
+"39
+[e = . . _ADCON0bits 1 2 -> -> 0 `i `uc ]
+[; ;user.c: 40: ADCON2 = 0b10101100;
 "40
-[e = . . _TRISAbits 1 2 -> -> 0 `i `uc ]
-[; ;user.c: 41: TRISAbits.RA1 = 0;
+[e = _ADCON2 -> -> 172 `i `uc ]
+[; ;user.c: 41: PIE1bits.ADIE = 1;
 "41
-[e = . . _TRISAbits 1 1 -> -> 0 `i `uc ]
-[; ;user.c: 43: RCONbits.IPEN = 0;
+[e = . . _PIE1bits 0 6 -> -> 1 `i `uc ]
+[; ;user.c: 42: PIR1bits.ADIF = 0;
+"42
+[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
+[; ;user.c: 43: ADCON0bits.ADON = 1;
 "43
-[e = . . _RCONbits 5 7 -> -> 0 `i `uc ]
-[; ;user.c: 45: INTCONbits.GIE = 1;
+[e = . . _ADCON0bits 1 0 -> -> 1 `i `uc ]
+[; ;user.c: 45: TRISAbits.RA1 = 0;
 "45
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;user.c: 46: INTCONbits.PEIE = 1;
+[e = . . _TRISAbits 1 1 -> -> 0 `i `uc ]
+[; ;user.c: 46: TRISAbits.RA2 = 0;
 "46
-[e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-[; ;user.c: 47: INTCONbits.TMR0IE = 1;
+[e = . . _TRISAbits 1 2 -> -> 0 `i `uc ]
+[; ;user.c: 47: TRISAbits.RA3 = 0;
 "47
-[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
-[; ;user.c: 48: INTCONbits.TMR0IF = 0;
+[e = . . _TRISAbits 1 3 -> -> 0 `i `uc ]
+[; ;user.c: 48: TRISAbits.RA4 = 0;
 "48
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-[; ;user.c: 49: INTCON2bits.TMR0IP = 1;
+[e = . . _TRISAbits 1 4 -> -> 0 `i `uc ]
+[; ;user.c: 49: TRISCbits.RC0 = 0;
 "49
-[e = . . _INTCON2bits 1 2 -> -> 1 `i `uc ]
-[; ;user.c: 50: T0CONbits.T08BIT = 1;
+[e = . . _TRISCbits 1 0 -> -> 0 `i `uc ]
+[; ;user.c: 50: TRISCbits.RC1 = 0;
 "50
-[e = . . _T0CONbits 0 4 -> -> 1 `i `uc ]
-[; ;user.c: 51: T0CONbits.T0CS = 0;
+[e = . . _TRISCbits 1 1 -> -> 0 `i `uc ]
+[; ;user.c: 51: TRISBbits.RB7 = 0;
 "51
-[e = . . _T0CONbits 0 3 -> -> 0 `i `uc ]
-[; ;user.c: 52: T0CONbits.PSA = 0;
+[e = . . _TRISBbits 1 7 -> -> 0 `i `uc ]
+[; ;user.c: 52: TRISBbits.RB6 = 0;
 "52
-[e = . . _T0CONbits 0 1 -> -> 0 `i `uc ]
-[; ;user.c: 53: T0CONbits.T0PS = 0b101;
-"53
-[e = . . _T0CONbits 0 0 -> -> 5 `i `uc ]
-[; ;user.c: 54: TMR0 = 0x6;
+[e = . . _TRISBbits 1 6 -> -> 0 `i `uc ]
+[; ;user.c: 54: RCONbits.IPEN = 0;
 "54
-[e = _TMR0 -> -> 6 `i `us ]
-[; ;user.c: 56: TRISCbits.RC6 = 0;
+[e = . . _RCONbits 5 7 -> -> 0 `i `uc ]
+[; ;user.c: 56: INTCONbits.GIE = 1;
 "56
-[e = . . _TRISCbits 1 4 -> -> 0 `i `uc ]
-[; ;user.c: 57: TRISCbits.RC7 = 1;
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;user.c: 57: INTCONbits.PEIE = 1;
 "57
-[e = . . _TRISCbits 1 5 -> -> 1 `i `uc ]
-[; ;user.c: 58: BRGH = 1;
+[e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
+[; ;user.c: 58: INTCONbits.TMR0IE = 1;
 "58
-[e = _BRGH -> -> 1 `i `b ]
-[; ;user.c: 59: BRG16 = 1;
+[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
+[; ;user.c: 59: INTCONbits.TMR0IF = 0;
 "59
-[e = _BRG16 -> -> 1 `i `b ]
-[; ;user.c: 60: SPBRG = 207;
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+[; ;user.c: 60: INTCON2bits.TMR0IP = 1;
 "60
-[e = _SPBRG -> -> 207 `i `uc ]
-[; ;user.c: 61: SPEN = 1;
+[e = . . _INTCON2bits 1 2 -> -> 1 `i `uc ]
+[; ;user.c: 61: T0CONbits.T08BIT = 1;
 "61
-[e = _SPEN -> -> 1 `i `b ]
-[; ;user.c: 62: SYNC = 0;
+[e = . . _T0CONbits 0 4 -> -> 1 `i `uc ]
+[; ;user.c: 62: T0CONbits.T0CS = 0;
 "62
-[e = _SYNC -> -> 0 `i `b ]
-[; ;user.c: 63: TXEN = 1;
+[e = . . _T0CONbits 0 3 -> -> 0 `i `uc ]
+[; ;user.c: 63: T0CONbits.PSA = 0;
 "63
-[e = _TXEN -> -> 1 `i `b ]
-[; ;user.c: 64: CREN = 1;
+[e = . . _T0CONbits 0 1 -> -> 0 `i `uc ]
+[; ;user.c: 64: T0CONbits.T0PS = 0b101;
 "64
-[e = _CREN -> -> 1 `i `b ]
-[; ;user.c: 65: TX9 = 0;
+[e = . . _T0CONbits 0 0 -> -> 5 `i `uc ]
+[; ;user.c: 65: TMR0 = 0x6;
 "65
-[e = _TX9 -> -> 0 `i `b ]
-[; ;user.c: 66: RX9 = 0;
-"66
-[e = _RX9 -> -> 0 `i `b ]
-[; ;user.c: 67: RCIE = 1;
+[e = _TMR0 -> -> 6 `i `us ]
+[; ;user.c: 67: INTCON3bits.INT1IE = 1;
 "67
-[e = _RCIE -> -> 1 `i `b ]
-[; ;user.c: 68: TXIE = 0;
+[e = . . _INTCON3bits 0 3 -> -> 1 `i `uc ]
+[; ;user.c: 68: INTCON3bits.INT2IE = 1;
 "68
-[e = _TXIE -> -> 0 `i `b ]
-[; ;user.c: 70: }
+[e = . . _INTCON3bits 0 4 -> -> 1 `i `uc ]
+[; ;user.c: 69: INTCON3bits.INT1IF = 0;
+"69
+[e = . . _INTCON3bits 0 0 -> -> 0 `i `uc ]
+[; ;user.c: 70: INTCON3bits.INT2IF = 0;
 "70
+[e = . . _INTCON3bits 0 1 -> -> 0 `i `uc ]
+[; ;user.c: 72: TRISCbits.RC6 = 0;
+"72
+[e = . . _TRISCbits 1 4 -> -> 0 `i `uc ]
+[; ;user.c: 73: TRISCbits.RC7 = 1;
+"73
+[e = . . _TRISCbits 1 5 -> -> 1 `i `uc ]
+[; ;user.c: 74: BRGH = 1;
+"74
+[e = _BRGH -> -> 1 `i `b ]
+[; ;user.c: 75: BRG16 = 1;
+"75
+[e = _BRG16 -> -> 1 `i `b ]
+[; ;user.c: 76: SPBRG = 207;
+"76
+[e = _SPBRG -> -> 207 `i `uc ]
+[; ;user.c: 77: SPEN = 1;
+"77
+[e = _SPEN -> -> 1 `i `b ]
+[; ;user.c: 78: SYNC = 0;
+"78
+[e = _SYNC -> -> 0 `i `b ]
+[; ;user.c: 79: TXEN = 1;
+"79
+[e = _TXEN -> -> 1 `i `b ]
+[; ;user.c: 80: CREN = 1;
+"80
+[e = _CREN -> -> 1 `i `b ]
+[; ;user.c: 81: TX9 = 0;
+"81
+[e = _TX9 -> -> 0 `i `b ]
+[; ;user.c: 82: RX9 = 0;
+"82
+[e = _RX9 -> -> 0 `i `b ]
+[; ;user.c: 83: RCIE = 1;
+"83
+[e = _RCIE -> -> 1 `i `b ]
+[; ;user.c: 84: TXIE = 0;
+"84
+[e = _TXIE -> -> 0 `i `b ]
+[; ;user.c: 86: }
+"86
 [e :UE 322 ]
 }

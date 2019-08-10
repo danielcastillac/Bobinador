@@ -4372,11 +4372,22 @@ LATB = 0;
 PORTC = 0;
 LATC = 0;
 
-ADCON1 = 0x0F;
+ADCON1 = 0b1110;
+TRISAbits.TRISA0 = 1;
+ADCON0bits.CHS = 0;
+ADCON2 = 0b10101100;
+PIE1bits.ADIE = 1;
+PIR1bits.ADIF = 0;
+ADCON0bits.ADON = 1;
 
-
-TRISAbits.RA2 = 0;
 TRISAbits.RA1 = 0;
+TRISAbits.RA2 = 0;
+TRISAbits.RA3 = 0;
+TRISAbits.RA4 = 0;
+TRISCbits.RC0 = 0;
+TRISCbits.RC1 = 0;
+TRISBbits.RB7 = 0;
+TRISBbits.RB6 = 0;
 
 RCONbits.IPEN = 0;
 
@@ -4390,6 +4401,11 @@ T0CONbits.T0CS = 0;
 T0CONbits.PSA = 0;
 T0CONbits.T0PS = 0b101;
 TMR0 = 0x6;
+
+INTCON3bits.INT1IE = 1;
+INTCON3bits.INT2IE = 1;
+INTCON3bits.INT1IF = 0;
+INTCON3bits.INT2IF = 0;
 
 TRISCbits.RC6 = 0;
 TRISCbits.RC7 = 1;

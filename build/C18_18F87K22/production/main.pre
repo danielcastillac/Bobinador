@@ -4370,14 +4370,20 @@ unsigned int motor1 = 1;
 unsigned int motor2;
 bool RA0state = 0;
 bool DIR_1 = 0;
+unsigned int caliber;
+unsigned int diameter;
+unsigned int length;
+unsigned int turns;
+unsigned int speed;
 
 
 extern unsigned int overflow;
 extern char recibi;
 extern char palabra[20];
 extern unsigned int n;
+extern unsigned int ADC_value;
 
-# 43
+# 53
 void main(void) {
 
 ConfigureOscillator();
@@ -4392,17 +4398,27 @@ LATAbits.LA1 = DIR_1;
 if (recibi == 1) {
 
 recibi = 0;
-switch (palabra[n]) {
 
-case 49:
 
-DIR_1 = 1;
-break;
-case 50:
 
-DIR_1 = 0;
-break;
+if (palabra[0] == 'B') {
+
+
+} else if (palabra[0] == 'A') {
+
+caliber = ((palabra[1] - 48) * 10) + ((palabra[2] - 48));
+diameter = ((palabra[3] - 48) * 1000) + ((palabra[4] - 48) * 100) + ((palabra[5] - 48) * 10) + ((palabra[6] - 48));
+length = ((palabra[7] - 48) * 10000) + ((palabra[8] - 48) * 1000) + ((palabra[9] - 48) * 100) + ((palabra[10] - 48) * 10) + ((palabra[11] - 48));
+turns = ((palabra[12] - 48) * 1000) + ((palabra[13] - 48) * 100) + ((palabra[14] - 48) * 10) + ((palabra[15] - 48));
+speed = palabra[15];
+
+}
+
+
+} else if (GODONE == 0) {
+
+GODONE = 1;
 }
 }
 }
-}
+
