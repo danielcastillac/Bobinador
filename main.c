@@ -33,6 +33,7 @@ unsigned int diameter;
 unsigned int length;
 unsigned int turns;
 unsigned int speed;
+unsigned int PWM_duty;
 
 /* i.e. uint8_t <variable_name>; */
 extern unsigned int overflow;
@@ -56,6 +57,7 @@ void main(void) {
 
     while (1) {
 
+        CCPR1L = PWM_duty;
         LATAbits.LA1 = DIR_1; // Set motor 1 direction
 
         if (recibi == 1) {
@@ -64,8 +66,8 @@ void main(void) {
 
             if (palabra[0] == 'B') {
                 // Its controlling LED intensity
-                DIR_1 = 1;
-                
+                DIR_1 = !DIR_1;
+                PWM_duty = ((palabra[1] - 48) * 10) + ((palabra[2] - 48));
             } else if (palabra[0] == 'A') {
                 // Its trasmiting the parameters
                 caliber = ((palabra[1] - 48) * 10) + ((palabra[2] - 48)); // 2 digits
@@ -74,9 +76,9 @@ void main(void) {
                 turns = ((palabra[12] - 48) * 1000) + ((palabra[13] - 48) * 100) + ((palabra[14] - 48) * 10) + ((palabra[15] - 48)); // 4 digits
                 speed = palabra[15]; // 1 digit: 1: low; 2: medium, 3: high
 
-                if (caliber == 20 && diameter == 2000) {
-                    DIR_1 = 0;
-                }
+//                if (caliber == 20 && diameter == 2000) {
+//                    DIR_1 = 0;
+//                }
                 
             }
 

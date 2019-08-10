@@ -50,6 +50,7 @@ void InitApp(void) {
     TRISCbits.RC1 = 0; // Motor 3, STEP output
     TRISBbits.RB7 = 0; // Motor 4, DIR output
     TRISBbits.RB6 = 0; // Motor 4, STEP output   
+    TRISCbits.RC2 = 0; // LED lighting PWM output
     /* Configure the IPEN bit (1=on) in RCON to turn on/off int priorities */
     RCONbits.IPEN = 0; // Disable interrupt priorities
     /* Enable interrupts */
@@ -82,5 +83,12 @@ void InitApp(void) {
     RX9 = 0; // 8-bit reception mode selected
     RCIE = 1; // Enable recieve interrupt bit
     TXIE = 0; // Disable transmit interrupt bit
-
+    /* PWM for LED ligthing control */
+    PR2 = 99;
+    CCPR1L = 50; // 50% duty by default
+    CCP1CONbits.DC1B = 0;
+    T2CONbits.T2CKPS = 0b00; // T2 prescaler = 1
+    T2CONbits.TMR2ON = 1; // T2 is ON
+    CCP1CONbits.CCP1M = 0b1111; // CCP1 is set to mode PWM
+    
 }

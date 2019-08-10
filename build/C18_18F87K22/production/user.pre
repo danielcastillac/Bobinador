@@ -4388,6 +4388,7 @@ TRISCbits.RC0 = 0;
 TRISCbits.RC1 = 0;
 TRISBbits.RB7 = 0;
 TRISBbits.RB6 = 0;
+TRISCbits.RC2 = 0;
 
 RCONbits.IPEN = 0;
 
@@ -4420,5 +4421,12 @@ TX9 = 0;
 RX9 = 0;
 RCIE = 1;
 TXIE = 0;
+
+PR2 = 99;
+CCPR1L = 50;
+CCP1CONbits.DC1B = 0;
+T2CONbits.T2CKPS = 0b00;
+T2CONbits.TMR2ON = 1;
+CCP1CONbits.CCP1M = 0b1111;
 
 }

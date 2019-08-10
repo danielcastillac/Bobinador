@@ -4375,6 +4375,7 @@ unsigned int diameter;
 unsigned int length;
 unsigned int turns;
 unsigned int speed;
+unsigned int PWM_duty;
 
 
 extern unsigned int overflow;
@@ -4383,7 +4384,7 @@ extern char palabra[20];
 extern unsigned int n;
 extern unsigned int ADC_value;
 
-# 50
+# 51
 void main(void) {
 
 ConfigureOscillator();
@@ -4393,6 +4394,7 @@ InitApp();
 
 while (1) {
 
+CCPR1L = PWM_duty;
 LATAbits.LA1 = DIR_1;
 
 if (recibi == 1) {
@@ -4401,8 +4403,8 @@ recibi = 0;
 
 if (palabra[0] == 'B') {
 
-DIR_1 = 1;
-
+DIR_1 = !DIR_1;
+PWM_duty = ((palabra[1] - 48) * 10) + ((palabra[2] - 48));
 } else if (palabra[0] == 'A') {
 
 caliber = ((palabra[1] - 48) * 10) + ((palabra[2] - 48));
@@ -4411,10 +4413,7 @@ length = ((palabra[7] - 48) * 10000) + ((palabra[8] - 48) * 1000) + ((palabra[9]
 turns = ((palabra[12] - 48) * 1000) + ((palabra[13] - 48) * 100) + ((palabra[14] - 48) * 10) + ((palabra[15] - 48));
 speed = palabra[15];
 
-if (caliber == 20 && diameter == 2000) {
-DIR_1 = 0;
-}
-
+# 83
 }
 
 
