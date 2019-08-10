@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.45 build -152302408 
-                                                                                               Sat Aug 10 13:08:35 2019
+                                                                                               Sat Aug 10 15:22:58 2019
 
 Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160504
      1                           	processor	18F2550
@@ -259,7 +259,7 @@ Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160
    245 ;;
    246 ;; *************** function _main *****************
    247 ;; Defined at:
-   248 ;;		line 53 in file "main.c"
+   248 ;;		line 50 in file "main.c"
    249 ;; Parameters:    Size  Location     Type
    250 ;;		None
    251 ;; Auto vars:     Size  Location     Type
@@ -294,15 +294,15 @@ Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160
    280  000012                     _main:
    281                           	opt stack 29
    282                           
-   283                           ;main.c: 55: ConfigureOscillator();
+   283                           ;main.c: 52: ConfigureOscillator();
    284                           
    285                           ;incstack = 0
    286  000012  ECF5  F001         	call	_ConfigureOscillator	;wreg free
    287                           
-   288                           ;main.c: 58: InitApp();
+   288                           ;main.c: 55: InitApp();
    289  000016  EC87  F001         	call	_InitApp	;wreg free
    290  00001A                     
-   291                           ;main.c: 62: LATAbits.LA1 = DIR_1;
+   291                           ;main.c: 59: LATAbits.LA1 = DIR_1;
    292  00001A  B027               	btfsc	_DIR_1,0,c
    293  00001C  D002               	bra	u155
    294  00001E  9289               	bcf	3977,1,c	;volatile
@@ -311,28 +311,28 @@ Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160
    297  000022  8289               	bsf	3977,1,c	;volatile
    298  000024                     u156:
    299                           
-   300                           ;main.c: 64: if (recibi == 1) {
+   300                           ;main.c: 61: if (recibi == 1) {
    301  000024  0429               	decf	_recibi,w,c
    302  000026  A4D8               	btfss	status,2,c
    303  000028  D0E2               	goto	l84
    304                           
-   305                           ;main.c: 66: recibi = 0;
+   305                           ;main.c: 63: recibi = 0;
    306  00002A  0E00               	movlw	0
    307  00002C  6E29               	movwf	_recibi,c
    308                           
-   309                           ;main.c: 70: if (palabra[0] == 'B') {
+   309                           ;main.c: 65: if (palabra[0] == 'B') {
    310  00002E  0E42               	movlw	66
    311  000030  1801               	xorwf	_palabra,w,c
    312  000032  B4D8               	btfsc	status,2,c
    313  000034  D7F2               	goto	l83
    314                           
-   315                           ;main.c: 73: } else if (palabra[0] == 'A') {
+   315                           ;main.c: 68: } else if (palabra[0] == 'A') {
    316  000036  0E41               	movlw	65
    317  000038  1801               	xorwf	_palabra,w,c
    318  00003A  A4D8               	btfss	status,2,c
    319  00003C  D7EE               	goto	l83
    320                           
-   321                           ;main.c: 75: caliber = ((palabra[1] - 48) * 10) + ((palabra[2] - 48));
+   321                           ;main.c: 70: caliber = ((palabra[1] - 48) * 10) + ((palabra[2] - 48));
    322  00003E  0ED0               	movlw	208
    323  000040  2402               	addwf	_palabra+1,w,c
    324  000042  6E3D               	movwf	___wmul@multiplier,c
@@ -358,7 +358,7 @@ Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160
    344  00006C  2044               	addwfc	??_main+1,w,c
    345  00006E  6E1E               	movwf	_caliber+1,c
    346                           
-   347                           ;main.c: 76: diameter = ((palabra[3] - 48) * 1000) + ((palabra[4] - 48) * 100) + ((palab
+   347                           ;main.c: 71: diameter = ((palabra[3] - 48) * 1000) + ((palabra[4] - 48) * 100) + ((palab
       +                          ra[5] - 48) * 10) + ((palabra[6] - 48));
    348  000070  0ED0               	movlw	208
    349  000072  2404               	addwf	_palabra+3,w,c
@@ -415,7 +415,7 @@ Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160
    400  0000DE  2044               	addwfc	??_main+1,w,c
    401  0000E0  6E1C               	movwf	_diameter+1,c
    402                           
-   403                           ;main.c: 77: length = ((palabra[7] - 48) * 10000) + ((palabra[8] - 48) * 1000) + ((palab
+   403                           ;main.c: 72: length = ((palabra[7] - 48) * 10000) + ((palabra[8] - 48) * 1000) + ((palab
       +                          ra[9] - 48) * 100) + ((palabra[10] - 48) * 10) + ((palabra[11] - 48));
    404  0000E2  0ED0               	movlw	208
    405  0000E4  2408               	addwf	_palabra+7,w,c
@@ -487,7 +487,7 @@ Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160
    471  000170  2044               	addwfc	??_main+1,w,c
    472  000172  6E1A               	movwf	_length+1,c
    473                           
-   474                           ;main.c: 78: turns = ((palabra[12] - 48) * 1000) + ((palabra[13] - 48) * 100) + ((palabr
+   474                           ;main.c: 73: turns = ((palabra[12] - 48) * 1000) + ((palabra[13] - 48) * 100) + ((palabr
       +                          a[14] - 48) * 10) + ((palabra[15] - 48));
    475  000174  0ED0               	movlw	208
    476  000176  240D               	addwf	_palabra+12,w,c
@@ -544,18 +544,18 @@ Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160
    527  0001E2  2044               	addwfc	??_main+1,w,c
    528  0001E4  6E18               	movwf	_turns+1,c
    529                           
-   530                           ;main.c: 79: speed = palabra[15];
+   530                           ;main.c: 74: speed = palabra[15];
    531  0001E6  C010  F015         	movff	_palabra+15,_speed
    532  0001EA  6A16               	clrf	_speed+1,c
    533                           
-   534                           ;main.c: 81: }
-   535                           ;main.c: 84: } else if (GODONE == 0) {
+   534                           ;main.c: 76: }
+   535                           ;main.c: 79: } else if (GODONE == 0) {
    536  0001EC  D716               	goto	l83
    537  0001EE                     l84:
    538  0001EE  B2C2               	btfsc	4034,1,c	;volatile
    539  0001F0  D714               	goto	l83
    540                           
-   541                           ;main.c: 86: GODONE = 1;
+   541                           ;main.c: 81: GODONE = 1;
    542  0001F2  82C2               	bsf	4034,1,c	;volatile
    543  0001F4  D712               	goto	l83
    544  0001F6                     __end_of_main:
@@ -1379,7 +1379,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.45 build -152302408 
-Symbol Table                                                                                   Sat Aug 10 13:08:35 2019
+Symbol Table                                                                                   Sat Aug 10 15:22:58 2019
 
                            _n 0025                            l83 001A                            l84 01EE  
          ___wmul@multiplicand 003F                   __CFG_BORV$3 000000                  __CFG_CP0$OFF 000000  

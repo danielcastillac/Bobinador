@@ -45,7 +45,6 @@ extern unsigned int ADC_value;
 /* Main Program                                                               */
 /* Function prototypes */
 
-
 /******************************************************************************/
 
 void main(void) {
@@ -62,12 +61,10 @@ void main(void) {
         if (recibi == 1) {
             /* Bluetooth reception routine */
             recibi = 0;
-            /* Check number of parameters to control machine or change light state */
-//            size_palabra = *(&palabra + 1) - palabra; // Based on palabra size, change LED intensity or give parameters
-            
+
             if (palabra[0] == 'B') {
                 // Its controlling LED intensity
-                
+
             } else if (palabra[0] == 'A') {
                 // Its trasmiting data
                 caliber = ((palabra[1] - 48) * 10) + ((palabra[2] - 48)); // 2 digits
@@ -75,7 +72,7 @@ void main(void) {
                 length = ((palabra[7] - 48) * 10000) + ((palabra[8] - 48) * 1000) + ((palabra[9] - 48) * 100) + ((palabra[10] - 48) * 10) + ((palabra[11] - 48)); // 5 digits (int not float)
                 turns = ((palabra[12] - 48) * 1000) + ((palabra[13] - 48) * 100) + ((palabra[14] - 48) * 10) + ((palabra[15] - 48)); // 4 digits
                 speed = palabra[15]; // 1 digit: 1: low; 2: medium, 3: high
-                
+
             }
 
 

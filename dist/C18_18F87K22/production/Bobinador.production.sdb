@@ -27,7 +27,7 @@
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "31 D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\interrupts.c
 [v _high_isr high_isr `II(v  1 e 1 0 ]
-"53 D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\main.c
+"50 D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\main.c
 [v _main main `(v  1 e 1 0 ]
 "24 D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\system.c
 [v _ConfigureOscillator ConfigureOscillator `(v  1 e 1 0 ]
@@ -399,10 +399,10 @@
 [v _turns turns `ui  1 e 2 0 ]
 "35
 [v _speed speed `ui  1 e 2 0 ]
-"53
+"50
 [v _main main `(v  1 e 1 0 ]
 {
-"89
+"84
 } 0
 "15 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]

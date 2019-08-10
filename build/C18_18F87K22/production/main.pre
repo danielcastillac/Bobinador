@@ -4383,7 +4383,7 @@ extern char palabra[20];
 extern unsigned int n;
 extern unsigned int ADC_value;
 
-# 53
+# 50
 void main(void) {
 
 ConfigureOscillator();
@@ -4398,8 +4398,6 @@ LATAbits.LA1 = DIR_1;
 if (recibi == 1) {
 
 recibi = 0;
-
-
 
 if (palabra[0] == 'B') {
 
@@ -4421,4 +4419,3 @@ GODONE = 1;
 }
 }
 }
-
