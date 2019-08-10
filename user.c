@@ -84,11 +84,10 @@ void InitApp(void) {
     RCIE = 1; // Enable recieve interrupt bit
     TXIE = 0; // Disable transmit interrupt bit
     /* PWM for LED ligthing control */
-    PR2 = 99;
-//    CCPR1L = 50; // 50% duty by default
-    CCP1CONbits.DC1B = 0;
+    PR2 = 99; // Set PWM frecuency to 20kHz
+    CCP1CONbits.DC1B = 0; // Least significant bits for PWM duty cycle
     T2CONbits.T2CKPS = 0b00; // T2 prescaler = 1
     T2CONbits.TMR2ON = 1; // T2 is ON
     CCP1CONbits.CCP1M = 0b1111; // CCP1 is set to mode PWM
-    
+
 }

@@ -3523,19 +3523,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user.c: 87: PR2 = 99;
 "87
 [e = _PR2 -> -> 99 `i `uc ]
-[; ;user.c: 89: CCP1CONbits.DC1B = 0;
-"89
+[; ;user.c: 88: CCP1CONbits.DC1B = 0;
+"88
 [e = . . _CCP1CONbits 0 1 -> -> 0 `i `uc ]
-[; ;user.c: 90: T2CONbits.T2CKPS = 0b00;
-"90
+[; ;user.c: 89: T2CONbits.T2CKPS = 0b00;
+"89
 [e = . . _T2CONbits 0 0 -> -> 0 `i `uc ]
-[; ;user.c: 91: T2CONbits.TMR2ON = 1;
-"91
+[; ;user.c: 90: T2CONbits.TMR2ON = 1;
+"90
 [e = . . _T2CONbits 0 1 -> -> 1 `i `uc ]
-[; ;user.c: 92: CCP1CONbits.CCP1M = 0b1111;
-"92
+[; ;user.c: 91: CCP1CONbits.CCP1M = 0b1111;
+"91
 [e = . . _CCP1CONbits 0 0 -> -> 15 `i `uc ]
-[; ;user.c: 94: }
-"94
+[; ;user.c: 93: }
+"93
 [e :UE 322 ]
 }

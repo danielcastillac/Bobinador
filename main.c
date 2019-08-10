@@ -57,7 +57,7 @@ void main(void) {
 
     while (1) {
 
-        CCPR1L = PWM_duty;
+        CCPR1L = PWM_duty; // Update duty cycle for LED strip
         LATAbits.LA1 = DIR_1; // Set motor 1 direction
 
         if (recibi == 1) {
@@ -76,10 +76,10 @@ void main(void) {
                 turns = ((palabra[12] - 48) * 1000) + ((palabra[13] - 48) * 100) + ((palabra[14] - 48) * 10) + ((palabra[15] - 48)); // 4 digits
                 speed = palabra[15]; // 1 digit: 1: low; 2: medium, 3: high
 
-//                if (caliber == 20 && diameter == 2000) {
-//                    DIR_1 = 0;
-//                }
-                
+                //                if (caliber == 20 && diameter == 2000) {
+                //                    DIR_1 = 0;
+                //                }
+
             }
 
 

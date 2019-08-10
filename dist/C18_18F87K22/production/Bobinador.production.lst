@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.45 build -152302408 
-                                                                                               Sat Aug 10 16:38:58 2019
+                                                                                               Sat Aug 10 16:49:01 2019
 
 Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160504
      1                           	processor	18F2550
@@ -911,18 +911,18 @@ Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160
    894  0003DC  0E63               	movlw	99
    895  0003DE  6ECB               	movwf	4043,c	;volatile
    896                           
-   897                           ;user.c: 89: CCP1CONbits.DC1B = 0;
+   897                           ;user.c: 88: CCP1CONbits.DC1B = 0;
    898  0003E0  0ECF               	movlw	-49
    899  0003E2  16BD               	andwf	4029,f,c	;volatile
    900                           
-   901                           ;user.c: 90: T2CONbits.T2CKPS = 0b00;
+   901                           ;user.c: 89: T2CONbits.T2CKPS = 0b00;
    902  0003E4  0EFC               	movlw	-4
    903  0003E6  16CA               	andwf	4042,f,c	;volatile
    904                           
-   905                           ;user.c: 91: T2CONbits.TMR2ON = 1;
+   905                           ;user.c: 90: T2CONbits.TMR2ON = 1;
    906  0003E8  84CA               	bsf	4042,2,c	;volatile
    907                           
-   908                           ;user.c: 92: CCP1CONbits.CCP1M = 0b1111;
+   908                           ;user.c: 91: CCP1CONbits.CCP1M = 0b1111;
    909  0003EA  80BD               	bsf	4029,0,c	;volatile
    910  0003EC  82BD               	bsf	4029,1,c	;volatile
    911  0003EE  84BD               	bsf	4029,2,c	;volatile
@@ -1481,7 +1481,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.45 build -152302408 
-Symbol Table                                                                                   Sat Aug 10 16:38:58 2019
+Symbol Table                                                                                   Sat Aug 10 16:49:01 2019
 
                            _n 0025                            l87 001A                            l88 0234  
                           l89 007C           ___wmul@multiplicand 003F                   __CFG_BORV$3 000000  
