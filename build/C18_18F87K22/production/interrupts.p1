@@ -3274,9 +3274,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 42: n++;
 "42
 [e ++ _n -> -> 1 `i `ui ]
-[; ;interrupts.c: 43: if (RCREG == '\r') {
+[; ;interrupts.c: 43: if (RCREG == '\n') {
 "43
-[e $ ! == -> _RCREG `ui -> 13 `ui 326  ]
+[e $ ! == -> _RCREG `ui -> 10 `ui 326  ]
 {
 [; ;interrupts.c: 44: TXREG = palabra[0];
 "44

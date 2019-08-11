@@ -40,7 +40,7 @@ void interrupt high_isr(void) {
         PIR1bits.RCIF = 0; // Restart Recieve interrupt flag
         palabra[n] = RCREG; // Save recieve char in buffer variable
         n++;
-        if (RCREG == '\r') {
+        if (RCREG == '\n') {
             TXREG = palabra[0]; // Retransmit to check connection
             while (TXIF == 0);
             recibi = 1;
