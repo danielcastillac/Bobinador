@@ -51,8 +51,8 @@ void interrupt high_isr(void) {
 
         if (MOT_1) {
             if (MOT_1_count == 5) {
-                LATAbits.LA5 = !PORTAbits.RA5;
-                MOT_2_count = 0;
+                LATAbits.LA3 = !PORTAbits.RA3;
+                MOT_1_count = 0;
             }
         }
         if (MOT_2) {
