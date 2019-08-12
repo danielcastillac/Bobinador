@@ -4372,18 +4372,19 @@ LATB = 0;
 PORTC = 0;
 LATC = 0;
 
-ADCON1 = 0b1110;
+ADCON1 = 0b1101;
 TRISAbits.TRISA0 = 1;
+TRISAbits.TRISA1 = 1;
 ADCON0bits.CHS = 0;
 ADCON2 = 0b10101100;
 PIE1bits.ADIE = 1;
 PIR1bits.ADIF = 0;
 ADCON0bits.ADON = 1;
 
-TRISAbits.RA1 = 0;
 TRISAbits.RA2 = 0;
 TRISAbits.RA3 = 0;
 TRISAbits.RA4 = 0;
+TRISAbits.RA5 = 0;
 TRISCbits.RC0 = 0;
 TRISCbits.RC1 = 0;
 TRISBbits.RB7 = 0;

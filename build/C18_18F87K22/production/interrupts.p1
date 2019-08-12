@@ -63,6 +63,35 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TXREG `Vuc ~T0 @X0 0 e@4013 ]
 "8962
 [v _TXIF `Vb ~T0 @X0 0 e@31988 ]
+"5489
+[s S228 :1 `uc 1 :1 `uc 1 ]
+[n S228 . . GO_NOT_DONE ]
+"5493
+[s S229 :1 `uc 1 :1 `uc 1 :4 `uc 1 ]
+[n S229 . ADON GO_nDONE CHS ]
+"5498
+[s S230 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S230 . . GO_DONE CHS0 CHS1 CHS2 CHS3 ]
+"5506
+[s S231 :1 `uc 1 :1 `uc 1 ]
+[n S231 . . DONE ]
+"5510
+[s S232 :1 `uc 1 :1 `uc 1 ]
+[n S232 . . GO ]
+"5514
+[s S233 :1 `uc 1 :1 `uc 1 ]
+[n S233 . . NOT_DONE ]
+"5518
+[s S234 :1 `uc 1 :1 `uc 1 ]
+[n S234 . . nDONE ]
+"5522
+[s S235 :1 `uc 1 :1 `uc 1 ]
+[n S235 . . GODONE ]
+"5488
+[u S227 `S228 1 `S229 1 `S230 1 `S231 1 `S232 1 `S233 1 `S234 1 `S235 1 ]
+[n S227 . . . . . . . . . ]
+"5527
+[v _ADCON0bits `VS227 ~T0 @X0 0 e@4034 ]
 "5602
 [v _ADRES `Vus ~T0 @X0 0 e@4035 ]
 "7236
@@ -3232,114 +3261,139 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;interrupts.c: 26: unsigned int overflow = 0;
 "27
-[v _ADC_value `ui ~T0 @X0 1 e ]
-[; ;interrupts.c: 27: unsigned int ADC_value;
+[v _ADC_value_press `ui ~T0 @X0 1 e ]
+[; ;interrupts.c: 27: unsigned int ADC_value_press;
+"28
+[v _ADC_value_dist `ui ~T0 @X0 1 e ]
+[; ;interrupts.c: 28: unsigned int ADC_value_dist;
 [v $root$_high_isr `(v ~T0 @X0 0 e ]
-[v F3359 `(v ~T0 @X0 1 tf ]
-"31
-[v _high_isr `IF3359 ~T0 @X0 1 e ]
+[v F3360 `(v ~T0 @X0 1 tf ]
+"32
+[v _high_isr `IF3360 ~T0 @X0 1 e ]
 {
-[; ;interrupts.c: 31: void interrupt high_isr(void) {
+[; ;interrupts.c: 32: void interrupt high_isr(void) {
 [e :U _high_isr ]
 [f ]
-[; ;interrupts.c: 32: if (INTCONbits.TMR0IF) {
-"32
+[; ;interrupts.c: 33: if (INTCONbits.TMR0IF) {
+"33
 [e $ ! != -> . . _INTCONbits 0 2 `i -> -> -> 0 `i `Vuc `i 323  ]
 {
-[; ;interrupts.c: 34: INTCONbits.TMR0IF = 0;
-"34
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-[; ;interrupts.c: 35: overflow++;
+[; ;interrupts.c: 35: INTCONbits.TMR0IF = 0;
 "35
-[e ++ _overflow -> -> 1 `i `ui ]
-[; ;interrupts.c: 36: LATAbits.LA2 = !PORTAbits.RA2;
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+[; ;interrupts.c: 36: overflow++;
 "36
-[e = . . _LATAbits 1 2 -> -> ! != -> . . _PORTAbits 0 2 `i -> -> -> 0 `i `Vuc `i `i `uc ]
-[; ;interrupts.c: 37: TMR0 = 50;
+[e ++ _overflow -> -> 1 `i `ui ]
+[; ;interrupts.c: 37: LATAbits.LA2 = !PORTAbits.RA2;
 "37
-[e = _TMR0 -> -> 50 `i `us ]
+[e = . . _LATAbits 1 2 -> -> ! != -> . . _PORTAbits 0 2 `i -> -> -> 0 `i `Vuc `i `i `uc ]
+[; ;interrupts.c: 38: TMR0 = 50;
 "38
+[e = _TMR0 -> -> 50 `i `us ]
+"39
 }
-[; ;interrupts.c: 38: } else if (PIR1bits.RCIF) {
+[; ;interrupts.c: 39: } else if (PIR1bits.RCIF) {
 [e $U 324  ]
 [e :U 323 ]
 [e $ ! != -> . . _PIR1bits 0 5 `i -> -> -> 0 `i `Vuc `i 325  ]
 {
-[; ;interrupts.c: 40: PIR1bits.RCIF = 0;
-"40
-[e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
-[; ;interrupts.c: 41: palabra[n] = RCREG;
+[; ;interrupts.c: 41: PIR1bits.RCIF = 0;
 "41
-[e = *U + &U _palabra * -> _n `ux -> -> # *U &U _palabra `ui `ux _RCREG ]
-[; ;interrupts.c: 42: n++;
+[e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
+[; ;interrupts.c: 42: palabra[n] = RCREG;
 "42
-[e ++ _n -> -> 1 `i `ui ]
-[; ;interrupts.c: 43: if (RCREG == '\n') {
+[e = *U + &U _palabra * -> _n `ux -> -> # *U &U _palabra `ui `ux _RCREG ]
+[; ;interrupts.c: 43: n++;
 "43
+[e ++ _n -> -> 1 `i `ui ]
+[; ;interrupts.c: 44: if (RCREG == '\n') {
+"44
 [e $ ! == -> _RCREG `ui -> 10 `ui 326  ]
 {
-[; ;interrupts.c: 44: TXREG = palabra[0];
-"44
-[e = _TXREG *U + &U _palabra * -> -> -> 0 `i `ui `ux -> -> # *U &U _palabra `ui `ux ]
-[; ;interrupts.c: 45: while (TXIF == 0);
+[; ;interrupts.c: 45: TXREG = palabra[0];
 "45
+[e = _TXREG *U + &U _palabra * -> -> -> 0 `i `ui `ux -> -> # *U &U _palabra `ui `ux ]
+[; ;interrupts.c: 46: while (TXIF == 0);
+"46
 [e $U 327  ]
 [e :U 328 ]
 [e :U 327 ]
 [e $ == -> _TXIF `i -> 0 `i 328  ]
 [e :U 329 ]
-[; ;interrupts.c: 46: recibi = 1;
-"46
-[e = _recibi -> -> 1 `i `uc ]
-[; ;interrupts.c: 47: n = 0;
+[; ;interrupts.c: 47: recibi = 1;
 "47
-[e = _n -> -> 0 `i `ui ]
+[e = _recibi -> -> 1 `i `uc ]
+[; ;interrupts.c: 48: n = 0;
 "48
-}
-[e :U 326 ]
+[e = _n -> -> 0 `i `ui ]
 "49
 }
-[; ;interrupts.c: 48: }
-[; ;interrupts.c: 49: } else if (PIR1bits.ADIF) {
+[e :U 326 ]
+"50
+}
+[; ;interrupts.c: 49: }
+[; ;interrupts.c: 50: } else if (PIR1bits.ADIF) {
 [e $U 330  ]
 [e :U 325 ]
 [e $ ! != -> . . _PIR1bits 0 6 `i -> -> -> 0 `i `Vuc `i 331  ]
 {
-[; ;interrupts.c: 51: PIR1bits.ADIF = 0;
-"51
-[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
-[; ;interrupts.c: 52: ADC_value = ADRES;
+[; ;interrupts.c: 52: PIR1bits.ADIF = 0;
 "52
-[e = _ADC_value -> _ADRES `ui ]
+[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
+[; ;interrupts.c: 53: if (ADCON0bits.CHS == 0b0000) {
+"53
+[e $ ! == -> . . _ADCON0bits 1 2 `i -> 0 `i 332  ]
+{
+[; ;interrupts.c: 54: ADC_value_press = ADRES;
 "54
+[e = _ADC_value_press -> _ADRES `ui ]
+"55
 }
-[; ;interrupts.c: 54: } else if (INTCON3bits.INT1IF) {
-[e $U 332  ]
-[e :U 331 ]
-[e $ ! != -> . . _INTCON3bits 0 0 `i -> -> -> 0 `i `Vuc `i 333  ]
-{
-[; ;interrupts.c: 56: INTCON3bits.INT1IF = 0;
-"56
-[e = . . _INTCON3bits 0 0 -> -> 0 `i `uc ]
-"58
-}
-[; ;interrupts.c: 58: } else if (INTCON3bits.INT2IF) {
-[e $U 334  ]
-[e :U 333 ]
-[e $ ! != -> . . _INTCON3bits 0 1 `i -> -> -> 0 `i `Vuc `i 335  ]
-{
-[; ;interrupts.c: 60: INTCON3bits.INT2IF = 0;
-"60
-[e = . . _INTCON3bits 0 1 -> -> 0 `i `uc ]
-"62
-}
-[e :U 335 ]
-"63
-[e :U 334 ]
+[; ;interrupts.c: 55: } else if (ADCON0bits.CHS == 0b0001) {
+[e $U 333  ]
 [e :U 332 ]
+[e $ ! == -> . . _ADCON0bits 1 2 `i -> 1 `i 334  ]
+{
+[; ;interrupts.c: 56: ADC_value_dist = ADRES;
+"56
+[e = _ADC_value_dist -> _ADRES `ui ]
+"57
+}
+[e :U 334 ]
+"58
+[e :U 333 ]
+[; ;interrupts.c: 57: }
+[; ;interrupts.c: 58: ADCON0bits.CHS = !ADCON0bits.CHS;
+[e = . . _ADCON0bits 1 2 -> -> ! != -> . . _ADCON0bits 1 2 `i -> -> -> 0 `i `Vuc `i `i `uc ]
+"60
+}
+[; ;interrupts.c: 60: } else if (INTCON3bits.INT1IF) {
+[e $U 335  ]
+[e :U 331 ]
+[e $ ! != -> . . _INTCON3bits 0 0 `i -> -> -> 0 `i `Vuc `i 336  ]
+{
+[; ;interrupts.c: 62: INTCON3bits.INT1IF = 0;
+"62
+[e = . . _INTCON3bits 0 0 -> -> 0 `i `uc ]
+"64
+}
+[; ;interrupts.c: 64: } else if (INTCON3bits.INT2IF) {
+[e $U 337  ]
+[e :U 336 ]
+[e $ ! != -> . . _INTCON3bits 0 1 `i -> -> -> 0 `i `Vuc `i 338  ]
+{
+[; ;interrupts.c: 66: INTCON3bits.INT2IF = 0;
+"66
+[e = . . _INTCON3bits 0 1 -> -> 0 `i `uc ]
+"68
+}
+[e :U 338 ]
+"69
+[e :U 337 ]
+[e :U 335 ]
 [e :U 330 ]
 [e :U 324 ]
-[; ;interrupts.c: 62: }
-[; ;interrupts.c: 63: }
+[; ;interrupts.c: 68: }
+[; ;interrupts.c: 69: }
 [e :UE 322 ]
 }

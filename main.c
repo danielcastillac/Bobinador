@@ -34,13 +34,15 @@ unsigned int length;
 unsigned int turns;
 unsigned int speed;
 unsigned int PWM_duty = 50;
+bool busy_flag = false;
 
 /* i.e. uint8_t <variable_name>; */
 extern unsigned int overflow;
 extern char recibi;
 extern char palabra[20];
 extern unsigned int n;
-extern unsigned int ADC_value;
+extern unsigned int ADC_value_press;
+extern unsigned int ADC_value_dist;
 
 /******************************************************************************/
 /* Main Program                                                               */
@@ -58,11 +60,16 @@ void main(void) {
     while (1) {
 
         CCPR1L = PWM_duty; // Update duty cycle for LED strip
-        LATAbits.LA1 = DIR_1; // Set motor 1 direction
-
+        LATAbits.LA2 = DIR_1; // Set motor 1 direction
+        
+        if (busy_flag) {
+            TXREG = 'C'; // Transmit -Currently working- flag to mobile app
+            while (TXIF == 0);
+        }
+        
         if (recibi == 1) {
             /* Bluetooth reception routine */
-            recibi = 0;
+            recibi = 0; // Turn down reception flag
 
             if (palabra[0] == 'B') {
                 // Its controlling LED intensity
@@ -76,10 +83,7 @@ void main(void) {
                 turns = ((palabra[12] - 48) * 1000) + ((palabra[13] - 48) * 100) + ((palabra[14] - 48) * 10) + ((palabra[15] - 48)); // 4 digits
                 speed = palabra[15]; // 1 digit: 1: low; 2: medium, 3: high
 
-                //                if (caliber == 20 && diameter == 2000) {
-                //                    DIR_1 = 0;
-                //                }
-
+                busy_flag = true; // Machine is currently working
             }
 
 

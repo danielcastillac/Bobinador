@@ -4376,15 +4376,17 @@ unsigned int length;
 unsigned int turns;
 unsigned int speed;
 unsigned int PWM_duty = 50;
+bool busy_flag = 0;
 
 
 extern unsigned int overflow;
 extern char recibi;
 extern char palabra[20];
 extern unsigned int n;
-extern unsigned int ADC_value;
+extern unsigned int ADC_value_press;
+extern unsigned int ADC_value_dist;
 
-# 51
+# 53
 void main(void) {
 
 ConfigureOscillator();
@@ -4395,7 +4397,12 @@ InitApp();
 while (1) {
 
 CCPR1L = PWM_duty;
-LATAbits.LA1 = DIR_1;
+LATAbits.LA2 = DIR_1;
+
+if (busy_flag) {
+TXREG = 'C';
+while (TXIF == 0);
+}
 
 if (recibi == 1) {
 
@@ -4413,7 +4420,7 @@ length = ((palabra[7] - 48) * 10000) + ((palabra[8] - 48) * 1000) + ((palabra[9]
 turns = ((palabra[12] - 48) * 1000) + ((palabra[13] - 48) * 100) + ((palabra[14] - 48) * 10) + ((palabra[15] - 48));
 speed = palabra[15];
 
-# 83
+busy_flag = 1;
 }
 
 

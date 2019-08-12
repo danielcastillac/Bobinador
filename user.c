@@ -34,22 +34,23 @@ void InitApp(void) {
     PORTC = 0;
     LATC = 0;
     /* Setup analog functionality */
-    ADCON1 = 0b1110; // All ports digital except AN0
-    TRISAbits.TRISA0 = 1; // A/D input pin
+    ADCON1 = 0b1101; // All ports digital except AN0 and AN1
+    TRISAbits.TRISA0 = 1; // A/D channel 0 input pin
+    TRISAbits.TRISA1 = 1; // A/D channel 1 input pin
     ADCON0bits.CHS = 0; // A/D Channel 0
     ADCON2 = 0b10101100; // Right justified, 12 TAD, FOSC/4
     PIE1bits.ADIE = 1; // A/D Interrupt Enable bit
     PIR1bits.ADIF = 0; // A/D interrupt flag
     ADCON0bits.ADON = 1; // A/D converter enabled REVISAR
     /* Initialize peripherals */
-    TRISAbits.RA1 = 0; // Motor 1, DIR output
-    TRISAbits.RA2 = 0; // Motor 1, STEP output
-    TRISAbits.RA3 = 0; // Motor 2, DIR output
-    TRISAbits.RA4 = 0; // Motor 2, STEP output
+    TRISAbits.RA2 = 0; // Motor 1, DIR output
+    TRISAbits.RA3 = 0; // Motor 1, STEP output
+    TRISAbits.RA4 = 0; // Motor 2, DIR output
+    TRISAbits.RA5 = 0; // Motor 2, STEP output
     TRISCbits.RC0 = 0; // Motor 3, DIR output
     TRISCbits.RC1 = 0; // Motor 3, STEP output
     TRISBbits.RB7 = 0; // Motor 4, DIR output
-    TRISBbits.RB6 = 0; // Motor 4, STEP output   
+    TRISBbits.RB6 = 0; // Motor 4, STEP output
     TRISCbits.RC2 = 0; // LED lighting PWM output
     /* Configure the IPEN bit (1=on) in RCON to turn on/off int priorities */
     RCONbits.IPEN = 0; // Disable interrupt priorities
