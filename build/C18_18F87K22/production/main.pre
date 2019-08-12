@@ -4370,6 +4370,14 @@ unsigned int motor1 = 1;
 unsigned int motor2;
 bool RA0state = 0;
 bool DIR_1 = 0;
+bool DIR_2 = 0;
+bool DIR_3 = 0;
+bool DIR_4 = 0;
+bool MOT_1 = 0;
+bool MOT_2 = 0;
+bool MOT_3 = 0;
+bool MOT_4 = 0;
+
 unsigned int caliber;
 unsigned int diameter;
 unsigned int length;
@@ -4386,7 +4394,7 @@ extern unsigned int n;
 extern unsigned int ADC_value_press;
 extern unsigned int ADC_value_dist;
 
-# 53
+# 61
 void main(void) {
 
 ConfigureOscillator();
@@ -4397,7 +4405,11 @@ InitApp();
 while (1) {
 
 CCPR1L = PWM_duty;
+
 LATAbits.LA2 = DIR_1;
+LATAbits.LA4 = DIR_2;
+LATCbits.LC0 = DIR_3;
+LATBbits.LB7 = DIR_4;
 
 if (busy_flag) {
 TXREG = 'C';
@@ -4421,6 +4433,22 @@ turns = ((palabra[12] - 48) * 1000) + ((palabra[13] - 48) * 100) + ((palabra[14]
 speed = palabra[15];
 
 busy_flag = 1;
+} else if (palabra[0] == 'D') {
+
+if (palabra[1] == '0') {
+
+DIR_3 = 0;
+MOT_3 = 1;
+} else if (palabra[1] == '1') {
+
+DIR_3 = 1;
+MOT_3 = 1;
+
+} else if (palabra[1] == '2') {
+
+
+}
+
 }
 
 

@@ -21,11 +21,19 @@
 /* Interrupt Routines                                                         */
 /******************************************************************************/
 char palabra[20]; // Buffer variable for reception
-unsigned int n = 0;
+unsigned int n = 0; // Receive char counter
 char recibi = 0;
 unsigned int overflow = 0; // TMR0 overflow counter
 unsigned int ADC_value_press;
 unsigned int ADC_value_dist;
+extern bool MOT_1 = 0; // Move motor 1 flag
+extern bool MOT_2 = 0; // Move motor 2 flag
+extern bool MOT_3 = 0; // Move motor 3 flag
+extern bool MOT_4 = 0; // Move motor 4 flag
+unsigned int MOT_1_count = 0; // Motor 1 cycle count
+unsigned int MOT_2_count = 0; // Motor 2 cycle count
+unsigned int MOT_3_count = 0; // Motor 3 cycle count
+unsigned int MOT_4_count = 0; // Motor 4 cycle count
 
 /* High-priority service */
 
@@ -33,9 +41,39 @@ void interrupt high_isr(void) {
     if (INTCONbits.TMR0IF) {
         /* Timer0 ISR for motor control time-step */
         INTCONbits.TMR0IF = 0; // Restart TMR0 interrupt flag
-        overflow++;
-        LATAbits.LA2 = !PORTAbits.RA2; // Invert state
-        TMR0 = 50;
+        overflow++; // REVISAR SI SIGUE FUNCIONANDO ASI
+        LATAbits.LA3 = !PORTAbits.RA3; // Invert state of motor 1
+        TMR0 = 50; // Time-step
+        MOT_1_count++;
+        MOT_2_count++;
+        MOT_3_count++;
+        MOT_4_count++;
+
+        if (MOT_1) {
+            if (MOT_1_count == 5) {
+                LATAbits.LA5 = !PORTAbits.RA5;
+                MOT_2_count = 0;
+            }
+        }
+        if (MOT_2) {
+            if (MOT_2_count == 5) {
+                LATAbits.LA5 = !PORTAbits.RA5;
+                MOT_2_count = 0;
+            }
+        }
+        if (MOT_3) {
+            if (MOT_3_count == 5) {
+                LATCbits.LC1 = !PORTCbits.RC1;
+                MOT_3_count = 0;
+            }
+        }
+        if (MOT_4) {
+            if (MOT_4_count == 5) {
+                LATBbits.LB6 = !PORTBbits.RB6;
+                MOT_4_count = 0;
+            }
+        }
+
     } else if (PIR1bits.RCIF) {
         /* Recieve bluetooth ISR */
         PIR1bits.RCIF = 0; // Restart Recieve interrupt flag
@@ -55,15 +93,15 @@ void interrupt high_isr(void) {
         } else if (ADCON0bits.CHS == 0b0001) {
             ADC_value_dist = ADRES;
         }
-        ADCON0bits.CHS = !ADCON0bits.CHS;
+        ADCON0bits.CHS = !ADCON0bits.CHS; // Change 
 
     } else if (INTCON3bits.INT1IF) {
         /* Limit switch 1 ISR */
         INTCON3bits.INT1IF = 0;
-
+        // PARAR MOVIMIENTO EN LA DIRECTION CUANDO SE RECIBA BANDERA
     } else if (INTCON3bits.INT2IF) {
         /* Limit switch 2 ISR */
         INTCON3bits.INT2IF = 0;
-
+        // PARAR MOVIMIENTO EN LA DIRECTION CUANDO SE RECIBA BANDERA
     }
 }

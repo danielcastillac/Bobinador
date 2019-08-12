@@ -4366,6 +4366,15 @@ char recibi = 0;
 unsigned int overflow = 0;
 unsigned int ADC_value_press;
 unsigned int ADC_value_dist;
+extern bool MOT_1 = 0;
+extern bool MOT_2 = 0;
+extern bool MOT_3 = 0;
+extern bool MOT_4 = 0;
+unsigned int MOT_1_count = 0;
+unsigned int MOT_2_count = 0;
+unsigned int MOT_3_count = 0;
+unsigned int MOT_4_count = 0;
+
 
 
 
@@ -4374,8 +4383,38 @@ if (INTCONbits.TMR0IF) {
 
 INTCONbits.TMR0IF = 0;
 overflow++;
-LATAbits.LA2 = !PORTAbits.RA2;
+LATAbits.LA3 = !PORTAbits.RA3;
 TMR0 = 50;
+MOT_1_count++;
+MOT_2_count++;
+MOT_3_count++;
+MOT_4_count++;
+
+if (MOT_1) {
+if (MOT_1_count == 5) {
+LATAbits.LA5 = !PORTAbits.RA5;
+MOT_2_count = 0;
+}
+}
+if (MOT_2) {
+if (MOT_2_count == 5) {
+LATAbits.LA5 = !PORTAbits.RA5;
+MOT_2_count = 0;
+}
+}
+if (MOT_3) {
+if (MOT_3_count == 5) {
+LATCbits.LC1 = !PORTCbits.RC1;
+MOT_3_count = 0;
+}
+}
+if (MOT_4) {
+if (MOT_4_count == 5) {
+LATBbits.LB6 = !PORTBbits.RB6;
+MOT_4_count = 0;
+}
+}
+
 } else if (PIR1bits.RCIF) {
 
 PIR1bits.RCIF = 0;

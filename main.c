@@ -28,6 +28,14 @@ unsigned int motor1 = 1; // Cycle number for motor 1
 unsigned int motor2; // Cycle number for motor 2
 bool RA0state = false; // Current state of STEP pin for motor 1
 bool DIR_1 = 0; // Direction of motor 1
+bool DIR_2 = 0; // Direction of motor 2
+bool DIR_3 = 0; // Direction of motor 3
+bool DIR_4 = 0; // Direction of motor 4
+bool MOT_1 = 0; // Move motor 1 flag
+bool MOT_2 = 0; // Move motor 2 flag
+bool MOT_3 = 0; // Move motor 3 flag
+bool MOT_4 = 0; // Move motor 4 flag
+
 unsigned int caliber;
 unsigned int diameter;
 unsigned int length;
@@ -60,13 +68,17 @@ void main(void) {
     while (1) {
 
         CCPR1L = PWM_duty; // Update duty cycle for LED strip
+
         LATAbits.LA2 = DIR_1; // Set motor 1 direction
-        
+        LATAbits.LA4 = DIR_2; // Set motor 2 direction
+        LATCbits.LC0 = DIR_3; // Set motor 3 direction
+        LATBbits.LB7 = DIR_4; // Set motor 4 direction
+
         if (busy_flag) {
             TXREG = 'C'; // Transmit -Currently working- flag to mobile app
             while (TXIF == 0);
         }
-        
+
         if (recibi == 1) {
             /* Bluetooth reception routine */
             recibi = 0; // Turn down reception flag
@@ -84,6 +96,22 @@ void main(void) {
                 speed = palabra[15]; // 1 digit: 1: low; 2: medium, 3: high
 
                 busy_flag = true; // Machine is currently working
+            } else if (palabra[0] == 'D') {
+                // Move cart to mark zero
+                if (palabra[1] == '0') {
+                    // Move cart right
+                    DIR_3 = 0;
+                    MOT_3 = true;
+                } else if (palabra[1] == '1') {
+                    // Move cart left
+                    DIR_3 = 1;
+                    MOT_3 = true;
+
+                } else if (palabra[1] == '2') {
+                    // Mark zero
+
+                }
+
             }
 
 
