@@ -55,6 +55,7 @@ extern unsigned int ADC_value_dist;
 /******************************************************************************/
 /* Main Program                                                               */
 /* Function prototypes */
+//int ADC_get(char channel);
 
 /******************************************************************************/
 
@@ -67,6 +68,7 @@ void main(void) {
 
     while (1) {
 
+        MOT_1 = 1;
         CCPR1L = PWM_duty; // Update duty cycle for LED strip
 
         LATAbits.LA2 = DIR_1; // Set motor 1 direction
@@ -74,10 +76,10 @@ void main(void) {
         LATCbits.LC0 = DIR_3; // Set motor 3 direction
         LATBbits.LB7 = DIR_4; // Set motor 4 direction
 
-        if (busy_flag) {
-            TXREG = 'C'; // Transmit -Currently working- flag to mobile app
-            while (TXIF == 0);
-        }
+//        if (busy_flag) {
+//            TXREG = 'C'; // Transmit -Currently working- flag to mobile app
+//            while (TXIF == 0);
+//        }
 
         if (recibi == 1) {
             /* Bluetooth reception routine */
@@ -85,7 +87,6 @@ void main(void) {
 
             if (palabra[0] == 'B') {
                 // Its controlling LED intensity
-                DIR_1 = !DIR_1;
                 PWM_duty = ((palabra[1] - 48) * 10) + ((palabra[2] - 48));
             } else if (palabra[0] == 'A') {
                 // Its trasmiting the parameters
@@ -117,7 +118,20 @@ void main(void) {
 
         } else if (GODONE == 0) {
             /* Restart ADC data gattering */
+            __delay_ms(10); // Wait to next conversion
+            ADCON0bits.CHS = !ADCON0bits.CHS; // Change channel
             GODONE = 1;
         }
     }
 }
+
+//int ADC_get(char channel) {
+//    if (channel !ADCON0bits.CHS) { //diferente
+//        __delay_ms(10);
+//        ADCON0bits.CHS = channel;
+//    }
+//    if (GODONE == 0) {
+//        GODONE = 1;
+//    }
+//    return ADRES;
+//}

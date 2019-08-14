@@ -4359,22 +4359,21 @@ typedef uint16_t uintptr_t;
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\stdbool.h"
 typedef unsigned char bool;
 
-# 23 "interrupts.c"
+# 24 "interrupts.c"
 char palabra[20];
 unsigned int n = 0;
 char recibi = 0;
 unsigned int overflow = 0;
 unsigned int ADC_value_press;
 unsigned int ADC_value_dist;
-extern bool MOT_1 = 0;
-extern bool MOT_2 = 0;
-extern bool MOT_3 = 0;
-extern bool MOT_4 = 0;
+extern bool MOT_1;
+extern bool MOT_2;
+extern bool MOT_3;
+extern bool MOT_4;
 unsigned int MOT_1_count = 0;
 unsigned int MOT_2_count = 0;
 unsigned int MOT_3_count = 0;
 unsigned int MOT_4_count = 0;
-
 
 
 
@@ -4383,21 +4382,20 @@ if (INTCONbits.TMR0IF) {
 
 INTCONbits.TMR0IF = 0;
 overflow++;
-LATAbits.LA3 = !PORTAbits.RA3;
-TMR0 = 50;
+TMR0 = 200;
 MOT_1_count++;
 MOT_2_count++;
 MOT_3_count++;
 MOT_4_count++;
 
 if (MOT_1) {
-if (MOT_1_count == 5) {
-LATAbits.LA5 = !PORTAbits.RA5;
-MOT_2_count = 0;
+if (MOT_1_count == 25) {
+LATAbits.LA3 = !PORTAbits.RA3;
+MOT_1_count = 0;
 }
 }
 if (MOT_2) {
-if (MOT_2_count == 5) {
+if (MOT_2_count == 2) {
 LATAbits.LA5 = !PORTAbits.RA5;
 MOT_2_count = 0;
 }
@@ -4434,6 +4432,7 @@ ADC_value_press = ADRES;
 } else if (ADCON0bits.CHS == 0b0001) {
 ADC_value_dist = ADRES;
 }
+_delay((unsigned long)((10)*(8000000/4000.0)));
 ADCON0bits.CHS = !ADCON0bits.CHS;
 
 } else if (INTCON3bits.INT1IF) {

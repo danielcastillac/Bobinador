@@ -16,6 +16,7 @@
 #include <stdbool.h>        /* For true/false definition */
 
 #endif
+#define _XTAL_FREQ 8000000
 
 /******************************************************************************/
 /* Interrupt Routines                                                         */
@@ -26,10 +27,10 @@ char recibi = 0;
 unsigned int overflow = 0; // TMR0 overflow counter
 unsigned int ADC_value_press;
 unsigned int ADC_value_dist;
-extern bool MOT_1 = 0; // Move motor 1 flag
-extern bool MOT_2 = 0; // Move motor 2 flag
-extern bool MOT_3 = 0; // Move motor 3 flag
-extern bool MOT_4 = 0; // Move motor 4 flag
+extern bool MOT_1; // Move motor 1 flag
+extern bool MOT_2; // Move motor 2 flag
+extern bool MOT_3; // Move motor 3 flag
+extern bool MOT_4; // Move motor 4 flag
 unsigned int MOT_1_count = 0; // Motor 1 cycle count
 unsigned int MOT_2_count = 0; // Motor 2 cycle count
 unsigned int MOT_3_count = 0; // Motor 3 cycle count
@@ -42,21 +43,20 @@ void interrupt high_isr(void) {
         /* Timer0 ISR for motor control time-step */
         INTCONbits.TMR0IF = 0; // Restart TMR0 interrupt flag
         overflow++; // REVISAR SI SIGUE FUNCIONANDO ASI
-        LATAbits.LA3 = !PORTAbits.RA3; // Invert state of motor 1
-        TMR0 = 50; // Time-step
+        TMR0 = 200; // Time-step (MAX 255 8 bits, 65535 16 bits)
         MOT_1_count++;
         MOT_2_count++;
         MOT_3_count++;
         MOT_4_count++;
 
         if (MOT_1) {
-            if (MOT_1_count == 5) {
+            if (MOT_1_count == 25) {
                 LATAbits.LA3 = !PORTAbits.RA3;
                 MOT_1_count = 0;
             }
         }
         if (MOT_2) {
-            if (MOT_2_count == 5) {
+            if (MOT_2_count == 2) {
                 LATAbits.LA5 = !PORTAbits.RA5;
                 MOT_2_count = 0;
             }
@@ -93,7 +93,8 @@ void interrupt high_isr(void) {
         } else if (ADCON0bits.CHS == 0b0001) {
             ADC_value_dist = ADRES;
         }
-        ADCON0bits.CHS = !ADCON0bits.CHS; // Change 
+        //        __delay_ms(10); // REVISAR SI PONIENDOLO EXISTEN PROBLEMAS
+        //        ADCON0bits.CHS = !ADCON0bits.CHS; // Change channel
 
     } else if (INTCON3bits.INT1IF) {
         /* Limit switch 1 ISR */

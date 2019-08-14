@@ -59,7 +59,7 @@ void InitApp(void) {
     TRISCbits.RC2 = 0; // LED lighting PWM output
     /* Configure the IPEN bit (1=on) in RCON to turn on/off int priorities */
     RCONbits.IPEN = 0; // Disable interrupt priorities
-    /* Enable interrupts */
+    /* Enable interrupts and TMR0 */
     INTCONbits.GIE = 1; // Global interrupt enable
     INTCONbits.PEIE = 1; // Enable peripheral interrupts
     INTCONbits.TMR0IE = 1; // Enable timer0 interrupt

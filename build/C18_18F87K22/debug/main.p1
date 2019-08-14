@@ -45,6 +45,39 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _palabra `uc ~T0 @X0 -> 0 `x e ]
 "8268 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [v _GODONE `Vb ~T0 @X0 0 e@32273 ]
+[v F3316 `(v ~T0 @X0 1 tf1`ul ]
+"164 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18.h
+[v __delay `JF3316 ~T0 @X0 0 e ]
+[p i __delay ]
+"5489 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
+[s S228 :1 `uc 1 :1 `uc 1 ]
+[n S228 . . GO_NOT_DONE ]
+"5493
+[s S229 :1 `uc 1 :1 `uc 1 :4 `uc 1 ]
+[n S229 . ADON GO_nDONE CHS ]
+"5498
+[s S230 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S230 . . GO_DONE CHS0 CHS1 CHS2 CHS3 ]
+"5506
+[s S231 :1 `uc 1 :1 `uc 1 ]
+[n S231 . . DONE ]
+"5510
+[s S232 :1 `uc 1 :1 `uc 1 ]
+[n S232 . . GO ]
+"5514
+[s S233 :1 `uc 1 :1 `uc 1 ]
+[n S233 . . NOT_DONE ]
+"5518
+[s S234 :1 `uc 1 :1 `uc 1 ]
+[n S234 . . nDONE ]
+"5522
+[s S235 :1 `uc 1 :1 `uc 1 ]
+[n S235 . . GODONE ]
+"5488
+[u S227 `S228 1 `S229 1 `S230 1 `S231 1 `S232 1 `S233 1 `S234 1 `S235 1 ]
+[n S227 . . . . . . . . . ]
+"5527
+[v _ADCON0bits `VS227 ~T0 @X0 0 e@4034 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -3407,22 +3440,28 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 326 ]
 [e $ ! == -> _GODONE `i -> 0 `i 338  ]
 {
-[; ;main.c: 121: GODONE = 1;
+[; ;main.c: 121: _delay((unsigned long)((10)*(8000000/4000.0)));
 "121
-[e = _GODONE -> -> 1 `i `b ]
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+[; ;main.c: 122: ADCON0bits.CHS = !ADCON0bits.CHS;
 "122
+[e = . . _ADCON0bits 1 2 -> -> ! != -> . . _ADCON0bits 1 2 `i -> -> -> 0 `i `Vuc `i `i `uc ]
+[; ;main.c: 123: GODONE = 1;
+"123
+[e = _GODONE -> -> 1 `i `b ]
+"124
 }
 [e :U 338 ]
-"123
+"125
 [e :U 337 ]
 }
 [e :U 323 ]
 "68
 [e $U 324  ]
 [e :U 325 ]
-[; ;main.c: 122: }
-[; ;main.c: 123: }
 [; ;main.c: 124: }
-"124
+[; ;main.c: 125: }
+[; ;main.c: 126: }
+"126
 [e :UE 322 ]
 }
