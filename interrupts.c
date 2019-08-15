@@ -43,7 +43,8 @@ unsigned int MOT_4_count = 0; // Motor 4 cycle count
 unsigned int count_1 = 5; // Number of half -periods motor 1
 unsigned int count_2 = 5; // Number of half -periods motor 2
 unsigned int count_3 = 5; // Number of half -periods motor 3
-unsigned int count_4 = 20; // Number of half -periods motor 4
+unsigned int count_4 = 50; // Number of half -periods motor 4
+unsigned int mot_4_steps = 0;
 
 /* High-priority service */
 
@@ -79,6 +80,7 @@ void interrupt high_isr(void) {
             if (MOT_4_count == count_4) {
                 LATBbits.LB6 = !PORTBbits.RB6;
                 MOT_4_count = 0;
+                mot_4_steps++;
             }
         }
 

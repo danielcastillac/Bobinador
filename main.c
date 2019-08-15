@@ -57,6 +57,8 @@ extern unsigned int count_2;
 extern unsigned int count_3;
 extern unsigned int count_4;
 extern char send[5];
+extern unsigned int mot_4_steps;
+unsigned int mot_4_step_count;
 
 /******************************************************************************/
 /* Main Program                                                               */
@@ -75,9 +77,9 @@ void main(void) {
     InitApp();
 
     while (1) {
-        MOT_1 = 1;
-        MOT_2 = 1;
-        MOT_4 = 1;
+        //        MOT_1 = 1;
+        //        MOT_2 = 1;
+        //        MOT_4 = 1;
 
         CCPR1L = PWM_duty; // Update duty cycle for LED strip
 
@@ -122,19 +124,30 @@ void main(void) {
                     MOT_3 = false;
                 }
 
+                /* FOR DEBUGGING ONLY !!!!!!! */
+
             } else if (palabra[0] == 'E') {
-                // Move pressure motor
+                // Move pressure motor (4)
                 if (palabra[1] == '0') {
                     MOT_4 = !MOT_4;
                 } else if (palabra[1] == '1') {
                     DIR_4 = !DIR_4;
+                }
+            } else if (palabra[0] == 'M') {
+                // Turn on/off given motor
+                if (palabra[1] == '1') {
+                    MOT_1 = !MOT_1;
+                } else if (palabra[1] == '2') {
+                    MOT_2 = !MOT_2;
+                } else if (palabra[1] == '3') {
+                    MOT_3 = !MOT_3;
                 }
             }
 
 
         } else if (GODONE == 0) {
             /* Restart ADC data gattering */
-            __delay_ms(10); // Wait to next conversion
+            __delay_ms(100); // Wait to next conversion
             ADCON0bits.CHS = !ADCON0bits.CHS; // Change channel
             GODONE = 1;
 
@@ -145,6 +158,10 @@ void main(void) {
             send_String(send);
         }
 
+        if (mot_4_steps == mot_4_step_count) {
+            // When reached numbers of steps, stop motor
+            MOT_4 = 0;
+        }
     }
 }
 
