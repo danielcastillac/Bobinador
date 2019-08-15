@@ -43,7 +43,6 @@ unsigned int turns;
 unsigned int speed;
 unsigned int PWM_duty = 50;
 
-//bool inter = false;
 bool busy_flag = false;
 
 /* i.e. uint8_t <variable_name>; */
@@ -57,12 +56,14 @@ extern unsigned int count_1;
 extern unsigned int count_2;
 extern unsigned int count_3;
 extern unsigned int count_4;
-
+extern char send[5];
 
 /******************************************************************************/
 /* Main Program                                                               */
 /* Function prototypes */
 //int ADC_get(char channel);
+void trans_Char(char out);
+void send_String(const char *out);
 
 /******************************************************************************/
 
@@ -136,7 +137,28 @@ void main(void) {
             __delay_ms(10); // Wait to next conversion
             ADCON0bits.CHS = !ADCON0bits.CHS; // Change channel
             GODONE = 1;
+
+            send[0] = '0' + (ADC_value_press / 1000);
+            send[1] = '0' + ((ADC_value_press % 1000) / 100);
+            send[2] = '0' + (((ADC_value_press % 1000) % 100) / 10);
+            send[3] = '0' + ((((ADC_value_press % 1000) % 100) / 10) % 10);
+            send_String(send);
         }
+
+    }
+}
+
+/* Function declarations */
+
+void trans_Char(char out) {
+    while (TXIF == 0);
+    TXREG = out;
+}
+
+void send_String(const char *out) {
+    while (*out != '\0') {
+        trans_Char(*out);
+        out++;
     }
 }
 

@@ -4385,7 +4385,6 @@ unsigned int turns;
 unsigned int speed;
 unsigned int PWM_duty = 50;
 
-
 bool busy_flag = 0;
 
 
@@ -4399,8 +4398,13 @@ extern unsigned int count_1;
 extern unsigned int count_2;
 extern unsigned int count_3;
 extern unsigned int count_4;
+extern char send[5];
 
-# 69
+# 65
+void trans_Char(char out);
+void send_String(const char *out);
+
+
 void main(void) {
 
 ConfigureOscillator();
@@ -4467,9 +4471,28 @@ DIR_4 = !DIR_4;
 _delay((unsigned long)((10)*(8000000/4000.0)));
 ADCON0bits.CHS = !ADCON0bits.CHS;
 GODONE = 1;
+
+send[0]='0' + (ADC_value_press/1000);
+send[1]='0' + ((ADC_value_press%1000)/100);
+send[2]='0' + (((ADC_value_press%1000)%100)/10);
+send[3]='0' + ((((ADC_value_press%1000)%100)/10)%10);
+send_String(send);
 }
 
-# 145
+}
+}
+
+
+
+void trans_Char(char out) {
+while (TXIF == 0);
+TXREG = out;
+}
+
+void send_String(const char *out) {
+while (*out != '\0') {
+trans_Char(*out);
+out++;
 }
 }
 

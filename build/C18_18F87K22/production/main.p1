@@ -39,9 +39,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S107 . . . ]
 "2672
 [v _LATBbits `VS107 ~T0 @X0 0 e@3978 ]
-"51 main.c
+"50 main.c
 [v _recibi `uc ~T0 @X0 0 e ]
-"52
+"51
 [v _palabra `uc ~T0 @X0 -> 0 `x e ]
 "8268 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [v _GODONE `Vb ~T0 @X0 0 e@32273 ]
@@ -78,6 +78,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S227 . . . . . . . . . ]
 "5527
 [v _ADCON0bits `VS227 ~T0 @X0 0 e@4034 ]
+"59 main.c
+[v _send `uc ~T0 @X0 -> 0 `x e ]
+"53
+[v _ADC_value_press `ui ~T0 @X0 0 e ]
+"66
+[v _send_String `(v ~T0 @X0 0 ef1`*Cuc ]
+"8962 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
+[v _TXIF `Vb ~T0 @X0 0 e@31988 ]
+"4447
+[v _TXREG `Vuc ~T0 @X0 0 e@4013 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -3298,22 +3308,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 50 `i `ui
 ]
 [; ;main.c: 44: unsigned int PWM_duty = 50;
-"47
+"46
 [v _busy_flag `uc ~T0 @X0 1 e ]
 [i _busy_flag
 -> -> 0 `i `uc
 ]
-[; ;main.c: 47: bool busy_flag = 0;
-[; ;main.c: 50: extern unsigned int overflow;
-[; ;main.c: 51: extern char recibi;
-[; ;main.c: 52: extern char palabra[20];
-[; ;main.c: 53: extern unsigned int n;
-[; ;main.c: 54: extern unsigned int ADC_value_press;
-[; ;main.c: 55: extern unsigned int ADC_value_dist;
-[; ;main.c: 56: extern unsigned int count_1;
-[; ;main.c: 57: extern unsigned int count_2;
-[; ;main.c: 58: extern unsigned int count_3;
-[; ;main.c: 59: extern unsigned int count_4;
+[; ;main.c: 46: bool busy_flag = 0;
+[; ;main.c: 49: extern unsigned int overflow;
+[; ;main.c: 50: extern char recibi;
+[; ;main.c: 51: extern char palabra[20];
+[; ;main.c: 52: extern unsigned int n;
+[; ;main.c: 53: extern unsigned int ADC_value_press;
+[; ;main.c: 54: extern unsigned int ADC_value_dist;
+[; ;main.c: 55: extern unsigned int count_1;
+[; ;main.c: 56: extern unsigned int count_2;
+[; ;main.c: 57: extern unsigned int count_3;
+[; ;main.c: 58: extern unsigned int count_4;
+[; ;main.c: 59: extern char send[5];
+[; ;main.c: 65: void trans_Char(char out);
+[; ;main.c: 66: void send_String(const char *out);
 [v $root$_main `(v ~T0 @X0 0 e ]
 "69
 [v _main `(v ~T0 @X0 1 ef ]
@@ -3493,19 +3506,84 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 138: GODONE = 1;
 "138
 [e = _GODONE -> -> 1 `i `b ]
-"139
+[; ;main.c: 140: send[0]='0' + (ADC_value_press/1000);
+"140
+[e = *U + &U _send * -> -> -> 0 `i `ui `ux -> -> # *U &U _send `ui `ux -> + -> 48 `ui / _ADC_value_press -> -> 1000 `i `ui `uc ]
+[; ;main.c: 141: send[1]='0' + ((ADC_value_press%1000)/100);
+"141
+[e = *U + &U _send * -> -> -> 1 `i `ui `ux -> -> # *U &U _send `ui `ux -> + -> 48 `ui / % _ADC_value_press -> -> 1000 `i `ui -> -> 100 `i `ui `uc ]
+[; ;main.c: 142: send[2]='0' + (((ADC_value_press%1000)%100)/10);
+"142
+[e = *U + &U _send * -> -> -> 2 `i `ui `ux -> -> # *U &U _send `ui `ux -> + -> 48 `ui / % % _ADC_value_press -> -> 1000 `i `ui -> -> 100 `i `ui -> -> 10 `i `ui `uc ]
+[; ;main.c: 143: send[3]='0' + ((((ADC_value_press%1000)%100)/10)%10);
+"143
+[e = *U + &U _send * -> -> -> 3 `i `ui `ux -> -> # *U &U _send `ui `ux -> + -> 48 `ui % / % % _ADC_value_press -> -> 1000 `i `ui -> -> 100 `i `ui -> -> 10 `i `ui -> -> 10 `i `ui `uc ]
+[; ;main.c: 144: send_String(send);
+"144
+[e ( _send_String (1 -> &U _send `*Cuc ]
+"145
 }
 [e :U 343 ]
-"145
+"147
 [e :U 342 ]
 }
 [e :U 323 ]
 "76
 [e $U 324  ]
 [e :U 325 ]
-[; ;main.c: 139: }
 [; ;main.c: 145: }
-[; ;main.c: 146: }
-"146
+[; ;main.c: 147: }
+[; ;main.c: 148: }
+"148
 [e :UE 322 ]
+}
+"152
+[v _trans_Char `(v ~T0 @X0 1 ef1`uc ]
+{
+[; ;main.c: 152: void trans_Char(char out) {
+[e :U _trans_Char ]
+[v _out `uc ~T0 @X0 1 r1 ]
+[f ]
+[; ;main.c: 153: while (TXIF == 0);
+"153
+[e $U 345  ]
+[e :U 346 ]
+[e :U 345 ]
+[e $ == -> _TXIF `i -> 0 `i 346  ]
+[e :U 347 ]
+[; ;main.c: 154: TXREG = out;
+"154
+[e = _TXREG _out ]
+[; ;main.c: 155: }
+"155
+[e :UE 344 ]
+}
+"157
+[v _send_String `(v ~T0 @X0 1 ef1`*Cuc ]
+{
+[; ;main.c: 157: void send_String(const char *out) {
+[e :U _send_String ]
+[v _out `*Cuc ~T0 @X0 1 r1 ]
+[f ]
+[; ;main.c: 158: while (*out != '\0') {
+"158
+[e $U 349  ]
+[e :U 350 ]
+{
+[; ;main.c: 159: trans_Char(*out);
+"159
+[e ( _trans_Char (1 *U _out ]
+[; ;main.c: 160: out++;
+"160
+[e ++ _out * -> -> 1 `i `x -> -> # *U _out `i `x ]
+"161
+}
+[e :U 349 ]
+"158
+[e $ != -> *U _out `ui -> 0 `ui 350  ]
+[e :U 351 ]
+[; ;main.c: 161: }
+[; ;main.c: 162: }
+"162
+[e :UE 348 ]
 }

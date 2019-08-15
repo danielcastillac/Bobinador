@@ -22,6 +22,7 @@
 /* Interrupt Routines                                                         */
 /******************************************************************************/
 char palabra[20]; // Buffer variable for reception
+char send[5]; // Buffer for transmission
 unsigned int n = 0; // Receive char counter
 char recibi = 0;
 unsigned int overflow = 0; // TMR0 overflow counter

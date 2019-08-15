@@ -4361,6 +4361,7 @@ typedef unsigned char bool;
 
 # 24 "interrupts.c"
 char palabra[20];
+char send[5];
 unsigned int n = 0;
 char recibi = 0;
 unsigned int overflow = 0;
@@ -4374,7 +4375,6 @@ extern bool DIR_1;
 extern bool DIR_2;
 extern bool DIR_3;
 extern bool DIR_4;
-
 unsigned int MOT_1_count = 0;
 unsigned int MOT_2_count = 0;
 unsigned int MOT_3_count = 0;
@@ -4386,12 +4386,10 @@ unsigned int count_4 = 20;
 
 
 
-
 void interrupt high_isr(void) {
 if (INTCONbits.TMR0IF) {
 
 INTCONbits.TMR0IF = 0;
-
 TMR0 = 250;
 MOT_1_count++;
 MOT_2_count++;
@@ -4434,10 +4432,7 @@ while (TXIF == 0);
 recibi = 1;
 n = 0;
 }
-}
-
-# 104
-else if (PIR1bits.ADIF) {
+} else if (PIR1bits.ADIF) {
 
 PIR1bits.ADIF = 0;
 if (ADCON0bits.CHS == 0b0000) {
