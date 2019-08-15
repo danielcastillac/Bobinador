@@ -39,12 +39,45 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S107 . . . ]
 "2672
 [v _LATBbits `VS107 ~T0 @X0 0 e@3978 ]
-"49 main.c
+"51 main.c
 [v _recibi `uc ~T0 @X0 0 e ]
-"50
+"52
 [v _palabra `uc ~T0 @X0 -> 0 `x e ]
 "8268 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [v _GODONE `Vb ~T0 @X0 0 e@32273 ]
+[v F3316 `(v ~T0 @X0 1 tf1`ul ]
+"164 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18.h
+[v __delay `JF3316 ~T0 @X0 0 e ]
+[p i __delay ]
+"5489 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
+[s S228 :1 `uc 1 :1 `uc 1 ]
+[n S228 . . GO_NOT_DONE ]
+"5493
+[s S229 :1 `uc 1 :1 `uc 1 :4 `uc 1 ]
+[n S229 . ADON GO_nDONE CHS ]
+"5498
+[s S230 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S230 . . GO_DONE CHS0 CHS1 CHS2 CHS3 ]
+"5506
+[s S231 :1 `uc 1 :1 `uc 1 ]
+[n S231 . . DONE ]
+"5510
+[s S232 :1 `uc 1 :1 `uc 1 ]
+[n S232 . . GO ]
+"5514
+[s S233 :1 `uc 1 :1 `uc 1 ]
+[n S233 . . NOT_DONE ]
+"5518
+[s S234 :1 `uc 1 :1 `uc 1 ]
+[n S234 . . nDONE ]
+"5522
+[s S235 :1 `uc 1 :1 `uc 1 ]
+[n S235 . . GODONE ]
+"5488
+[u S227 `S228 1 `S229 1 `S230 1 `S231 1 `S232 1 `S233 1 `S234 1 `S235 1 ]
+[n S227 . . . . . . . . . ]
+"5527
+[v _ADCON0bits `VS227 ~T0 @X0 0 e@4034 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -3265,164 +3298,214 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 50 `i `ui
 ]
 [; ;main.c: 44: unsigned int PWM_duty = 50;
-"45
+"47
 [v _busy_flag `uc ~T0 @X0 1 e ]
 [i _busy_flag
 -> -> 0 `i `uc
 ]
-[; ;main.c: 45: bool busy_flag = 0;
-[; ;main.c: 48: extern unsigned int overflow;
-[; ;main.c: 49: extern char recibi;
-[; ;main.c: 50: extern char palabra[20];
-[; ;main.c: 51: extern unsigned int n;
-[; ;main.c: 52: extern unsigned int ADC_value_press;
-[; ;main.c: 53: extern unsigned int ADC_value_dist;
+[; ;main.c: 47: bool busy_flag = 0;
+[; ;main.c: 50: extern unsigned int overflow;
+[; ;main.c: 51: extern char recibi;
+[; ;main.c: 52: extern char palabra[20];
+[; ;main.c: 53: extern unsigned int n;
+[; ;main.c: 54: extern unsigned int ADC_value_press;
+[; ;main.c: 55: extern unsigned int ADC_value_dist;
+[; ;main.c: 56: extern unsigned int count_1;
+[; ;main.c: 57: extern unsigned int count_2;
+[; ;main.c: 58: extern unsigned int count_3;
+[; ;main.c: 59: extern unsigned int count_4;
 [v $root$_main `(v ~T0 @X0 0 e ]
-"61
+"69
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 61: void main(void) {
+[; ;main.c: 69: void main(void) {
 [e :U _main ]
 [f ]
-[; ;main.c: 63: ConfigureOscillator();
-"63
+[; ;main.c: 71: ConfigureOscillator();
+"71
 [e ( _ConfigureOscillator ..  ]
-[; ;main.c: 66: InitApp();
-"66
+[; ;main.c: 74: InitApp();
+"74
 [e ( _InitApp ..  ]
-[; ;main.c: 68: while (1) {
-"68
+[; ;main.c: 76: while (1) {
+"76
 [e :U 324 ]
 {
-[; ;main.c: 70: MOT_1 = 1;
-"70
+[; ;main.c: 77: MOT_1 = 1;
+"77
 [e = _MOT_1 -> -> 1 `i `uc ]
-[; ;main.c: 71: CCPR1L = PWM_duty;
-"71
+[; ;main.c: 78: MOT_2 = 1;
+"78
+[e = _MOT_2 -> -> 1 `i `uc ]
+[; ;main.c: 79: MOT_4 = 1;
+"79
+[e = _MOT_4 -> -> 1 `i `uc ]
+[; ;main.c: 81: CCPR1L = PWM_duty;
+"81
 [e = _CCPR1L -> _PWM_duty `uc ]
-[; ;main.c: 73: LATAbits.LA2 = DIR_1;
-"73
-[e = . . _LATAbits 1 2 _DIR_1 ]
-[; ;main.c: 74: LATAbits.LA4 = DIR_2;
-"74
-[e = . . _LATAbits 1 4 _DIR_2 ]
-[; ;main.c: 75: LATCbits.LC0 = DIR_3;
-"75
-[e = . . _LATCbits 1 0 _DIR_3 ]
-[; ;main.c: 76: LATBbits.LB7 = DIR_4;
-"76
-[e = . . _LATBbits 1 7 _DIR_4 ]
-[; ;main.c: 83: if (recibi == 1) {
+[; ;main.c: 83: LATAbits.LA2 = DIR_1;
 "83
+[e = . . _LATAbits 1 2 _DIR_1 ]
+[; ;main.c: 84: LATAbits.LA4 = DIR_2;
+"84
+[e = . . _LATAbits 1 4 _DIR_2 ]
+[; ;main.c: 85: LATCbits.LC0 = DIR_3;
+"85
+[e = . . _LATCbits 1 0 _DIR_3 ]
+[; ;main.c: 86: LATBbits.LB7 = DIR_4;
+"86
+[e = . . _LATBbits 1 7 _DIR_4 ]
+[; ;main.c: 93: if (recibi == 1) {
+"93
 [e $ ! == -> _recibi `i -> 1 `i 326  ]
 {
-[; ;main.c: 85: recibi = 0;
-"85
+[; ;main.c: 95: recibi = 0;
+"95
 [e = _recibi -> -> 0 `i `uc ]
-[; ;main.c: 87: if (palabra[0] == 'B') {
-"87
+[; ;main.c: 97: if (palabra[0] == 'B') {
+"97
 [e $ ! == -> *U + &U _palabra * -> -> -> 0 `i `ui `ux -> -> # *U &U _palabra `ui `ux `ui -> 66 `ui 327  ]
 {
-[; ;main.c: 90: PWM_duty = ((palabra[1] - 48) * 10) + ((palabra[2] - 48));
-"90
+[; ;main.c: 99: PWM_duty = ((palabra[1] - 48) * 10) + ((palabra[2] - 48));
+"99
 [e = _PWM_duty -> + * - -> *U + &U _palabra * -> -> -> 1 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 10 `i - -> *U + &U _palabra * -> -> -> 2 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i `ui ]
-"91
+"100
 }
-[; ;main.c: 91: } else if (palabra[0] == 'A') {
+[; ;main.c: 100: } else if (palabra[0] == 'A') {
 [e $U 328  ]
 [e :U 327 ]
 [e $ ! == -> *U + &U _palabra * -> -> -> 0 `i `ui `ux -> -> # *U &U _palabra `ui `ux `ui -> 65 `ui 329  ]
 {
-[; ;main.c: 93: caliber = ((palabra[1] - 48) * 10) + ((palabra[2] - 48));
-"93
+[; ;main.c: 102: caliber = ((palabra[1] - 48) * 10) + ((palabra[2] - 48));
+"102
 [e = _caliber -> + * - -> *U + &U _palabra * -> -> -> 1 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 10 `i - -> *U + &U _palabra * -> -> -> 2 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i `ui ]
-[; ;main.c: 94: diameter = ((palabra[3] - 48) * 1000) + ((palabra[4] - 48) * 100) + ((palabra[5] - 48) * 10) + ((palabra[6] - 48));
-"94
+[; ;main.c: 103: diameter = ((palabra[3] - 48) * 1000) + ((palabra[4] - 48) * 100) + ((palabra[5] - 48) * 10) + ((palabra[6] - 48));
+"103
 [e = _diameter -> + + + * - -> *U + &U _palabra * -> -> -> 3 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 1000 `i * - -> *U + &U _palabra * -> -> -> 4 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 100 `i * - -> *U + &U _palabra * -> -> -> 5 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 10 `i - -> *U + &U _palabra * -> -> -> 6 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i `ui ]
-[; ;main.c: 95: length = ((palabra[7] - 48) * 10000) + ((palabra[8] - 48) * 1000) + ((palabra[9] - 48) * 100) + ((palabra[10] - 48) * 10) + ((palabra[11] - 48));
-"95
+[; ;main.c: 104: length = ((palabra[7] - 48) * 10000) + ((palabra[8] - 48) * 1000) + ((palabra[9] - 48) * 100) + ((palabra[10] - 48) * 10) + ((palabra[11] - 48));
+"104
 [e = _length -> + + + + * - -> *U + &U _palabra * -> -> -> 7 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 10000 `i * - -> *U + &U _palabra * -> -> -> 8 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 1000 `i * - -> *U + &U _palabra * -> -> -> 9 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 100 `i * - -> *U + &U _palabra * -> -> -> 10 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 10 `i - -> *U + &U _palabra * -> -> -> 11 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i `ui ]
-[; ;main.c: 96: turns = ((palabra[12] - 48) * 1000) + ((palabra[13] - 48) * 100) + ((palabra[14] - 48) * 10) + ((palabra[15] - 48));
-"96
+[; ;main.c: 105: turns = ((palabra[12] - 48) * 1000) + ((palabra[13] - 48) * 100) + ((palabra[14] - 48) * 10) + ((palabra[15] - 48));
+"105
 [e = _turns -> + + + * - -> *U + &U _palabra * -> -> -> 12 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 1000 `i * - -> *U + &U _palabra * -> -> -> 13 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 100 `i * - -> *U + &U _palabra * -> -> -> 14 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i -> 10 `i - -> *U + &U _palabra * -> -> -> 15 `i `ui `ux -> -> # *U &U _palabra `ui `ux `i -> 48 `i `ui ]
-[; ;main.c: 97: speed = palabra[15];
-"97
+[; ;main.c: 106: speed = palabra[15];
+"106
 [e = _speed -> *U + &U _palabra * -> -> -> 15 `i `ui `ux -> -> # *U &U _palabra `ui `ux `ui ]
-[; ;main.c: 99: busy_flag = 1;
-"99
+[; ;main.c: 108: busy_flag = 1;
+"108
 [e = _busy_flag -> -> 1 `i `uc ]
-"100
+"109
 }
-[; ;main.c: 100: } else if (palabra[0] == 'D') {
+[; ;main.c: 109: } else if ((palabra[0] == 'D')) {
 [e $U 330  ]
 [e :U 329 ]
 [e $ ! == -> *U + &U _palabra * -> -> -> 0 `i `ui `ux -> -> # *U &U _palabra `ui `ux `ui -> 68 `ui 331  ]
 {
-[; ;main.c: 102: if (palabra[1] == '0') {
-"102
+[; ;main.c: 111: if (palabra[1] == '0') {
+"111
 [e $ ! == -> *U + &U _palabra * -> -> -> 1 `i `ui `ux -> -> # *U &U _palabra `ui `ux `ui -> 48 `ui 332  ]
 {
-[; ;main.c: 104: DIR_3 = 0;
-"104
-[e = _DIR_3 -> -> 0 `i `uc ]
-[; ;main.c: 105: MOT_3 = 1;
-"105
+[; ;main.c: 113: MOT_3 = 1;
+"113
 [e = _MOT_3 -> -> 1 `i `uc ]
-"106
+[; ;main.c: 114: DIR_3 = 0;
+"114
+[e = _DIR_3 -> -> 0 `i `uc ]
+"115
 }
-[; ;main.c: 106: } else if (palabra[1] == '1') {
+[; ;main.c: 115: } else if (palabra[1] == '1') {
 [e $U 333  ]
 [e :U 332 ]
 [e $ ! == -> *U + &U _palabra * -> -> -> 1 `i `ui `ux -> -> # *U &U _palabra `ui `ux `ui -> 49 `ui 334  ]
 {
-[; ;main.c: 108: DIR_3 = 1;
-"108
-[e = _DIR_3 -> -> 1 `i `uc ]
-[; ;main.c: 109: MOT_3 = 1;
-"109
+[; ;main.c: 117: MOT_3 = 1;
+"117
 [e = _MOT_3 -> -> 1 `i `uc ]
-"111
+[; ;main.c: 118: DIR_3 = 1;
+"118
+[e = _DIR_3 -> -> 1 `i `uc ]
+"119
 }
-[; ;main.c: 111: } else if (palabra[1] == '2') {
+[; ;main.c: 119: } else if (palabra[1] == '2') {
 [e $U 335  ]
 [e :U 334 ]
 [e $ ! == -> *U + &U _palabra * -> -> -> 1 `i `ui `ux -> -> # *U &U _palabra `ui `ux `ui -> 50 `ui 336  ]
 {
-"114
+[; ;main.c: 120: ;
+[; ;main.c: 121: MOT_3 = 0;
+"121
+[e = _MOT_3 -> -> 0 `i `uc ]
+"122
 }
 [e :U 336 ]
-"116
+"124
 [e :U 335 ]
 [e :U 333 ]
 }
+[; ;main.c: 122: }
+[; ;main.c: 124: } else if (palabra[0] == 'E') {
+[e $U 337  ]
 [e :U 331 ]
-"119
+[e $ ! == -> *U + &U _palabra * -> -> -> 0 `i `ui `ux -> -> # *U &U _palabra `ui `ux `ui -> 69 `ui 338  ]
+{
+[; ;main.c: 126: if (palabra[1] == '0') {
+"126
+[e $ ! == -> *U + &U _palabra * -> -> -> 1 `i `ui `ux -> -> # *U &U _palabra `ui `ux `ui -> 48 `ui 339  ]
+{
+[; ;main.c: 127: MOT_4 = !MOT_4;
+"127
+[e = _MOT_4 -> -> ! != -> _MOT_4 `i -> -> -> 0 `i `uc `i `i `uc ]
+"128
+}
+[; ;main.c: 128: } else if (palabra[1] == '1') {
+[e $U 340  ]
+[e :U 339 ]
+[e $ ! == -> *U + &U _palabra * -> -> -> 1 `i `ui `ux -> -> # *U &U _palabra `ui `ux `ui -> 49 `ui 341  ]
+{
+[; ;main.c: 129: DIR_4 = !DIR_4;
+"129
+[e = _DIR_4 -> -> ! != -> _DIR_4 `i -> -> -> 0 `i `uc `i `i `uc ]
+"130
+}
+[e :U 341 ]
+"131
+[e :U 340 ]
+}
+[e :U 338 ]
+"134
+[e :U 337 ]
 [e :U 330 ]
 [e :U 328 ]
 }
-[; ;main.c: 114: }
-[; ;main.c: 116: }
-[; ;main.c: 119: } else if (GODONE == 0) {
-[e $U 337  ]
+[; ;main.c: 130: }
+[; ;main.c: 131: }
+[; ;main.c: 134: } else if (GODONE == 0) {
+[e $U 342  ]
 [e :U 326 ]
-[e $ ! == -> _GODONE `i -> 0 `i 338  ]
+[e $ ! == -> _GODONE `i -> 0 `i 343  ]
 {
-[; ;main.c: 121: GODONE = 1;
-"121
+[; ;main.c: 136: _delay((unsigned long)((10)*(8000000/4000.0)));
+"136
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+[; ;main.c: 137: ADCON0bits.CHS = !ADCON0bits.CHS;
+"137
+[e = . . _ADCON0bits 1 2 -> -> ! != -> . . _ADCON0bits 1 2 `i -> -> -> 0 `i `Vuc `i `i `uc ]
+[; ;main.c: 138: GODONE = 1;
+"138
 [e = _GODONE -> -> 1 `i `b ]
-"122
+"139
 }
-[e :U 338 ]
-"123
-[e :U 337 ]
+[e :U 343 ]
+"145
+[e :U 342 ]
 }
 [e :U 323 ]
-"68
+"76
 [e $U 324  ]
 [e :U 325 ]
-[; ;main.c: 122: }
-[; ;main.c: 123: }
-[; ;main.c: 124: }
-"124
+[; ;main.c: 139: }
+[; ;main.c: 145: }
+[; ;main.c: 146: }
+"146
 [e :UE 322 ]
 }

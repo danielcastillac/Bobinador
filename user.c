@@ -23,7 +23,7 @@
 /* User Functions                                                             */
 /******************************************************************************/
 /*
- Motor 1 -> Main rotation axis
+ Motor 1 -> Main rotation axis IGUAL VELOCIDAD A MOTOR 2
  Motor 2 -> Feeding motor
  Motor 3 -> Cart motor
  Motor 4 -> Pressure motor
@@ -40,8 +40,7 @@ void InitApp(void) {
     LATC = 0;
     /* Setup analog functionality */
     ADCON1 = 0b1101; // All ports digital except AN0 and AN1
-    TRISAbits.TRISA0 = 1; // A/D channel 0 input pin (pressure sensor)
-    TRISAbits.TRISA1 = 1; // A/D channel 1 input pin (distance sensor)
+    TRISAbits.TRISA0 = 1; // A/D channel 0 input pin
     ADCON0bits.CHS = 0; // A/D Channel 0 by default
     ADCON2 = 0b10101100; // Right justified, 12 TAD, FOSC/4
     PIE1bits.ADIE = 1; // A/D Interrupt Enable bit
@@ -71,10 +70,14 @@ void InitApp(void) {
     T0CONbits.T0PS = 0b101; // Prescaler value 1:64
     TMR0 = 0x6; // Preload value
     // Finales de carrera
+    TRISBbits.RB1 = 1; // INT1 input
+    TRISBbits.RB2 = 1; // INT2 input
     INTCON3bits.INT1IE = 1; // Enable INT1
     INTCON3bits.INT2IE = 1; // Enable INT2
     INTCON3bits.INT1IF = 0; // Reset INT1 flag
-    INTCON3bits.INT2IF = 0; // Reset INT2 flag    
+    INTCON3bits.INT2IF = 0; // Reset INT2 flag
+    INTCON2bits.INTEDG1 = 0; // falling edge
+    INTCON2bits.INTEDG2 = 0; // falling edge
     /* Bluetooth configuration */
     TRISCbits.RC6 = 0; // TX pin output
     TRISCbits.RC7 = 1; // RX pin input

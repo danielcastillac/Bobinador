@@ -35,13 +35,15 @@ bool MOT_1 = 0; // Move motor 1 flag
 bool MOT_2 = 0; // Move motor 2 flag
 bool MOT_3 = 0; // Move motor 3 flag
 bool MOT_4 = 0; // Move motor 4 flag
-
+/* Parameters */
 unsigned int caliber;
 unsigned int diameter;
 unsigned int length;
 unsigned int turns;
 unsigned int speed;
 unsigned int PWM_duty = 50;
+
+//bool inter = false;
 bool busy_flag = false;
 
 /* i.e. uint8_t <variable_name>; */
@@ -51,6 +53,11 @@ extern char palabra[20];
 extern unsigned int n;
 extern unsigned int ADC_value_press;
 extern unsigned int ADC_value_dist;
+extern unsigned int count_1;
+extern unsigned int count_2;
+extern unsigned int count_3;
+extern unsigned int count_4;
+
 
 /******************************************************************************/
 /* Main Program                                                               */
@@ -67,8 +74,10 @@ void main(void) {
     InitApp();
 
     while (1) {
-
         MOT_1 = 1;
+        MOT_2 = 1;
+        MOT_4 = 1;
+
         CCPR1L = PWM_duty; // Update duty cycle for LED strip
 
         LATAbits.LA2 = DIR_1; // Set motor 1 direction
@@ -76,10 +85,10 @@ void main(void) {
         LATCbits.LC0 = DIR_3; // Set motor 3 direction
         LATBbits.LB7 = DIR_4; // Set motor 4 direction
 
-//        if (busy_flag) {
-//            TXREG = 'C'; // Transmit -Currently working- flag to mobile app
-//            while (TXIF == 0);
-//        }
+        //        if (busy_flag) {
+        //            TXREG = 'C'; // Transmit -Currently working- flag to mobile app
+        //            while (TXIF == 0);
+        //        }
 
         if (recibi == 1) {
             /* Bluetooth reception routine */
@@ -97,22 +106,28 @@ void main(void) {
                 speed = palabra[15]; // 1 digit: 1: low; 2: medium, 3: high
 
                 busy_flag = true; // Machine is currently working
-            } else if (palabra[0] == 'D') {
-                // Move cart to mark zero
+            } else if ((palabra[0] == 'D')) { // && !busy_flag
+                // Move cart manually to mark zero
                 if (palabra[1] == '0') {
                     // Move cart right
-                    DIR_3 = 0;
                     MOT_3 = true;
+                    DIR_3 = false;
                 } else if (palabra[1] == '1') {
                     // Move cart left
-                    DIR_3 = 1;
                     MOT_3 = true;
-
+                    DIR_3 = true;
                 } else if (palabra[1] == '2') {
-                    // Mark zero
-
+                    ; // Mark zero
+                    MOT_3 = false;
                 }
 
+            } else if (palabra[0] == 'E') {
+                // Move pressure motor
+                if (palabra[1] == '0') {
+                    MOT_4 = !MOT_4;
+                } else if (palabra[1] == '1') {
+                    DIR_4 = !DIR_4;
+                }
             }
 
 

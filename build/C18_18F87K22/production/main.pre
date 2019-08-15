@@ -4384,6 +4384,8 @@ unsigned int length;
 unsigned int turns;
 unsigned int speed;
 unsigned int PWM_duty = 50;
+
+
 bool busy_flag = 0;
 
 
@@ -4393,8 +4395,12 @@ extern char palabra[20];
 extern unsigned int n;
 extern unsigned int ADC_value_press;
 extern unsigned int ADC_value_dist;
+extern unsigned int count_1;
+extern unsigned int count_2;
+extern unsigned int count_3;
+extern unsigned int count_4;
 
-# 61
+# 69
 void main(void) {
 
 ConfigureOscillator();
@@ -4403,8 +4409,10 @@ ConfigureOscillator();
 InitApp();
 
 while (1) {
-
 MOT_1 = 1;
+MOT_2 = 1;
+MOT_4 = 1;
+
 CCPR1L = PWM_duty;
 
 LATAbits.LA2 = DIR_1;
@@ -4412,13 +4420,12 @@ LATAbits.LA4 = DIR_2;
 LATCbits.LC0 = DIR_3;
 LATBbits.LB7 = DIR_4;
 
-# 83
+# 93
 if (recibi == 1) {
 
 recibi = 0;
 
 if (palabra[0] == 'B') {
-
 
 PWM_duty = ((palabra[1] - 48) * 10) + ((palabra[2] - 48));
 } else if (palabra[0] == 'A') {
@@ -4430,29 +4437,39 @@ turns = ((palabra[12] - 48) * 1000) + ((palabra[13] - 48) * 100) + ((palabra[14]
 speed = palabra[15];
 
 busy_flag = 1;
-} else if (palabra[0] == 'D') {
+} else if ((palabra[0] == 'D')) {
 
 if (palabra[1] == '0') {
 
-DIR_3 = 0;
 MOT_3 = 1;
+DIR_3 = 0;
 } else if (palabra[1] == '1') {
 
-DIR_3 = 1;
 MOT_3 = 1;
-
+DIR_3 = 1;
 } else if (palabra[1] == '2') {
-
-
+;
+MOT_3 = 0;
 }
 
+} else if (palabra[0] == 'E') {
+
+if (palabra[1] == '0') {
+MOT_4 = !MOT_4;
+} else if (palabra[1] == '1') {
+DIR_4 = !DIR_4;
+}
 }
 
 
 } else if (GODONE == 0) {
 
+_delay((unsigned long)((10)*(8000000/4000.0)));
+ADCON0bits.CHS = !ADCON0bits.CHS;
 GODONE = 1;
 }
+
+# 145
 }
 }
 

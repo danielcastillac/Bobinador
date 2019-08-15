@@ -4370,10 +4370,20 @@ extern bool MOT_1;
 extern bool MOT_2;
 extern bool MOT_3;
 extern bool MOT_4;
+extern bool DIR_1;
+extern bool DIR_2;
+extern bool DIR_3;
+extern bool DIR_4;
+
 unsigned int MOT_1_count = 0;
 unsigned int MOT_2_count = 0;
 unsigned int MOT_3_count = 0;
 unsigned int MOT_4_count = 0;
+unsigned int count_1 = 5;
+unsigned int count_2 = 5;
+unsigned int count_3 = 5;
+unsigned int count_4 = 20;
+
 
 
 
@@ -4381,33 +4391,33 @@ void interrupt high_isr(void) {
 if (INTCONbits.TMR0IF) {
 
 INTCONbits.TMR0IF = 0;
-overflow++;
-TMR0 = 200;
+
+TMR0 = 250;
 MOT_1_count++;
 MOT_2_count++;
 MOT_3_count++;
 MOT_4_count++;
 
 if (MOT_1) {
-if (MOT_1_count == 25) {
+if (MOT_1_count == count_1) {
 LATAbits.LA3 = !PORTAbits.RA3;
 MOT_1_count = 0;
 }
 }
 if (MOT_2) {
-if (MOT_2_count == 2) {
+if (MOT_2_count == count_2) {
 LATAbits.LA5 = !PORTAbits.RA5;
 MOT_2_count = 0;
 }
 }
 if (MOT_3) {
-if (MOT_3_count == 5) {
+if (MOT_3_count == count_3) {
 LATCbits.LC1 = !PORTCbits.RC1;
 MOT_3_count = 0;
 }
 }
 if (MOT_4) {
-if (MOT_4_count == 5) {
+if (MOT_4_count == count_4) {
 LATBbits.LB6 = !PORTBbits.RB6;
 MOT_4_count = 0;
 }
@@ -4424,7 +4434,10 @@ while (TXIF == 0);
 recibi = 1;
 n = 0;
 }
-} else if (PIR1bits.ADIF) {
+}
+
+# 104
+else if (PIR1bits.ADIF) {
 
 PIR1bits.ADIF = 0;
 if (ADCON0bits.CHS == 0b0000) {
@@ -4432,16 +4445,23 @@ ADC_value_press = ADRES;
 } else if (ADCON0bits.CHS == 0b0001) {
 ADC_value_dist = ADRES;
 }
-_delay((unsigned long)((10)*(8000000/4000.0)));
-ADCON0bits.CHS = !ADCON0bits.CHS;
+
+
+
 
 } else if (INTCON3bits.INT1IF) {
 
 INTCON3bits.INT1IF = 0;
 
+
+DIR_3 = !DIR_3;
+
 } else if (INTCON3bits.INT2IF) {
 
 INTCON3bits.INT2IF = 0;
+
+
+DIR_3 = !DIR_3;
 
 }
 }
