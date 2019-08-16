@@ -4393,7 +4393,7 @@ extern char recibi;
 extern char palabra[20];
 extern unsigned int n;
 extern unsigned int ADC_value_press;
-extern unsigned int ADC_value_dist;
+
 extern unsigned int count_1;
 extern unsigned int count_2;
 extern unsigned int count_3;
@@ -4484,7 +4484,7 @@ MOT_3 = !MOT_3;
 } else if (GODONE == 0) {
 
 _delay((unsigned long)((4)*(8000000/4000.0)));
-ADCON0bits.CHS = !ADCON0bits.CHS;
+
 GODONE = 1;
 
 # 167

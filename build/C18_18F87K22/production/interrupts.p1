@@ -127,35 +127,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TXREG `Vuc ~T0 @X0 0 e@4013 ]
 "8962
 [v _TXIF `Vb ~T0 @X0 0 e@31988 ]
-"5489
-[s S228 :1 `uc 1 :1 `uc 1 ]
-[n S228 . . GO_NOT_DONE ]
-"5493
-[s S229 :1 `uc 1 :1 `uc 1 :4 `uc 1 ]
-[n S229 . ADON GO_nDONE CHS ]
-"5498
-[s S230 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S230 . . GO_DONE CHS0 CHS1 CHS2 CHS3 ]
-"5506
-[s S231 :1 `uc 1 :1 `uc 1 ]
-[n S231 . . DONE ]
-"5510
-[s S232 :1 `uc 1 :1 `uc 1 ]
-[n S232 . . GO ]
-"5514
-[s S233 :1 `uc 1 :1 `uc 1 ]
-[n S233 . . NOT_DONE ]
-"5518
-[s S234 :1 `uc 1 :1 `uc 1 ]
-[n S234 . . nDONE ]
-"5522
-[s S235 :1 `uc 1 :1 `uc 1 ]
-[n S235 . . GODONE ]
-"5488
-[u S227 `S228 1 `S229 1 `S230 1 `S231 1 `S232 1 `S233 1 `S234 1 `S235 1 ]
-[n S227 . . . . . . . . . ]
-"5527
-[v _ADCON0bits `VS227 ~T0 @X0 0 e@4034 ]
 "5602
 [v _ADRES `Vus ~T0 @X0 0 e@4035 ]
 "7236
@@ -3332,9 +3303,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 "29
 [v _ADC_value_press `ui ~T0 @X0 1 e ]
 [; ;interrupts.c: 29: unsigned int ADC_value_press;
-"30
-[v _ADC_value_dist `ui ~T0 @X0 1 e ]
-[; ;interrupts.c: 30: unsigned int ADC_value_dist;
 [; ;interrupts.c: 31: extern bool MOT_1;
 [; ;interrupts.c: 32: extern bool MOT_2;
 [; ;interrupts.c: 33: extern bool MOT_3;
@@ -3398,9 +3366,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;interrupts.c: 47: unsigned int mot_4_steps = 0;
 [v $root$_high_isr `(v ~T0 @X0 0 e ]
-[v F3378 `(v ~T0 @X0 1 tf ]
+[v F3377 `(v ~T0 @X0 1 tf ]
 "51
-[v _high_isr `IF3378 ~T0 @X0 1 e ]
+[v _high_isr `IF3377 ~T0 @X0 1 e ]
 {
 [; ;interrupts.c: 51: void interrupt high_isr(void) {
 [e :U _high_isr ]
@@ -3568,63 +3536,44 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 100: PIR1bits.ADIF = 0;
 "100
 [e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
-[; ;interrupts.c: 101: if (ADCON0bits.CHS == 0b0000) {
-"101
-[e $ ! == -> . . _ADCON0bits 1 2 `i -> 0 `i 340  ]
-{
-[; ;interrupts.c: 102: ADC_value_press = ADRES;
-"102
+[; ;interrupts.c: 106: ADC_value_press = ADRES;
+"106
 [e = _ADC_value_press -> _ADRES `ui ]
-"103
+"108
 }
-[; ;interrupts.c: 103: } else if (ADCON0bits.CHS == 0b0001) {
-[e $U 341  ]
-[e :U 340 ]
-[e $ ! == -> . . _ADCON0bits 1 2 `i -> 1 `i 342  ]
-{
-[; ;interrupts.c: 104: ADC_value_dist = ADRES;
-"104
-[e = _ADC_value_dist -> _ADRES `ui ]
-"105
-}
-[e :U 342 ]
-"110
-[e :U 341 ]
-}
-[; ;interrupts.c: 105: }
-[; ;interrupts.c: 110: } else if (INTCON3bits.INT1IF) {
-[e $U 343  ]
+[; ;interrupts.c: 108: } else if (INTCON3bits.INT1IF) {
+[e $U 340  ]
 [e :U 339 ]
-[e $ ! != -> . . _INTCON3bits 0 0 `i -> -> -> 0 `i `Vuc `i 344  ]
+[e $ ! != -> . . _INTCON3bits 0 0 `i -> -> -> 0 `i `Vuc `i 341  ]
 {
-[; ;interrupts.c: 112: INTCON3bits.INT1IF = 0;
-"112
+[; ;interrupts.c: 110: INTCON3bits.INT1IF = 0;
+"110
 [e = . . _INTCON3bits 0 0 -> -> 0 `i `uc ]
-[; ;interrupts.c: 115: DIR_3 = !DIR_3;
+[; ;interrupts.c: 113: DIR_3 = !DIR_3;
+"113
+[e = _DIR_3 -> -> ! != -> _DIR_3 `i -> -> -> 0 `i `uc `i `i `uc ]
 "115
-[e = _DIR_3 -> -> ! != -> _DIR_3 `i -> -> -> 0 `i `uc `i `i `uc ]
-"117
 }
-[; ;interrupts.c: 117: } else if (INTCON3bits.INT2IF) {
-[e $U 345  ]
-[e :U 344 ]
-[e $ ! != -> . . _INTCON3bits 0 1 `i -> -> -> 0 `i `Vuc `i 346  ]
+[; ;interrupts.c: 115: } else if (INTCON3bits.INT2IF) {
+[e $U 342  ]
+[e :U 341 ]
+[e $ ! != -> . . _INTCON3bits 0 1 `i -> -> -> 0 `i `Vuc `i 343  ]
 {
-[; ;interrupts.c: 119: INTCON3bits.INT2IF = 0;
-"119
+[; ;interrupts.c: 117: INTCON3bits.INT2IF = 0;
+"117
 [e = . . _INTCON3bits 0 1 -> -> 0 `i `uc ]
-[; ;interrupts.c: 122: DIR_3 = !DIR_3;
-"122
+[; ;interrupts.c: 120: DIR_3 = !DIR_3;
+"120
 [e = _DIR_3 -> -> ! != -> _DIR_3 `i -> -> -> 0 `i `uc `i `i `uc ]
-"124
+"122
 }
-[e :U 346 ]
-"125
-[e :U 345 ]
 [e :U 343 ]
+"123
+[e :U 342 ]
+[e :U 340 ]
 [e :U 338 ]
 [e :U 332 ]
-[; ;interrupts.c: 124: }
-[; ;interrupts.c: 125: }
+[; ;interrupts.c: 122: }
+[; ;interrupts.c: 123: }
 [e :UE 322 ]
 }

@@ -51,7 +51,7 @@ extern char recibi;
 extern char palabra[20];
 extern unsigned int n;
 extern unsigned int ADC_value_press;
-extern unsigned int ADC_value_dist;
+//extern unsigned int ADC_value_dist;
 extern unsigned int count_1;
 extern unsigned int count_2;
 extern unsigned int count_3;
@@ -155,7 +155,7 @@ void main(void) {
         } else if (GODONE == 0) {
             /* Restart ADC data gattering */
             __delay_ms(4); // Wait to next conversion
-            ADCON0bits.CHS = !ADCON0bits.CHS; // Change channel
+//            ADCON0bits.CHS = !ADCON0bits.CHS; // Change channel
             GODONE = 1;
 //            send[0] = 'A';
 //            send[1] = '0' + (ADC_value_press / 1000);

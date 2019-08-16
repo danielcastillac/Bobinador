@@ -4366,7 +4366,7 @@ unsigned int n = 0;
 char recibi = 0;
 unsigned int overflow = 0;
 unsigned int ADC_value_press;
-unsigned int ADC_value_dist;
+
 extern bool MOT_1;
 extern bool MOT_2;
 extern bool MOT_3;
@@ -4437,14 +4437,9 @@ n = 0;
 } else if (PIR1bits.ADIF) {
 
 PIR1bits.ADIF = 0;
-if (ADCON0bits.CHS == 0b0000) {
+
+# 106
 ADC_value_press = ADRES;
-} else if (ADCON0bits.CHS == 0b0001) {
-ADC_value_dist = ADRES;
-}
-
-
-
 
 } else if (INTCON3bits.INT1IF) {
 

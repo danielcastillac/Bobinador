@@ -49,35 +49,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 "164 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18.h
 [v __delay `JF3316 ~T0 @X0 0 e ]
 [p i __delay ]
-"5489 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
-[s S228 :1 `uc 1 :1 `uc 1 ]
-[n S228 . . GO_NOT_DONE ]
-"5493
-[s S229 :1 `uc 1 :1 `uc 1 :4 `uc 1 ]
-[n S229 . ADON GO_nDONE CHS ]
-"5498
-[s S230 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S230 . . GO_DONE CHS0 CHS1 CHS2 CHS3 ]
-"5506
-[s S231 :1 `uc 1 :1 `uc 1 ]
-[n S231 . . DONE ]
-"5510
-[s S232 :1 `uc 1 :1 `uc 1 ]
-[n S232 . . GO ]
-"5514
-[s S233 :1 `uc 1 :1 `uc 1 ]
-[n S233 . . NOT_DONE ]
-"5518
-[s S234 :1 `uc 1 :1 `uc 1 ]
-[n S234 . . nDONE ]
-"5522
-[s S235 :1 `uc 1 :1 `uc 1 ]
-[n S235 . . GODONE ]
-"5488
-[u S227 `S228 1 `S229 1 `S230 1 `S231 1 `S232 1 `S233 1 `S234 1 `S235 1 ]
-[n S227 . . . . . . . . . ]
-"5527
-[v _ADCON0bits `VS227 ~T0 @X0 0 e@4034 ]
 "60 main.c
 [v _mot_4_steps `ui ~T0 @X0 0 e ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
@@ -3311,7 +3282,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 51: extern char palabra[20];
 [; ;main.c: 52: extern unsigned int n;
 [; ;main.c: 53: extern unsigned int ADC_value_press;
-[; ;main.c: 54: extern unsigned int ADC_value_dist;
 [; ;main.c: 55: extern unsigned int count_1;
 [; ;main.c: 56: extern unsigned int count_2;
 [; ;main.c: 57: extern unsigned int count_3;
@@ -3561,9 +3531,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 157: _delay((unsigned long)((4)*(8000000/4000.0)));
 "157
 [e ( __delay (1 -> * -> -> 4 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-[; ;main.c: 158: ADCON0bits.CHS = !ADCON0bits.CHS;
-"158
-[e = . . _ADCON0bits 1 2 -> -> ! != -> . . _ADCON0bits 1 2 `i -> -> -> 0 `i `Vuc `i `i `uc ]
 [; ;main.c: 159: GODONE = 1;
 "159
 [e = _GODONE -> -> 1 `i `b ]

@@ -71,7 +71,7 @@ void InitApp(void) {
     T0CONbits.PSA = 0; // Prescaler is assigned
     T0CONbits.T0PS = 0b101; // Prescaler value 1:64
     TMR0 = 0x6; // Preload value
-    // Finales de carrera
+    /* Limit switch */
     TRISBbits.RB1 = 1; // INT1 input
     TRISBbits.RB2 = 1; // INT2 input
     INTCON3bits.INT1IE = 1; // Enable INT1

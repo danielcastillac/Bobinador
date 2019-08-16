@@ -27,7 +27,7 @@ unsigned int n = 0; // Receive char counter
 char recibi = 0;
 unsigned int overflow = 0; // TMR0 overflow counter
 unsigned int ADC_value_press;
-unsigned int ADC_value_dist;
+//unsigned int ADC_value_dist;
 extern bool MOT_1; // Move motor 1 flag
 extern bool MOT_2; // Move motor 2 flag
 extern bool MOT_3; // Move motor 3 flag
@@ -98,11 +98,12 @@ void interrupt high_isr(void) {
     } else if (PIR1bits.ADIF) {
         /* A/D converter ISR */
         PIR1bits.ADIF = 0; // Restart A/D flag
-        if (ADCON0bits.CHS == 0b0000) {
-            ADC_value_press = ADRES;
-        } else if (ADCON0bits.CHS == 0b0001) {
-            ADC_value_dist = ADRES;
-        }
+//        if (ADCON0bits.CHS == 0b0000) {
+//            ADC_value_press = ADRES;
+//        } else if (ADCON0bits.CHS == 0b0001) {
+//            ADC_value_dist = ADRES;
+//        }
+        ADC_value_press = ADRES;
 
     } else if (INTCON3bits.INT1IF) {
         /* Limit switch 1 ISR */
