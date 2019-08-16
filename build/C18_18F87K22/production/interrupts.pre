@@ -4379,11 +4379,23 @@ unsigned int MOT_1_count = 0;
 unsigned int MOT_2_count = 0;
 unsigned int MOT_3_count = 0;
 unsigned int MOT_4_count = 0;
-unsigned int count_1 = 5;
+unsigned int count_1 = 2;
 unsigned int count_2 = 5;
-unsigned int count_3 = 5;
+unsigned int count_3 = 132;
 unsigned int count_4 = 5;
+unsigned int mot_1_steps = 0;
+unsigned int mot_3_steps = 0;
 unsigned int mot_4_steps = 0;
+unsigned int turns_count = 0;
+extern bool busy_flag;
+extern bool zero_flag;
+extern bool finish;
+extern unsigned int length;
+extern unsigned int turns;
+
+
+void trans_Char(char out);
+unsigned int mot_3_step_count(unsigned int l, unsigned int ms);
 
 
 
@@ -4397,10 +4409,39 @@ MOT_2_count++;
 MOT_3_count++;
 MOT_4_count++;
 
+if (MOT_3) {
+if (MOT_3_count == count_3) {
+LATCbits.LC1 = !PORTCbits.RC1;
+MOT_3_count = 0;
+if (zero_flag == 1) {
+
+mot_3_steps++;
+if (mot_3_steps == mot_3_step_count(length, 1)) {
+DIR_3 = !DIR_3;
+mot_3_steps = 0;
+}
+}
+}
+}
+
 if (MOT_1) {
 if (MOT_1_count == count_1) {
 LATAbits.LA3 = !PORTAbits.RA3;
 MOT_1_count = 0;
+
+if (zero_flag) {
+mot_1_steps++;
+if (mot_1_steps == 200) {
+
+mot_1_steps = 0;
+turns_count++;
+}
+if (turns_count == (turns)) {
+finish = 1;
+}
+}
+
+
 }
 }
 if (MOT_2) {
@@ -4409,17 +4450,13 @@ LATAbits.LA5 = !PORTAbits.RA5;
 MOT_2_count = 0;
 }
 }
-if (MOT_3) {
-if (MOT_3_count == count_3) {
-LATCbits.LC1 = !PORTCbits.RC1;
-MOT_3_count = 0;
-}
-}
+
 if (MOT_4) {
 if (MOT_4_count == count_4) {
 LATBbits.LB6 = !PORTBbits.RB6;
 MOT_4_count = 0;
 mot_4_steps++;
+
 }
 }
 
@@ -4438,22 +4475,40 @@ n = 0;
 
 PIR1bits.ADIF = 0;
 
-# 106
+# 143
 ADC_value_press = ADRES;
 
 } else if (INTCON3bits.INT1IF) {
 
 INTCON3bits.INT1IF = 0;
 
+if (busy_flag) {
+
+MOT_1 = 0;
+MOT_2 = 0;
+MOT_3 = 0;
+MOT_4 = 0;
+trans_Char('1');
+} else {
 
 DIR_3 = !DIR_3;
+}
 
 } else if (INTCON3bits.INT2IF) {
 
 INTCON3bits.INT2IF = 0;
 
+if (busy_flag) {
+
+MOT_1 = 0;
+MOT_2 = 0;
+MOT_3 = 0;
+MOT_4 = 0;
+trans_Char('1');
+} else {
 
 DIR_3 = !DIR_3;
+}
 
 }
 }

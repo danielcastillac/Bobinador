@@ -40,12 +40,24 @@ unsigned int MOT_1_count = 0; // Motor 1 cycle count
 unsigned int MOT_2_count = 0; // Motor 2 cycle count
 unsigned int MOT_3_count = 0; // Motor 3 cycle count
 unsigned int MOT_4_count = 0; // Motor 4 cycle count
-unsigned int count_1 = 5; // Number of half -periods motor 1
+unsigned int count_1 = 2; // Number of half -periods motor 1
 unsigned int count_2 = 5; // Number of half -periods motor 2
-unsigned int count_3 = 5; // Number of half -periods motor 3
+unsigned int count_3 = 132; // Number of half -periods motor 3
 unsigned int count_4 = 5; // Number of half -periods motor 4
+unsigned int mot_1_steps = 0;
+unsigned int mot_3_steps = 0;
 unsigned int mot_4_steps = 0;
+unsigned int turns_count = 0;
+extern bool busy_flag;
+extern bool zero_flag;
+extern bool finish;
+extern unsigned int length;
+extern unsigned int turns;
 
+/* Function prototypes */
+void trans_Char(char out);
+unsigned int mot_3_step_count(unsigned int l, unsigned int ms);
+//unsigned long int real_turns(unsigned int turn);
 /* High-priority service */
 
 void interrupt high_isr(void) {
@@ -58,10 +70,26 @@ void interrupt high_isr(void) {
         MOT_3_count++;
         MOT_4_count++;
 
+
+        
         if (MOT_1) {
             if (MOT_1_count == count_1) {
                 LATAbits.LA3 = !PORTAbits.RA3;
                 MOT_1_count = 0;
+                
+                if (zero_flag) {
+                    mot_1_steps++;
+                    if (mot_1_steps == 200) {
+                        // Another turn
+                        mot_1_steps = 0;
+                        turns_count++;
+                    }
+                    if (turns_count == (turns)) {
+                        finish = true;
+                    }
+                }
+                
+
             }
         }
         if (MOT_2) {
@@ -74,6 +102,14 @@ void interrupt high_isr(void) {
             if (MOT_3_count == count_3) {
                 LATCbits.LC1 = !PORTCbits.RC1;
                 MOT_3_count = 0;
+                if (zero_flag == true) {
+                    // Termino de marcar cero, empiece a contar pasos
+                    mot_3_steps++;
+                    if (mot_3_steps == mot_3_step_count(length, 1)) {
+                        DIR_3 = !DIR_3;
+                        mot_3_steps = 0;
+                    }
+                }
             }
         }
         if (MOT_4) {
@@ -81,6 +117,7 @@ void interrupt high_isr(void) {
                 LATBbits.LB6 = !PORTBbits.RB6;
                 MOT_4_count = 0;
                 mot_4_steps++;
+
             }
         }
 
@@ -98,26 +135,44 @@ void interrupt high_isr(void) {
     } else if (PIR1bits.ADIF) {
         /* A/D converter ISR */
         PIR1bits.ADIF = 0; // Restart A/D flag
-//        if (ADCON0bits.CHS == 0b0000) {
-//            ADC_value_press = ADRES;
-//        } else if (ADCON0bits.CHS == 0b0001) {
-//            ADC_value_dist = ADRES;
-//        }
+        //        if (ADCON0bits.CHS == 0b0000) {
+        //            ADC_value_press = ADRES;
+        //        } else if (ADCON0bits.CHS == 0b0001) {
+        //            ADC_value_dist = ADRES;
+        //        }
         ADC_value_press = ADRES;
 
     } else if (INTCON3bits.INT1IF) {
         /* Limit switch 1 ISR */
         INTCON3bits.INT1IF = 0;
         // PARAR MOVIMIENTO EN LA DIRECTION CUANDO SE RECIBA BANDERA
-        //        MOT_3 = false;
-        DIR_3 = !DIR_3;
+        if (busy_flag) {
+            // If there is a problem, shut down every motor
+            MOT_1 = 0;
+            MOT_2 = 0;
+            MOT_3 = 0;
+            MOT_4 = 0;
+            trans_Char('1'); // Send failure alert to app
+        } else {
+            // Is marking zero
+            DIR_3 = !DIR_3;
+        }
 
     } else if (INTCON3bits.INT2IF) {
         /* Limit switch 2 ISR */
         INTCON3bits.INT2IF = 0;
         // PARAR MOVIMIENTO EN LA DIRECTION CUANDO SE RECIBA BANDERA
-        //        MOT_3 = false;
-        DIR_3 = !DIR_3;
+        if (busy_flag) {
+            // If there is a problem, shut down every motor
+            MOT_1 = 0;
+            MOT_2 = 0;
+            MOT_3 = 0;
+            MOT_4 = 0;
+            trans_Char('1'); // Send failure alert to app
+        } else {
+            // Is marking zero
+            DIR_3 = !DIR_3;
+        }
 
     }
 }

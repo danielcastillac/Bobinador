@@ -38,12 +38,14 @@ bool MOT_4 = 0; // Move motor 4 flag
 /* Parameters */
 unsigned int caliber;
 unsigned int diameter;
-unsigned int length;
-unsigned int turns;
+unsigned int length = 9000;
+unsigned int turns = 20;
 unsigned int speed;
 unsigned int PWM_duty = 50;
 
 bool busy_flag = false;
+bool zero_flag = false;
+bool finish = false;
 
 /* i.e. uint8_t <variable_name>; */
 extern unsigned int overflow;
@@ -57,6 +59,7 @@ extern unsigned int count_2;
 extern unsigned int count_3;
 extern unsigned int count_4;
 extern char send[7];
+extern unsigned int mot_3_steps;
 extern unsigned int mot_4_steps;
 unsigned int mot_4_step_count;
 bool enable = 0; // Motor 1 on/2 off by default
@@ -65,7 +68,9 @@ bool enable = 0; // Motor 1 on/2 off by default
 /* Main Program                                                               */
 /* Function prototypes */
 //int ADC_get(char channel);
-//void trans_Char(char out);
+void trans_Char(char out);
+unsigned int mot_3_step_count (unsigned int l, unsigned int ms);
+//unsigned long int real_turns(unsigned int turn);
 //void send_String(const char *out);
 //void ADCfunction(char canalf);
 
@@ -77,10 +82,6 @@ void main(void) {
 
     /* Initialize I/O and Peripherals for application */
     InitApp();
-    MOT_1 = 1;
-    MOT_2 = 1;
-    MOT_3 = 1;
-    MOT_4 = 1;
     while (1) {
         
         CCPR1L = PWM_duty; // Update duty cycle for LED strip
@@ -89,14 +90,17 @@ void main(void) {
         LATAbits.LA4 = DIR_2; // Set motor 2 direction
         LATCbits.LC0 = DIR_3; // Set motor 3 direction
         LATBbits.LB7 = DIR_4; // Set motor 4 direction
-        LATBbits.LB4 = enable;
-        LATBbits.LB5 = !enable;
+        LATBbits.LB5 = enable;
+        LATBbits.LB4 = !enable;
 
         //        if (busy_flag) {
         //            TXREG = 'C'; // Transmit -Currently working- flag to mobile app
         //            while (TXIF == 0);
         //        }
 
+//        MOT_1 = 1;
+//        MOT_3 = 1;
+        
         if (recibi == 1) {
             /* Bluetooth reception routine */
             recibi = 0; // Turn down reception flag
@@ -116,7 +120,7 @@ void main(void) {
             } else if (palabra[0] == 'C') {
                 // Switch between Mot1/Mot2 turn on/off
                 enable = !enable;
-            } else if ((palabra[0] == 'D')) { // && !busy_flag
+            } else if ((palabra[0] == 'D') && (busy_flag == 0)) { // && !busy_flag
                 // Move cart manually to mark zero
                 if (palabra[1] == '0') {
                     // Move cart right
@@ -127,8 +131,10 @@ void main(void) {
                     MOT_3 = true;
                     DIR_3 = true;
                 } else if (palabra[1] == '2') {
-                    ; // Mark zero
+                    // Mark zero
                     MOT_3 = false;
+
+                    zero_flag = true;
                 }
 
                 /* FOR DEBUGGING ONLY !!!!!!! */
@@ -158,31 +164,72 @@ void main(void) {
 //            ADCON0bits.CHS = !ADCON0bits.CHS; // Change channel
             GODONE = 1;
 //            send[0] = 'A';
-//            send[1] = '0' + (ADC_value_press / 1000);
-//            send[2] = '0' + ((ADC_value_press % 1000) / 100);
-//            send[3] = '0' + (((ADC_value_press % 1000) % 100) / 10);
-//            send[4] = '0' + ((((ADC_value_press % 1000) % 100) / 10) % 10);
+//            send[1] = '0' + (mot_3_steps / 1000);
+//            send[2] = '0' + ((mot_3_steps % 1000) / 100);
+//            send[3] = '0' + (((mot_3_steps % 1000) % 100) / 10);
+//            send[4] = '0' + ((((mot_3_steps % 1000) % 100) / 10) % 10);
+//            
 //            send[5] = '\n';
 //            send_String(send);
         }
 
-        if (mot_4_steps == mot_4_step_count) {
-            // When reached numbers of steps, stop motor
+//        if (mot_3_steps == 10) { // mot_3_step_count(length, 1)
+//            // Reached end of given winding
+//            MOT_3 = 0;
+////            DIR_3 = !DIR_3;
+//            mot_3_steps = 0;
+//        }
+        
+        if (mot_4_steps == mot_4_step_count && busy_flag) {
+            // When reached numbers of steps, stop pressure motor
             MOT_4 = 0;
         }
+        
+        if (zero_flag) {          
+            // If zero
+//            __delay_ms(500);
+            MOT_1 = MOT_3 = 1;
+           
+            DIR_3 = 1;
+        }
+        
+        
+        if (finish) {
+            MOT_1 = 0;
+            MOT_3 = 0;
+            trans_Char('Z');
+            finish = 0;
+        }
+        
+        
+        
+        
+        
+        
+        
     }
 }
 
 /* Function declarations */
 
-//void trans_Char(char out) {
-//    while (TXIF == 0);
-//    TXREG = out;
-//}
-//
+void trans_Char(char out) {
+    while (TXIF == 0);
+    TXREG = out;
+}
+
 //void send_String(const char *out) {
 //    while (*out != '\0') {
-//        trans_Char(*out)
+//        trans_Char(*out);
 //        out++;
 //    }
 //}
+
+unsigned int mot_3_step_count (unsigned int l, unsigned int ms) {
+    // lenght: 5 numbers, in mm, multiplied by 100, ex: 50,33 mm= 05033
+    return (ms*l)/2;
+}
+
+//unsigned long int real_turns(unsigned int turn) {
+//    return (turn*7437)/1000;
+//}
+
