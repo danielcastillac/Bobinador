@@ -4361,7 +4361,7 @@ typedef unsigned char bool;
 
 # 24 "interrupts.c"
 char palabra[20];
-char send[5];
+char send[7];
 unsigned int n = 0;
 char recibi = 0;
 unsigned int overflow = 0;
@@ -4382,7 +4382,8 @@ unsigned int MOT_4_count = 0;
 unsigned int count_1 = 5;
 unsigned int count_2 = 5;
 unsigned int count_3 = 5;
-unsigned int count_4 = 20;
+unsigned int count_4 = 5;
+unsigned int mot_4_steps = 0;
 
 
 
@@ -4418,6 +4419,7 @@ if (MOT_4) {
 if (MOT_4_count == count_4) {
 LATBbits.LB6 = !PORTBbits.RB6;
 MOT_4_count = 0;
+mot_4_steps++;
 }
 }
 

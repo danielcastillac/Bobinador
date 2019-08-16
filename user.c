@@ -56,6 +56,8 @@ void InitApp(void) {
     TRISBbits.RB7 = 0; // Motor 4, DIR output
     TRISBbits.RB6 = 0; // Motor 4, STEP output
     TRISCbits.RC2 = 0; // LED lighting PWM output
+    TRISBbits.RB4 = 0; // Motor 1 enable
+    TRISBbits.RB5 = 0; // Motor 2 enable
     /* Configure the IPEN bit (1=on) in RCON to turn on/off int priorities */
     RCONbits.IPEN = 0; // Disable interrupt priorities
     /* Enable interrupts and TMR0 */

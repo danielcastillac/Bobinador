@@ -22,7 +22,7 @@
 /* Interrupt Routines                                                         */
 /******************************************************************************/
 char palabra[20]; // Buffer variable for reception
-char send[5]; // Buffer for transmission
+char send[7]; // Buffer for transmission
 unsigned int n = 0; // Receive char counter
 char recibi = 0;
 unsigned int overflow = 0; // TMR0 overflow counter
@@ -43,7 +43,7 @@ unsigned int MOT_4_count = 0; // Motor 4 cycle count
 unsigned int count_1 = 5; // Number of half -periods motor 1
 unsigned int count_2 = 5; // Number of half -periods motor 2
 unsigned int count_3 = 5; // Number of half -periods motor 3
-unsigned int count_4 = 50; // Number of half -periods motor 4
+unsigned int count_4 = 5; // Number of half -periods motor 4
 unsigned int mot_4_steps = 0;
 
 /* High-priority service */
@@ -103,9 +103,6 @@ void interrupt high_isr(void) {
         } else if (ADCON0bits.CHS == 0b0001) {
             ADC_value_dist = ADRES;
         }
-
-        //        __delay_ms(10); // REVISAR SI PONIENDOLO EXISTEN PROBLEMAS
-        //        ADCON0bits.CHS = !ADCON0bits.CHS; // Change channel
 
     } else if (INTCON3bits.INT1IF) {
         /* Limit switch 1 ISR */

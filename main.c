@@ -56,16 +56,18 @@ extern unsigned int count_1;
 extern unsigned int count_2;
 extern unsigned int count_3;
 extern unsigned int count_4;
-extern char send[5];
+extern char send[7];
 extern unsigned int mot_4_steps;
 unsigned int mot_4_step_count;
+bool enable = 0; // Motor 1 on/2 off by default
 
 /******************************************************************************/
 /* Main Program                                                               */
 /* Function prototypes */
 //int ADC_get(char channel);
-void trans_Char(char out);
-void send_String(const char *out);
+//void trans_Char(char out);
+//void send_String(const char *out);
+//void ADCfunction(char canalf);
 
 /******************************************************************************/
 
@@ -75,18 +77,20 @@ void main(void) {
 
     /* Initialize I/O and Peripherals for application */
     InitApp();
-
+    MOT_1 = 1;
+    MOT_2 = 1;
+    MOT_3 = 1;
+    MOT_4 = 1;
     while (1) {
-        //        MOT_1 = 1;
-        //        MOT_2 = 1;
-        //        MOT_4 = 1;
-
+        
         CCPR1L = PWM_duty; // Update duty cycle for LED strip
 
         LATAbits.LA2 = DIR_1; // Set motor 1 direction
         LATAbits.LA4 = DIR_2; // Set motor 2 direction
         LATCbits.LC0 = DIR_3; // Set motor 3 direction
         LATBbits.LB7 = DIR_4; // Set motor 4 direction
+        LATBbits.LB4 = enable;
+        LATBbits.LB5 = !enable;
 
         //        if (busy_flag) {
         //            TXREG = 'C'; // Transmit -Currently working- flag to mobile app
@@ -109,6 +113,9 @@ void main(void) {
                 speed = palabra[15]; // 1 digit: 1: low; 2: medium, 3: high
 
                 busy_flag = true; // Machine is currently working
+            } else if (palabra[0] == 'C') {
+                // Switch between Mot1/Mot2 turn on/off
+                enable = !enable;
             } else if ((palabra[0] == 'D')) { // && !busy_flag
                 // Move cart manually to mark zero
                 if (palabra[1] == '0') {
@@ -147,15 +154,16 @@ void main(void) {
 
         } else if (GODONE == 0) {
             /* Restart ADC data gattering */
-            __delay_ms(100); // Wait to next conversion
+            __delay_ms(4); // Wait to next conversion
             ADCON0bits.CHS = !ADCON0bits.CHS; // Change channel
             GODONE = 1;
-
-            send[0] = '0' + (ADC_value_press / 1000);
-            send[1] = '0' + ((ADC_value_press % 1000) / 100);
-            send[2] = '0' + (((ADC_value_press % 1000) % 100) / 10);
-            send[3] = '0' + ((((ADC_value_press % 1000) % 100) / 10) % 10);
-            send_String(send);
+//            send[0] = 'A';
+//            send[1] = '0' + (ADC_value_press / 1000);
+//            send[2] = '0' + ((ADC_value_press % 1000) / 100);
+//            send[3] = '0' + (((ADC_value_press % 1000) % 100) / 10);
+//            send[4] = '0' + ((((ADC_value_press % 1000) % 100) / 10) % 10);
+//            send[5] = '\n';
+//            send_String(send);
         }
 
         if (mot_4_steps == mot_4_step_count) {
@@ -167,25 +175,14 @@ void main(void) {
 
 /* Function declarations */
 
-void trans_Char(char out) {
-    while (TXIF == 0);
-    TXREG = out;
-}
-
-void send_String(const char *out) {
-    while (*out != '\0') {
-        trans_Char(*out);
-        out++;
-    }
-}
-
-//int ADC_get(char channel) {
-//    if (channel !ADCON0bits.CHS) { //diferente
-//        __delay_ms(10);
-//        ADCON0bits.CHS = channel;
+//void trans_Char(char out) {
+//    while (TXIF == 0);
+//    TXREG = out;
+//}
+//
+//void send_String(const char *out) {
+//    while (*out != '\0') {
+//        trans_Char(*out)
+//        out++;
 //    }
-//    if (GODONE == 0) {
-//        GODONE = 1;
-//    }
-//    return ADRES;
 //}

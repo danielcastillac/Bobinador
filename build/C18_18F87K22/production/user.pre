@@ -4389,6 +4389,8 @@ TRISCbits.RC1 = 0;
 TRISBbits.RB7 = 0;
 TRISBbits.RB6 = 0;
 TRISCbits.RC2 = 0;
+TRISBbits.RB4 = 0;
+TRISBbits.RB5 = 0;
 
 RCONbits.IPEN = 0;
 
