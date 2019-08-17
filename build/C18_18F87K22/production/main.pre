@@ -4417,6 +4417,7 @@ void send_String(const char *out);
 void zero_mark();
 void unwind();
 void finish();
+void reset();
 
 
 void main(void) {
@@ -4487,6 +4488,8 @@ enable = !enable;
 } else if (palabra[0] == 'W') {
 
 unwind();
+} else if (palabra[0] == 'R') {
+reset();
 }
 
 } else if (GODONE == 0) {
@@ -4529,7 +4532,7 @@ MOT_1 = 1;
 MOT_3 = 1;
 }
 
-# 194
+# 197
 void unwind() {
 
 enable = !enable;
@@ -4547,3 +4550,11 @@ MOT_1 = MOT_3 = 0;
 winding = 0;
 finish_flag = 1;
 }
+
+void reset() {
+
+# 216
+#asm
+    reset
+#endasm 
+    }

@@ -75,6 +75,7 @@ void send_String(const char *out);
 void zero_mark();
 void unwind();
 void finish();
+void reset();
 /******************************************************************************/
 
 void main(void) {
@@ -145,6 +146,8 @@ void main(void) {
             } else if (palabra[0] == 'W') {
                 // Unwind routine if necessary
                 unwind();
+            } else if (palabra[0] == 'R') {
+                reset();
             }
 
         } else if (GODONE == 0) {
@@ -207,4 +210,10 @@ void finish() {
     MOT_1 = MOT_3 = 0; // Shutdown motors
     winding = false; // Exit winding mode
     finish_flag = true;
+}
+
+void reset() {
+    #asm 
+    reset
+    #endasm
 }
