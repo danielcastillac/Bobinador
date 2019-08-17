@@ -41,7 +41,7 @@ unsigned int MOT_2_count = 0; // Motor 2 cycle count
 unsigned int MOT_3_count = 0; // Motor 3 cycle count
 unsigned int MOT_4_count = 0; // Motor 4 cycle count
 unsigned int count_1 = 2; // Number of half -periods motor 1
-unsigned int count_2 = 5; // Number of half -periods motor 2
+unsigned int count_2 = 1; // Number of half -periods motor 2
 unsigned int count_3 = 132; // Number of half -periods motor 3
 unsigned int count_4 = 5; // Number of half -periods motor 4
 unsigned int mot_1_steps = 0;
@@ -115,7 +115,7 @@ void interrupt high_isr(void) {
         //        }
 
     } else if (PIR1bits.TMR1IF) {
-        // Mark zero routine
+        // Mark zero routine & unwind
         PIR1bits.TMR1IF = 0;
         TMR1 = 0xD8F0;
         if (MOT_3) {
@@ -127,10 +127,7 @@ void interrupt high_isr(void) {
 
         if (MOT_2) {
             // Feeding motor control when unwinding
-            if (MOT_2_count == count_2) {
-                LATAbits.LA5 = !PORTAbits.RA5;
-                MOT_2_count = 0;
-            }
+            LATAbits.LA5 = !PORTAbits.RA5;
         }
 
 

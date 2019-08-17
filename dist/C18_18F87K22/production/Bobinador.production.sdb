@@ -557,8 +557,6 @@
 [v _MOT_4_count MOT_4_count `ui  1 e 2 0 ]
 "43
 [v _count_1 count_1 `ui  1 e 2 0 ]
-"44
-[v _count_2 count_2 `ui  1 e 2 0 ]
 "45
 [v _count_3 count_3 `ui  1 e 2 0 ]
 "47
@@ -639,7 +637,7 @@
 "66 D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\interrupts.c
 [v _high_isr high_isr `II(v  1 e 1 0 ]
 {
-"192
+"189
 } 0
 "174 D:\Ingenieria_fisica\10_semestre\Taller V\PROYECTO\Bobinador\main.c
 [v _mot_3_step_count mot_3_step_count `(ui  1 e 2 0 ]

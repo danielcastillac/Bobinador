@@ -4380,7 +4380,7 @@ unsigned int MOT_2_count = 0;
 unsigned int MOT_3_count = 0;
 unsigned int MOT_4_count = 0;
 unsigned int count_1 = 2;
-unsigned int count_2 = 5;
+unsigned int count_2 = 1;
 unsigned int count_3 = 132;
 unsigned int count_4 = 5;
 unsigned int mot_1_steps = 0;
@@ -4459,10 +4459,7 @@ LATCbits.LC1 = !PORTCbits.RC1;
 
 if (MOT_2) {
 
-if (MOT_2_count == count_2) {
 LATAbits.LA5 = !PORTAbits.RA5;
-MOT_2_count = 0;
-}
 }
 
 
@@ -4482,7 +4479,7 @@ n = 0;
 
 PIR1bits.ADIF = 0;
 
-# 157
+# 154
 ADC_value_press = ADRES;
 
 } else if (INTCON3bits.INT1IF) {
