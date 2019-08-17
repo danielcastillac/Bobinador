@@ -4380,8 +4380,8 @@ bool MOT_4 = 0;
 
 unsigned int caliber;
 unsigned int diameter;
-unsigned int length = 3000;
-unsigned int turns = 20;
+unsigned int length = 9250;
+unsigned int turns = 4000;
 unsigned int speed;
 unsigned int PWM_duty = 50;
 
@@ -4525,4 +4525,6 @@ DIR_3 = 1;
 T1CONbits.TMR1ON = 0;
 T0CONbits.TMR0ON = 1;
 zero_flag = 0;
+MOT_1 = 1;
+MOT_3 = 1;
 }

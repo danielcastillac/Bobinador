@@ -27,7 +27,7 @@
 unsigned int motor1 = 1; // Cycle number for motor 1
 unsigned int motor2; // Cycle number for motor 2
 bool RA0state = false; // Current state of STEP pin for motor 1
-bool DIR_1 = 0; // Direction of motor 1
+bool DIR_1 = 1; // Direction of motor 1
 bool DIR_2 = 0; // Direction of motor 2
 bool DIR_3 = 0; // Direction of motor 3
 bool DIR_4 = 0; // Direction of motor 4
@@ -38,8 +38,8 @@ bool MOT_4 = 0; // Move motor 4 flag
 /* Parameters */
 unsigned int caliber;
 unsigned int diameter;
-unsigned int length = 3000;
-unsigned int turns = 20;
+unsigned int length = 9250;
+unsigned int turns = 4000;
 unsigned int speed;
 unsigned int PWM_duty = 50;
 
@@ -220,4 +220,6 @@ void zero_mark() {
     T1CONbits.TMR1ON = 0; // Disable timer1 (marking zero)
     T0CONbits.TMR0ON = 1; // Enable timer0 (winding control)
     zero_flag = false;
+    MOT_1 = 1;
+    MOT_3 = 1;
 }

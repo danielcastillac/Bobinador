@@ -4425,21 +4425,18 @@ if (mot_1_steps == 200) {
 mot_1_steps = 0;
 turns_count++;
 }
+
+# 98
 }
 }
 
-# 100
+# 106
 if (MOT_3) {
 if (MOT_3_count == count_3) {
 MOT_3_count = 0;
 LATCbits.LC1 = !PORTCbits.RC1;
 mot_3_steps++;
-if (turns_count == turns) {
 
-MOT_1 = 0;
-MOT_3 = 0;
-trans_Char('0');
-}
 if (mot_3_steps == mot_3_step_count(length, 1)) {
 
 DIR_3 = !DIR_3;
@@ -4448,7 +4445,7 @@ mot_3_steps = 0;
 }
 }
 
-# 127
+# 128
 } else if (PIR1bits.TMR1IF) {
 
 if(MOT_3) {
@@ -4474,7 +4471,7 @@ n = 0;
 
 PIR1bits.ADIF = 0;
 
-# 156
+# 157
 ADC_value_press = ADRES;
 
 } else if (INTCON3bits.INT1IF) {

@@ -89,6 +89,12 @@ void interrupt high_isr(void) {
                     mot_1_steps = 0; // Restart step counter
                     turns_count++;
                 }
+//                if (turns_count == turns) {
+//                    // Max number of turns reached
+//                    MOT_1 = 0;
+//                    MOT_3 = 0;
+//                    trans_Char('0');
+//                }
             }
         }
         //        if (MOT_2) {
@@ -102,12 +108,7 @@ void interrupt high_isr(void) {
                 MOT_3_count = 0; // Restart counter
                 LATCbits.LC1 = !PORTCbits.RC1;
                 mot_3_steps++; // Increment steps
-                if (turns_count == turns) {
-                    // Max number of turns reached
-                    MOT_1 = 0;
-                    MOT_3 = 0;
-                    trans_Char('0');
-                }
+
                 if (mot_3_steps == mot_3_step_count(length, 1)) {
                     // Change direction when mot_3 traveled length
                     DIR_3 = !DIR_3;

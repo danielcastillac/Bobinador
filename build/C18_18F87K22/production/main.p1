@@ -3291,15 +3291,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 "41
 [v _length `ui ~T0 @X0 1 e ]
 [i _length
--> -> 3000 `i `ui
+-> -> 9250 `i `ui
 ]
-[; ;main.c: 41: unsigned int length = 3000;
+[; ;main.c: 41: unsigned int length = 9250;
 "42
 [v _turns `ui ~T0 @X0 1 e ]
 [i _turns
--> -> 20 `i `ui
+-> -> 4000 `i `ui
 ]
-[; ;main.c: 42: unsigned int turns = 20;
+[; ;main.c: 42: unsigned int turns = 4000;
 "43
 [v _speed `ui ~T0 @X0 1 e ]
 [; ;main.c: 43: unsigned int speed;
@@ -3665,7 +3665,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 222: zero_flag = 0;
 "222
 [e = _zero_flag -> -> 0 `i `uc ]
-[; ;main.c: 223: }
+[; ;main.c: 223: MOT_1 = 1;
 "223
+[e = _MOT_1 -> -> 1 `i `uc ]
+[; ;main.c: 224: MOT_3 = 1;
+"224
+[e = _MOT_3 -> -> 1 `i `uc ]
+[; ;main.c: 225: }
+"225
 [e :UE 360 ]
 }
