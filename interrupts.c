@@ -54,10 +54,19 @@ extern bool finish;
 extern unsigned int length;
 extern unsigned int turns;
 
+
+
+
+unsigned int zero_count = 0;
+
+
+
+
 /* Function prototypes */
 void trans_Char(char out);
 unsigned int mot_3_step_count(unsigned int l, unsigned int ms);
 //unsigned long int real_turns(unsigned int turn);
+
 /* High-priority service */
 
 void interrupt high_isr(void) {
@@ -69,62 +78,70 @@ void interrupt high_isr(void) {
         MOT_2_count++;
         MOT_3_count++;
         MOT_4_count++;
-        
+
         if (MOT_1) {
             if (MOT_1_count == count_1) {
+                MOT_1_count = 0; // Restart counter
                 LATAbits.LA3 = !PORTAbits.RA3;
-                MOT_1_count = 0;
-                
-                if (zero_flag) {
-                    mot_1_steps++;
-                    if (mot_1_steps == 200) {
-                        // Another turn
-                        mot_1_steps = 0;
-                        turns_count++;
-                    }
-                    if (turns_count == (turns)) {
-                        finish = true;
-                    }
-                }                
-            }
-        }
-        if (MOT_2) {
-            if (MOT_2_count == count_2) {
-                LATAbits.LA5 = !PORTAbits.RA5;
-                MOT_2_count = 0;
-            }
-        }
-        if (MOT_3) {
-            if (MOT_3_count == count_3) {
-                LATCbits.LC1 = !PORTCbits.RC1;
-                MOT_3_count = 0;
-                if (zero_flag == true) {
-                    // Termino de marcar cero, empiece a contar pasos
-                    mot_3_steps++;
-                    if (mot_3_steps >= mot_3_step_count(length, 1)) {
-                        DIR_3 = !DIR_3;
-                        mot_3_steps = 0;
-                    }
+                mot_1_steps++; // Increment steps
+                if (mot_1_steps == 200) {
+                    // Another turn of motor 1
+                    mot_1_steps = 0; // Restart step counter
+                    turns_count++;
                 }
             }
         }
-        if (MOT_4) {
-            if (MOT_4_count == count_4) {
-                LATBbits.LB6 = !PORTBbits.RB6;
-                MOT_4_count = 0;
-                mot_4_steps++;
-
+        //        if (MOT_2) {
+        //            if (MOT_2_count == count_2) {
+        //                LATAbits.LA5 = !PORTAbits.RA5;
+        //                MOT_2_count = 0;
+        //            }
+        //        }
+        if (MOT_3) {
+            if (MOT_3_count == count_3) {
+                MOT_3_count = 0; // Restart counter
+                LATCbits.LC1 = !PORTCbits.RC1;
+                mot_3_steps++; // Increment steps
+                if (turns_count == turns) {
+                    // Max number of turns reached
+                    MOT_1 = 0;
+                    MOT_3 = 0;
+                    trans_Char('0');
+                }
+                if (mot_3_steps == mot_3_step_count(length, 1)) {
+                    // Change direction when mot_3 traveled length
+                    DIR_3 = !DIR_3;
+                    mot_3_steps = 0;
+                }
             }
         }
+//        if (MOT_4) {
+//            if (MOT_4_count == count_4) {
+//                LATBbits.LB6 = !PORTBbits.RB6;
+//                MOT_4_count = 0;
+//                mot_4_steps++;
+//
+//            }
+//        }
 
+    } else if (PIR1bits.TMR1IF) {
+        // Mark zero routine
+        if(MOT_3) {
+            LATCbits.LC1 = !PORTCbits.RC1;
+        }
+        PIR1bits.TMR1IF = 0;
+//        TMR1 = 0xB1E0;
+        TMR1 = 0xD8F0;
+        zero_count++;
+        
     } else if (PIR1bits.RCIF) {
         /* Recieve bluetooth ISR */
         PIR1bits.RCIF = 0; // Restart Recieve interrupt flag
         palabra[n] = RCREG; // Save recieve char in buffer variable
         n++;
         if (RCREG == '\n') {
-//            TXREG = palabra[0]; // Retransmit to check connection
-//            while (TXIF == 0);
+            //            TXREG = palabra[0]; // Retransmit to check connection
+            //            while (TXIF == 0);
             recibi = 1;
             n = 0;
         }
@@ -148,7 +165,7 @@ void interrupt high_isr(void) {
             MOT_2 = 0;
             MOT_3 = 0;
             MOT_4 = 0;
-//            trans_Char('1'); // Send failure alert to app
+            //            trans_Char('1'); // Send failure alert to app
         } else {
             // Is marking zero
             DIR_3 = !DIR_3;
@@ -164,7 +181,7 @@ void interrupt high_isr(void) {
             MOT_2 = 0;
             MOT_3 = 0;
             MOT_4 = 0;
-//            trans_Char('1'); // Send failure alert to app
+            //            trans_Char('1'); // Send failure alert to app
         } else {
             // Is marking zero
             DIR_3 = !DIR_3;

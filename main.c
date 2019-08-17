@@ -38,13 +38,13 @@ bool MOT_4 = 0; // Move motor 4 flag
 /* Parameters */
 unsigned int caliber;
 unsigned int diameter;
-unsigned int length = 9000;
+unsigned int length = 3000;
 unsigned int turns = 20;
 unsigned int speed;
 unsigned int PWM_duty = 50;
 
 bool busy_flag = false;
-bool zero_flag = false;
+bool zero_flag = true;
 bool finish = false;
 
 /* i.e. uint8_t <variable_name>; */
@@ -69,11 +69,10 @@ bool enable = 0; // Motor 1 on/2 off by default
 /* Function prototypes */
 //int ADC_get(char channel);
 void trans_Char(char out);
-unsigned int mot_3_step_count (unsigned int l, unsigned int ms);
+unsigned int mot_3_step_count(unsigned int l, unsigned int ms);
 //unsigned long int real_turns(unsigned int turn);
 void send_String(const char *out);
-//void ADCfunction(char canalf);
-
+void zero_mark();
 /******************************************************************************/
 
 void main(void) {
@@ -83,7 +82,7 @@ void main(void) {
     /* Initialize I/O and Peripherals for application */
     InitApp();
     while (1) {
-        
+
         CCPR1L = PWM_duty; // Update duty cycle for LED strip
 
         LATAbits.LA2 = DIR_1; // Set motor 1 direction
@@ -98,13 +97,11 @@ void main(void) {
         //            while (TXIF == 0);
         //        }
 
-        MOT_1 = 1;
-//        MOT_3 = 1;
-        
+
         if (recibi == 1) {
             /* Bluetooth reception routine */
             recibi = 0; // Turn down reception flag
-//            MOT_1 = 1;
+            //            MOT_1 = 1;
 
             if (palabra[0] == 'B') {
                 // Its controlling LED intensity
@@ -121,7 +118,7 @@ void main(void) {
             } else if (palabra[0] == 'C') {
                 // Switch between Mot1/Mot2 turn on/off
                 enable = !enable;
-            } else if ((palabra[0] == 'D') && (busy_flag == 0)) { // && !busy_flag
+            } else if ((palabra[0] == 'D') && (zero_flag)) { // && !busy_flag
                 // Move cart manually to mark zero
                 if (palabra[1] == '0') {
                     // Move cart right
@@ -132,21 +129,18 @@ void main(void) {
                     MOT_3 = true;
                     DIR_3 = true;
                 } else if (palabra[1] == '2') {
-                    // Mark zero
+                    // Stop cart
                     MOT_3 = false;
-                    DIR_3 = 1;
-                    zero_flag = true;
+                } else if (palabra[1] == '3') {
+                    // Mark zero
+                    if (MOT_3 == 0) {
+                        // Only mark zero if the cart isn't moving
+                        zero_mark();
+                    }
+
                 }
 
-                /* FOR DEBUGGING ONLY !!!!!!! */
-
-            } else if (palabra[0] == 'E') {
-                // Move pressure motor (4)
-                if (palabra[1] == '0') {
-                    MOT_4 = !MOT_4;
-                } else if (palabra[1] == '1') {
-                    DIR_4 = !DIR_4;
-                }
+            /* FOR DEBUGGING ONLY !!!!!!! */
             } else if (palabra[0] == 'M') {
                 // Turn on/off given motor
                 if (palabra[1] == '1') {
@@ -162,58 +156,39 @@ void main(void) {
         } else if (GODONE == 0) {
             /* Restart ADC data gattering */
             __delay_ms(4); // Wait to next conversion
-//            ADCON0bits.CHS = !ADCON0bits.CHS; // Change channel
+            //            ADCON0bits.CHS = !ADCON0bits.CHS; // Change channel
             GODONE = 1;
-//            send[0] = 'A';
-//            send[1] = '0' + (mot_3_steps / 1000);
-//            send[2] = '0' + ((mot_3_steps % 1000) / 100);
-//            send[3] = '0' + (((mot_3_steps % 1000) % 100) / 10);
-//            send[4] = '0' + ((((mot_3_steps % 1000) % 100) / 10) % 10);
-//            
-//            send[5] = '\n';
-//            send_String(send);
+            //            send[0] = 'A';
+            //            send[1] = '0' + (mot_3_steps / 1000);
+            //            send[2] = '0' + ((mot_3_steps % 1000) / 100);
+            //            send[3] = '0' + (((mot_3_steps % 1000) % 100) / 10);
+            //            send[4] = '0' + ((((mot_3_steps % 1000) % 100) / 10) % 10);
+            //            
+            //            send[5] = '\n';
+            //            send_String(send);
         }
 
-//        if (mot_3_steps == 10) { // mot_3_step_count(length, 1)
-//            // Reached end of given winding
-//            MOT_3 = 0;
-////            DIR_3 = !DIR_3;
-//            mot_3_steps = 0;
-//        }
+        //        if (mot_3_steps == 10) { // mot_3_step_count(length, 1)
+        //            // Reached end of given winding
+        //            MOT_3 = 0;
+        ////            DIR_3 = !DIR_3;
+        //            mot_3_steps = 0;
+        //        }
+
+        //        if (mot_4_steps == mot_4_step_count && busy_flag) {
+        //            // When reached numbers of steps, stop pressure motor
+        //            MOT_4 = 0;
+        //        }
+
+        //        send[0] = '0' + ((mot_3_steps % 1000) / 100);
+        //        send[1] = '0' + (((mot_3_steps % 1000) % 100) / 10);
+        //        send[2] = '0' + ((((mot_3_steps % 1000) % 100) / 10) % 10);
+        //        send[3] = '\n';
+        //        send_String(send);
+
         
-//        if (mot_4_steps == mot_4_step_count && busy_flag) {
-//            // When reached numbers of steps, stop pressure motor
-//            MOT_4 = 0;
-//        }
-        
-        if (zero_flag) {          
-            // If zero
-            
-//            MOT_1 = 1;
-//            __delay_ms(1);
-            MOT_3 = 1;
-           
-//            DIR_3 = 1;
-        }
-        
-        
-        if (finish) {
-            MOT_1 = 0;
-            MOT_3 = 0;
-            trans_Char('Z');
-            finish = 0;
-        }
-        
-//        send[0] = '0' + ((mot_3_steps % 1000) / 100);
-//        send[1] = '0' + (((mot_3_steps % 1000) % 100) / 10);
-//        send[2] = '0' + ((((mot_3_steps % 1000) % 100) / 10) % 10);
-//        send[3] = '\n';
-//        send_String(send);
-        
-        
-        
-        
-        
+
+
     }
 }
 
@@ -231,12 +206,18 @@ void send_String(const char *out) {
     }
 }
 
-unsigned int mot_3_step_count (unsigned int l, unsigned int ms) {
+unsigned int mot_3_step_count(unsigned int l, unsigned int ms) {
     // lenght: 5 numbers, in mm, multiplied by 100, ex: 50,33 mm= 05033
-    return (ms*l)/2;
+    return (ms * l) / 2;
 }
 
 //unsigned long int real_turns(unsigned int turn) {
 //    return (turn*7437)/1000;
 //}
 
+void zero_mark() {
+    DIR_3 = 1; // Start to the right
+    T1CONbits.TMR1ON = 0; // Disable timer1 (marking zero)
+    T0CONbits.TMR0ON = 1; // Enable timer0 (winding control)
+    zero_flag = false;
+}

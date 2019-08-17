@@ -70,7 +70,17 @@ void InitApp(void) {
     T0CONbits.T0CS = 0; // Internal instruction cycle clock source
     T0CONbits.PSA = 0; // Prescaler is assigned
     T0CONbits.T0PS = 0b101; // Prescaler value 1:64
+    T0CONbits.TMR0ON = 0; // Disable by default
     TMR0 = 0x6; // Preload value
+    /* TMR1 */
+    PIE1bits.TMR1IE = 1;
+    PIR1bits.TMR1IF = 0;
+    IPR1bits.TMR1IP = 1;
+    T1CONbits.TMR1CS = 0;
+    T1CONbits.T1CKPS = 0b00;
+    T1CONbits.TMR1ON = 1; // Enable by default
+    
+    
     /* Limit switch */
     TRISBbits.RB1 = 1; // INT1 input
     TRISBbits.RB2 = 1; // INT2 input
