@@ -4389,19 +4389,16 @@ unsigned int mot_4_steps = 0;
 unsigned int turns_count = 0;
 extern bool param_flag;
 extern bool zero_flag;
-extern bool finish;
+extern bool winding;
 extern unsigned int length;
 extern unsigned int turns;
 
 
 
-
-unsigned int zero_count = 0;
-
-# 66
 void trans_Char(char out);
 unsigned int mot_3_step_count(unsigned int l, unsigned int ms);
 
+void finish();
 
 
 
@@ -4426,12 +4423,13 @@ if (mot_1_steps == 200) {
 mot_1_steps = 0;
 turns_count++;
 }
+if (turns_count == turns) {
 
-# 99
+finish();
 }
 }
+}
 
-# 107
 if (MOT_3) {
 
 if (MOT_3_count == count_3) {
@@ -4447,15 +4445,27 @@ mot_3_steps = 0;
 }
 }
 
-# 130
+# 117
 } else if (PIR1bits.TMR1IF) {
 
-if(MOT_3) {
-LATCbits.LC1 = !PORTCbits.RC1;
-}
 PIR1bits.TMR1IF = 0;
 TMR1 = 0xD8F0;
-zero_count++;
+if (MOT_3) {
+
+LATCbits.LC1 = !PORTCbits.RC1;
+}
+
+
+
+if (MOT_2) {
+
+if (MOT_2_count == count_2) {
+LATAbits.LA5 = !PORTAbits.RA5;
+MOT_2_count = 0;
+}
+}
+
+
 
 } else if (PIR1bits.RCIF) {
 
@@ -4472,14 +4482,14 @@ n = 0;
 
 PIR1bits.ADIF = 0;
 
-# 158
+# 157
 ADC_value_press = ADRES;
 
 } else if (INTCON3bits.INT1IF) {
 
 INTCON3bits.INT1IF = 0;
 
-if (param_flag) {
+if (winding) {
 
 MOT_1 = 0;
 MOT_2 = 0;
@@ -4495,7 +4505,7 @@ DIR_3 = !DIR_3;
 
 INTCON3bits.INT2IF = 0;
 
-if (param_flag) {
+if (winding) {
 
 MOT_1 = 0;
 MOT_2 = 0;

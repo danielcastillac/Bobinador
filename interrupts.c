@@ -50,22 +50,16 @@ unsigned int mot_4_steps = 0;
 unsigned int turns_count = 0;
 extern bool param_flag;
 extern bool zero_flag;
-extern bool finish;
+extern bool winding;
 extern unsigned int length;
 extern unsigned int turns;
-
-
-
-
-unsigned int zero_count = 0;
-
-
 
 
 /* Function prototypes */
 void trans_Char(char out);
 unsigned int mot_3_step_count(unsigned int l, unsigned int ms);
 //unsigned long int real_turns(unsigned int turn);
+void finish();
 
 /* High-priority service */
 
@@ -90,20 +84,13 @@ void interrupt high_isr(void) {
                     mot_1_steps = 0; // Restart step counter
                     turns_count++;
                 }
-//                if (turns_count == turns) {
-//                    // Max number of turns reached
-//                    MOT_1 = 0;
-//                    MOT_3 = 0;
-//                    trans_Char('0');
-//                }
+                if (turns_count == turns) {
+                    // Max number of turns reached
+                    finish();
+                }
             }
         }
-        //        if (MOT_2) {
-        //            if (MOT_2_count == count_2) {
-        //                LATAbits.LA5 = !PORTAbits.RA5;
-        //                MOT_2_count = 0;
-        //            }
-        //        }
+
         if (MOT_3) {
             // MOTOR 3 CONTROL ROUTINE
             if (MOT_3_count == count_3) {
@@ -118,32 +105,44 @@ void interrupt high_isr(void) {
                 }
             }
         }
-//        if (MOT_4) {
-//            if (MOT_4_count == count_4) {
-//                LATBbits.LB6 = !PORTBbits.RB6;
-//                MOT_4_count = 0;
-//                mot_4_steps++;
-//
-//            }
-//        }
+        //        if (MOT_4) {
+        //            if (MOT_4_count == count_4) {
+        //                LATBbits.LB6 = !PORTBbits.RB6;
+        //                MOT_4_count = 0;
+        //                mot_4_steps++;
+        //
+        //            }
+        //        }
 
     } else if (PIR1bits.TMR1IF) {
         // Mark zero routine
-        if(MOT_3) {
-            LATCbits.LC1 = !PORTCbits.RC1;
-        }
         PIR1bits.TMR1IF = 0;
         TMR1 = 0xD8F0;
-        zero_count++;
+        if (MOT_3) {
+            // Zero marking control routine
+            LATCbits.LC1 = !PORTCbits.RC1;
+        }
         
+
+
+        if (MOT_2) {
+            // Feeding motor control when unwinding
+            if (MOT_2_count == count_2) {
+                LATAbits.LA5 = !PORTAbits.RA5;
+                MOT_2_count = 0;
+            }
+        }
+
+
+
     } else if (PIR1bits.RCIF) {
         /* Recieve bluetooth ISR */
         PIR1bits.RCIF = 0; // Restart Recieve interrupt flag
         palabra[n] = RCREG; // Save recieve char in buffer variable
         n++;
         if (RCREG == '\n') {
-                        TXREG = palabra[0]; // Retransmit to check connection
-                        while (TXIF == 0);
+            TXREG = palabra[0]; // Retransmit to check connection
+            while (TXIF == 0);
             recibi = 1;
             n = 0;
         }
@@ -161,7 +160,7 @@ void interrupt high_isr(void) {
         /* Limit switch 1 ISR */
         INTCON3bits.INT1IF = 0;
         // PARAR MOVIMIENTO EN LA DIRECTION CUANDO SE RECIBA BANDERA
-        if (param_flag) {
+        if (winding) {
             // If there is a problem, shut down every motor
             MOT_1 = 0;
             MOT_2 = 0;
@@ -177,7 +176,7 @@ void interrupt high_isr(void) {
         /* Limit switch 2 ISR */
         INTCON3bits.INT2IF = 0;
         // PARAR MOVIMIENTO EN LA DIRECTION CUANDO SE RECIBA BANDERA
-        if (param_flag) {
+        if (winding) {
             // If there is a problem, shut down every motor
             MOT_1 = 0;
             MOT_2 = 0;

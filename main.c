@@ -37,16 +37,15 @@ bool MOT_3 = 0; // Move motor 3 flag
 bool MOT_4 = 0; // Move motor 4 flag
 /* Parameters */
 unsigned int caliber;
-unsigned int diameter;
 unsigned int length = 9250;
 unsigned int turns = 4000;
-unsigned int speed;
 unsigned int PWM_duty = 50;
 
 bool param_flag = false; // If it has recieved parameters
 bool zero_flag = true; // If it is in marking zero mode (default mode)
-bool finish = false; // If machine has finished winding
-bool enable = 0; // Motor 1 on/2 off by default
+bool finish_flag = false; // If machine has finished winding
+bool enable = 0; // Motor 1 on/ 2 off by default
+bool winding = 0; // Currently windiing flag
 
 /* i.e. uint8_t <variable_name>; */
 extern unsigned int overflow;
@@ -62,6 +61,8 @@ extern unsigned int count_4;
 extern char send[7];
 extern unsigned int mot_3_steps;
 extern unsigned int mot_4_steps;
+extern unsigned int count_1;
+extern unsigned int count_3;
 unsigned int mot_4_step_count;
 
 /******************************************************************************/
@@ -72,6 +73,8 @@ unsigned int mot_3_step_count(unsigned int l, unsigned int ms);
 //unsigned long int real_turns(unsigned int turn);
 void send_String(const char *out);
 void zero_mark();
+void unwind();
+void finish();
 /******************************************************************************/
 
 void main(void) {
@@ -88,8 +91,8 @@ void main(void) {
         LATAbits.LA4 = DIR_2; // Set motor 2 direction
         LATCbits.LC0 = DIR_3; // Set motor 3 direction
         LATBbits.LB7 = DIR_4; // Set motor 4 direction
-        LATBbits.LB5 = enable;
-        LATBbits.LB4 = !enable;
+        LATBbits.LB5 = enable; // Enable mot_1 by default
+        LATBbits.LB4 = !enable; // Disable mot_2 by default
 
         if (recibi == 1) {
             /* Bluetooth reception routine */
@@ -139,6 +142,9 @@ void main(void) {
             } else if (palabra[0] == 'N') {
                 // Switch between Mot1/Mot2 turn on/off
                 enable = !enable;
+            } else if (palabra[0] == 'W') {
+                // Unwind routine if necessary
+                unwind();
             }
 
         } else if (GODONE == 0) {
@@ -171,14 +177,34 @@ unsigned int mot_3_step_count(unsigned int l, unsigned int ms) {
 }
 
 void zero_mark() {
+    // Post-zero marked routine
     DIR_3 = 1; // Start to the right
     T1CONbits.TMR1ON = 0; // Disable timer1 (marking zero)
     T0CONbits.TMR0ON = 1; // Enable timer0 (winding control)
-    zero_flag = false;
-    MOT_1 = 1;
-    MOT_3 = 1;
+    zero_flag = false; // Exit zero marking mode
+    winding = true; // Enter winding mode
+    MOT_1 = true;
+    MOT_3 = true;
 }
 
 //unsigned long int real_turns(unsigned int turn) {
 //    return (turn*7437)/1000;
 //}
+
+void unwind() {
+    // Unwind current winding
+    enable = !enable; // Disable Motor 1, Enable Motor 2
+    T1CONbits.TMR1ON = 1; // Enable timer1 (marking zero)
+    T0CONbits.TMR0ON = 0; // Disable timer0 (winding control)
+    MOT_3 = 0;
+    MOT_2 = 1;
+}
+
+void finish() {
+    // When finished winding, routine
+    T1CONbits.TMR1ON = 1; // Disable timer1 (marking zero)
+    T0CONbits.TMR0ON = 0; // Enable timer0 (winding control)
+    MOT_1 = MOT_3 = 0; // Shutdown motors
+    winding = false; // Exit winding mode
+    finish_flag = true;
+}

@@ -4379,16 +4379,15 @@ bool MOT_3 = 0;
 bool MOT_4 = 0;
 
 unsigned int caliber;
-unsigned int diameter;
 unsigned int length = 9250;
 unsigned int turns = 4000;
-unsigned int speed;
 unsigned int PWM_duty = 50;
 
 bool param_flag = 0;
 bool zero_flag = 1;
-bool finish = 0;
+bool finish_flag = 0;
 bool enable = 0;
+bool winding = 0;
 
 
 extern unsigned int overflow;
@@ -4404,6 +4403,8 @@ extern unsigned int count_4;
 extern char send[7];
 extern unsigned int mot_3_steps;
 extern unsigned int mot_4_steps;
+extern unsigned int count_1;
+extern unsigned int count_3;
 unsigned int mot_4_step_count;
 
 
@@ -4414,6 +4415,8 @@ unsigned int mot_3_step_count(unsigned int l, unsigned int ms);
 
 void send_String(const char *out);
 void zero_mark();
+void unwind();
+void finish();
 
 
 void main(void) {
@@ -4481,6 +4484,9 @@ MOT_3 = !MOT_3;
 } else if (palabra[0] == 'N') {
 
 enable = !enable;
+} else if (palabra[0] == 'W') {
+
+unwind();
 }
 
 } else if (GODONE == 0) {
@@ -4513,11 +4519,31 @@ return (ms * l) / 2;
 }
 
 void zero_mark() {
+
 DIR_3 = 1;
 T1CONbits.TMR1ON = 0;
 T0CONbits.TMR0ON = 1;
 zero_flag = 0;
+winding = 1;
 MOT_1 = 1;
 MOT_3 = 1;
 }
 
+# 194
+void unwind() {
+
+enable = !enable;
+T1CONbits.TMR1ON = 1;
+T0CONbits.TMR0ON = 0;
+MOT_3 = 0;
+MOT_2 = 1;
+}
+
+void finish() {
+
+T1CONbits.TMR1ON = 1;
+T0CONbits.TMR0ON = 0;
+MOT_1 = MOT_3 = 0;
+winding = 0;
+finish_flag = 1;
+}
