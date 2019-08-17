@@ -4409,21 +4409,6 @@ MOT_2_count++;
 MOT_3_count++;
 MOT_4_count++;
 
-if (MOT_3) {
-if (MOT_3_count == count_3) {
-LATCbits.LC1 = !PORTCbits.RC1;
-MOT_3_count = 0;
-if (zero_flag == 1) {
-
-mot_3_steps++;
-if (mot_3_steps == mot_3_step_count(length, 1)) {
-DIR_3 = !DIR_3;
-mot_3_steps = 0;
-}
-}
-}
-}
-
 if (MOT_1) {
 if (MOT_1_count == count_1) {
 LATAbits.LA3 = !PORTAbits.RA3;
@@ -4440,8 +4425,6 @@ if (turns_count == (turns)) {
 finish = 1;
 }
 }
-
-
 }
 }
 if (MOT_2) {
@@ -4450,7 +4433,20 @@ LATAbits.LA5 = !PORTAbits.RA5;
 MOT_2_count = 0;
 }
 }
+if (MOT_3) {
+if (MOT_3_count == count_3) {
+LATCbits.LC1 = !PORTCbits.RC1;
+MOT_3_count = 0;
+if (zero_flag == 1) {
 
+mot_3_steps++;
+if (mot_3_steps >= mot_3_step_count(length, 1)) {
+DIR_3 = !DIR_3;
+mot_3_steps = 0;
+}
+}
+}
+}
 if (MOT_4) {
 if (MOT_4_count == count_4) {
 LATBbits.LB6 = !PORTBbits.RB6;
@@ -4466,8 +4462,8 @@ PIR1bits.RCIF = 0;
 palabra[n] = RCREG;
 n++;
 if (RCREG == '\n') {
-TXREG = palabra[0];
-while (TXIF == 0);
+
+
 recibi = 1;
 n = 0;
 }
@@ -4475,7 +4471,7 @@ n = 0;
 
 PIR1bits.ADIF = 0;
 
-# 143
+# 139
 ADC_value_press = ADRES;
 
 } else if (INTCON3bits.INT1IF) {
@@ -4488,7 +4484,7 @@ MOT_1 = 0;
 MOT_2 = 0;
 MOT_3 = 0;
 MOT_4 = 0;
-trans_Char('1');
+
 } else {
 
 DIR_3 = !DIR_3;
@@ -4504,7 +4500,7 @@ MOT_1 = 0;
 MOT_2 = 0;
 MOT_3 = 0;
 MOT_4 = 0;
-trans_Char('1');
+
 } else {
 
 DIR_3 = !DIR_3;

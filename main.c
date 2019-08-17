@@ -71,7 +71,7 @@ bool enable = 0; // Motor 1 on/2 off by default
 void trans_Char(char out);
 unsigned int mot_3_step_count (unsigned int l, unsigned int ms);
 //unsigned long int real_turns(unsigned int turn);
-//void send_String(const char *out);
+void send_String(const char *out);
 //void ADCfunction(char canalf);
 
 /******************************************************************************/
@@ -98,12 +98,13 @@ void main(void) {
         //            while (TXIF == 0);
         //        }
 
-//        MOT_1 = 1;
+        MOT_1 = 1;
 //        MOT_3 = 1;
         
         if (recibi == 1) {
             /* Bluetooth reception routine */
             recibi = 0; // Turn down reception flag
+//            MOT_1 = 1;
 
             if (palabra[0] == 'B') {
                 // Its controlling LED intensity
@@ -133,7 +134,7 @@ void main(void) {
                 } else if (palabra[1] == '2') {
                     // Mark zero
                     MOT_3 = false;
-
+                    DIR_3 = 1;
                     zero_flag = true;
                 }
 
@@ -180,17 +181,19 @@ void main(void) {
 //            mot_3_steps = 0;
 //        }
         
-        if (mot_4_steps == mot_4_step_count && busy_flag) {
-            // When reached numbers of steps, stop pressure motor
-            MOT_4 = 0;
-        }
+//        if (mot_4_steps == mot_4_step_count && busy_flag) {
+//            // When reached numbers of steps, stop pressure motor
+//            MOT_4 = 0;
+//        }
         
         if (zero_flag) {          
             // If zero
-//            __delay_ms(500);
-            MOT_1 = MOT_3 = 1;
+            
+//            MOT_1 = 1;
+//            __delay_ms(1);
+            MOT_3 = 1;
            
-            DIR_3 = 1;
+//            DIR_3 = 1;
         }
         
         
@@ -201,7 +204,11 @@ void main(void) {
             finish = 0;
         }
         
-        
+//        send[0] = '0' + ((mot_3_steps % 1000) / 100);
+//        send[1] = '0' + (((mot_3_steps % 1000) % 100) / 10);
+//        send[2] = '0' + ((((mot_3_steps % 1000) % 100) / 10) % 10);
+//        send[3] = '\n';
+//        send_String(send);
         
         
         
@@ -217,12 +224,12 @@ void trans_Char(char out) {
     TXREG = out;
 }
 
-//void send_String(const char *out) {
-//    while (*out != '\0') {
-//        trans_Char(*out);
-//        out++;
-//    }
-//}
+void send_String(const char *out) {
+    while (*out != '\0') {
+        trans_Char(*out);
+        out++;
+    }
+}
 
 unsigned int mot_3_step_count (unsigned int l, unsigned int ms) {
     // lenght: 5 numbers, in mm, multiplied by 100, ex: 50,33 mm= 05033

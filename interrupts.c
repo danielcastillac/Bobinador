@@ -69,8 +69,6 @@ void interrupt high_isr(void) {
         MOT_2_count++;
         MOT_3_count++;
         MOT_4_count++;
-
-
         
         if (MOT_1) {
             if (MOT_1_count == count_1) {
@@ -87,9 +85,7 @@ void interrupt high_isr(void) {
                     if (turns_count == (turns)) {
                         finish = true;
                     }
-                }
-                
-
+                }                
             }
         }
         if (MOT_2) {
@@ -105,7 +101,7 @@ void interrupt high_isr(void) {
                 if (zero_flag == true) {
                     // Termino de marcar cero, empiece a contar pasos
                     mot_3_steps++;
-                    if (mot_3_steps == mot_3_step_count(length, 1)) {
+                    if (mot_3_steps >= mot_3_step_count(length, 1)) {
                         DIR_3 = !DIR_3;
                         mot_3_steps = 0;
                     }
@@ -127,8 +123,8 @@ void interrupt high_isr(void) {
         palabra[n] = RCREG; // Save recieve char in buffer variable
         n++;
         if (RCREG == '\n') {
-            TXREG = palabra[0]; // Retransmit to check connection
-            while (TXIF == 0);
+//            TXREG = palabra[0]; // Retransmit to check connection
+//            while (TXIF == 0);
             recibi = 1;
             n = 0;
         }
@@ -152,7 +148,7 @@ void interrupt high_isr(void) {
             MOT_2 = 0;
             MOT_3 = 0;
             MOT_4 = 0;
-            trans_Char('1'); // Send failure alert to app
+//            trans_Char('1'); // Send failure alert to app
         } else {
             // Is marking zero
             DIR_3 = !DIR_3;
@@ -168,7 +164,7 @@ void interrupt high_isr(void) {
             MOT_2 = 0;
             MOT_3 = 0;
             MOT_4 = 0;
-            trans_Char('1'); // Send failure alert to app
+//            trans_Char('1'); // Send failure alert to app
         } else {
             // Is marking zero
             DIR_3 = !DIR_3;

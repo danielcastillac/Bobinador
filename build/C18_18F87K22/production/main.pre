@@ -4410,7 +4410,11 @@ bool enable = 0;
 void trans_Char(char out);
 unsigned int mot_3_step_count (unsigned int l, unsigned int ms);
 
-# 79
+void send_String(const char *out);
+
+
+
+
 void main(void) {
 
 ConfigureOscillator();
@@ -4428,10 +4432,14 @@ LATBbits.LB7 = DIR_4;
 LATBbits.LB5 = enable;
 LATBbits.LB4 = !enable;
 
-# 104
+# 101
+MOT_1 = 1;
+
+
 if (recibi == 1) {
 
 recibi = 0;
+
 
 if (palabra[0] == 'B') {
 
@@ -4461,7 +4469,7 @@ DIR_3 = 1;
 } else if (palabra[1] == '2') {
 
 MOT_3 = 0;
-
+DIR_3 = 1;
 zero_flag = 1;
 }
 
@@ -4492,21 +4500,18 @@ _delay((unsigned long)((4)*(8000000/4000.0)));
 
 GODONE = 1;
 
-# 174
+# 175
 }
 
-# 183
-if (mot_4_steps == mot_4_step_count && busy_flag) {
-
-MOT_4 = 0;
-}
-
+# 189
 if (zero_flag) {
 
 
-MOT_1 = MOT_3 = 1;
 
-DIR_3 = 1;
+
+MOT_3 = 1;
+
+
 }
 
 
@@ -4516,6 +4521,8 @@ MOT_3 = 0;
 trans_Char('Z');
 finish = 0;
 }
+
+# 217
 }
 }
 
@@ -4526,7 +4533,13 @@ while (TXIF == 0);
 TXREG = out;
 }
 
-# 220
+void send_String(const char *out) {
+while (*out != '\0') {
+trans_Char(*out);
+out++;
+}
+}
+
 unsigned int mot_3_step_count (unsigned int l, unsigned int ms) {
 
 return (ms*l)/2;
