@@ -4387,7 +4387,7 @@ unsigned int mot_1_steps = 0;
 unsigned int mot_3_steps = 0;
 unsigned int mot_4_steps = 0;
 unsigned int turns_count = 0;
-extern bool busy_flag;
+extern bool param_flag;
 extern bool zero_flag;
 extern bool finish;
 extern unsigned int length;
@@ -4416,6 +4416,7 @@ MOT_3_count++;
 MOT_4_count++;
 
 if (MOT_1) {
+
 if (MOT_1_count == count_1) {
 MOT_1_count = 0;
 LATAbits.LA3 = !PORTAbits.RA3;
@@ -4426,12 +4427,13 @@ mot_1_steps = 0;
 turns_count++;
 }
 
-# 98
+# 99
 }
 }
 
-# 106
+# 107
 if (MOT_3) {
+
 if (MOT_3_count == count_3) {
 MOT_3_count = 0;
 LATCbits.LC1 = !PORTCbits.RC1;
@@ -4445,14 +4447,13 @@ mot_3_steps = 0;
 }
 }
 
-# 128
+# 130
 } else if (PIR1bits.TMR1IF) {
 
 if(MOT_3) {
 LATCbits.LC1 = !PORTCbits.RC1;
 }
 PIR1bits.TMR1IF = 0;
-
 TMR1 = 0xD8F0;
 zero_count++;
 
@@ -4462,8 +4463,8 @@ PIR1bits.RCIF = 0;
 palabra[n] = RCREG;
 n++;
 if (RCREG == '\n') {
-
-
+TXREG = palabra[0];
+while (TXIF == 0);
 recibi = 1;
 n = 0;
 }
@@ -4471,14 +4472,14 @@ n = 0;
 
 PIR1bits.ADIF = 0;
 
-# 157
+# 158
 ADC_value_press = ADRES;
 
 } else if (INTCON3bits.INT1IF) {
 
 INTCON3bits.INT1IF = 0;
 
-if (busy_flag) {
+if (param_flag) {
 
 MOT_1 = 0;
 MOT_2 = 0;
@@ -4494,7 +4495,7 @@ DIR_3 = !DIR_3;
 
 INTCON3bits.INT2IF = 0;
 
-if (busy_flag) {
+if (param_flag) {
 
 MOT_1 = 0;
 MOT_2 = 0;

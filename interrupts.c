@@ -48,7 +48,7 @@ unsigned int mot_1_steps = 0;
 unsigned int mot_3_steps = 0;
 unsigned int mot_4_steps = 0;
 unsigned int turns_count = 0;
-extern bool busy_flag;
+extern bool param_flag;
 extern bool zero_flag;
 extern bool finish;
 extern unsigned int length;
@@ -80,6 +80,7 @@ void interrupt high_isr(void) {
         MOT_4_count++;
 
         if (MOT_1) {
+            // MOTOR 1 CONTROL ROUTINE
             if (MOT_1_count == count_1) {
                 MOT_1_count = 0; // Restart counter
                 LATAbits.LA3 = !PORTAbits.RA3;
@@ -104,6 +105,7 @@ void interrupt high_isr(void) {
         //            }
         //        }
         if (MOT_3) {
+            // MOTOR 3 CONTROL ROUTINE
             if (MOT_3_count == count_3) {
                 MOT_3_count = 0; // Restart counter
                 LATCbits.LC1 = !PORTCbits.RC1;
@@ -131,7 +133,6 @@ void interrupt high_isr(void) {
             LATCbits.LC1 = !PORTCbits.RC1;
         }
         PIR1bits.TMR1IF = 0;
-//        TMR1 = 0xB1E0;
         TMR1 = 0xD8F0;
         zero_count++;
         
@@ -141,8 +142,8 @@ void interrupt high_isr(void) {
         palabra[n] = RCREG; // Save recieve char in buffer variable
         n++;
         if (RCREG == '\n') {
-            //            TXREG = palabra[0]; // Retransmit to check connection
-            //            while (TXIF == 0);
+                        TXREG = palabra[0]; // Retransmit to check connection
+                        while (TXIF == 0);
             recibi = 1;
             n = 0;
         }
@@ -160,7 +161,7 @@ void interrupt high_isr(void) {
         /* Limit switch 1 ISR */
         INTCON3bits.INT1IF = 0;
         // PARAR MOVIMIENTO EN LA DIRECTION CUANDO SE RECIBA BANDERA
-        if (busy_flag) {
+        if (param_flag) {
             // If there is a problem, shut down every motor
             MOT_1 = 0;
             MOT_2 = 0;
@@ -176,7 +177,7 @@ void interrupt high_isr(void) {
         /* Limit switch 2 ISR */
         INTCON3bits.INT2IF = 0;
         // PARAR MOVIMIENTO EN LA DIRECTION CUANDO SE RECIBA BANDERA
-        if (busy_flag) {
+        if (param_flag) {
             // If there is a problem, shut down every motor
             MOT_1 = 0;
             MOT_2 = 0;

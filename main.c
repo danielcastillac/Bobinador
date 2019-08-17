@@ -27,7 +27,7 @@
 unsigned int motor1 = 1; // Cycle number for motor 1
 unsigned int motor2; // Cycle number for motor 2
 bool RA0state = false; // Current state of STEP pin for motor 1
-bool DIR_1 = 1; // Direction of motor 1
+bool DIR_1 = 0; // Direction of motor 1
 bool DIR_2 = 0; // Direction of motor 2
 bool DIR_3 = 0; // Direction of motor 3
 bool DIR_4 = 0; // Direction of motor 4
@@ -43,9 +43,10 @@ unsigned int turns = 4000;
 unsigned int speed;
 unsigned int PWM_duty = 50;
 
-bool busy_flag = false;
-bool zero_flag = true;
-bool finish = false;
+bool param_flag = false; // If it has recieved parameters
+bool zero_flag = true; // If it is in marking zero mode (default mode)
+bool finish = false; // If machine has finished winding
+bool enable = 0; // Motor 1 on/2 off by default
 
 /* i.e. uint8_t <variable_name>; */
 extern unsigned int overflow;
@@ -62,10 +63,8 @@ extern char send[7];
 extern unsigned int mot_3_steps;
 extern unsigned int mot_4_steps;
 unsigned int mot_4_step_count;
-bool enable = 0; // Motor 1 on/2 off by default
 
 /******************************************************************************/
-/* Main Program                                                               */
 /* Function prototypes */
 //int ADC_get(char channel);
 void trans_Char(char out);
@@ -92,33 +91,21 @@ void main(void) {
         LATBbits.LB5 = enable;
         LATBbits.LB4 = !enable;
 
-        //        if (busy_flag) {
-        //            TXREG = 'C'; // Transmit -Currently working- flag to mobile app
-        //            while (TXIF == 0);
-        //        }
-
-
         if (recibi == 1) {
             /* Bluetooth reception routine */
             recibi = 0; // Turn down reception flag
-            //            MOT_1 = 1;
 
-            if (palabra[0] == 'B') {
-                // Its controlling LED intensity
-                PWM_duty = ((palabra[1] - 48) * 10) + ((palabra[2] - 48));
-            } else if (palabra[0] == 'A') {
+            if (palabra[0] == 'A') {
                 // Its trasmiting the parameters
                 caliber = ((palabra[1] - 48) * 10) + ((palabra[2] - 48)); // 2 digits
-                diameter = ((palabra[3] - 48) * 1000) + ((palabra[4] - 48) * 100) + ((palabra[5] - 48) * 10) + ((palabra[6] - 48)); // 4 digits (int not float)
-                length = ((palabra[7] - 48) * 10000) + ((palabra[8] - 48) * 1000) + ((palabra[9] - 48) * 100) + ((palabra[10] - 48) * 10) + ((palabra[11] - 48)); // 5 digits (int not float)
-                turns = ((palabra[12] - 48) * 1000) + ((palabra[13] - 48) * 100) + ((palabra[14] - 48) * 10) + ((palabra[15] - 48)); // 4 digits
-                speed = palabra[15]; // 1 digit: 1: low; 2: medium, 3: high
+                length = ((palabra[3] - 48) * 10000) + ((palabra[4] - 48) * 1000) + ((palabra[5] - 48) * 100) + ((palabra[6] - 48) * 10) + ((palabra[7] - 48)); // 5 digits (int not float)
+                turns = ((palabra[8] - 48) * 1000) + ((palabra[9] - 48) * 100) + ((palabra[10] - 48) * 10) + ((palabra[11] - 48)); // 4 digits
 
-                busy_flag = true; // Machine is currently working
-            } else if (palabra[0] == 'C') {
-                // Switch between Mot1/Mot2 turn on/off
-                enable = !enable;
-            } else if ((palabra[0] == 'D') && (zero_flag)) { // && !busy_flag
+                param_flag = true; // Machine has parameters
+            } else if (palabra[0] == 'B') {
+                // Its controlling LED intensity
+                PWM_duty = ((palabra[1] - 48) * 10) + ((palabra[2] - 48));
+            }  else if ((palabra[0] == 'D') && (zero_flag)) { // && !param_flag
                 // Move cart manually to mark zero
                 if (palabra[1] == '0') {
                     // Move cart right
@@ -133,11 +120,10 @@ void main(void) {
                     MOT_3 = false;
                 } else if (palabra[1] == '3') {
                     // Mark zero
-                    if (MOT_3 == 0) {
-                        // Only mark zero if the cart isn't moving
+                    if ((MOT_3 == 0) && (param_flag)) {
+                        // Only mark zero if the cart isn't moving and it has recieved parameters
                         zero_mark();
                     }
-
                 }
 
             /* FOR DEBUGGING ONLY !!!!!!! */
@@ -150,44 +136,17 @@ void main(void) {
                 } else if (palabra[1] == '3') {
                     MOT_3 = !MOT_3;
                 }
+            } else if (palabra[0] == 'N') {
+                // Switch between Mot1/Mot2 turn on/off
+                enable = !enable;
             }
-
 
         } else if (GODONE == 0) {
             /* Restart ADC data gattering */
             __delay_ms(4); // Wait to next conversion
             //            ADCON0bits.CHS = !ADCON0bits.CHS; // Change channel
             GODONE = 1;
-            //            send[0] = 'A';
-            //            send[1] = '0' + (mot_3_steps / 1000);
-            //            send[2] = '0' + ((mot_3_steps % 1000) / 100);
-            //            send[3] = '0' + (((mot_3_steps % 1000) % 100) / 10);
-            //            send[4] = '0' + ((((mot_3_steps % 1000) % 100) / 10) % 10);
-            //            
-            //            send[5] = '\n';
-            //            send_String(send);
         }
-
-        //        if (mot_3_steps == 10) { // mot_3_step_count(length, 1)
-        //            // Reached end of given winding
-        //            MOT_3 = 0;
-        ////            DIR_3 = !DIR_3;
-        //            mot_3_steps = 0;
-        //        }
-
-        //        if (mot_4_steps == mot_4_step_count && busy_flag) {
-        //            // When reached numbers of steps, stop pressure motor
-        //            MOT_4 = 0;
-        //        }
-
-        //        send[0] = '0' + ((mot_3_steps % 1000) / 100);
-        //        send[1] = '0' + (((mot_3_steps % 1000) % 100) / 10);
-        //        send[2] = '0' + ((((mot_3_steps % 1000) % 100) / 10) % 10);
-        //        send[3] = '\n';
-        //        send_String(send);
-
-        
-
 
     }
 }
@@ -211,10 +170,6 @@ unsigned int mot_3_step_count(unsigned int l, unsigned int ms) {
     return (ms * l) / 2;
 }
 
-//unsigned long int real_turns(unsigned int turn) {
-//    return (turn*7437)/1000;
-//}
-
 void zero_mark() {
     DIR_3 = 1; // Start to the right
     T1CONbits.TMR1ON = 0; // Disable timer1 (marking zero)
@@ -223,3 +178,7 @@ void zero_mark() {
     MOT_1 = 1;
     MOT_3 = 1;
 }
+
+//unsigned long int real_turns(unsigned int turn) {
+//    return (turn*7437)/1000;
+//}
