@@ -34,7 +34,7 @@ bool DIR_4 = 0; // Direction of motor 4
 bool MOT_1 = 0; // Move motor 1 flag
 bool MOT_2 = 0; // Move motor 2 flag
 bool MOT_3 = 0; // Move motor 3 flag
-bool MOT_4 = 0; // Move motor 4 flag
+bool MOT_4 = 1; // Move motor 4 flag
 /* Parameters */
 unsigned int caliber;
 unsigned int length = 9250;
@@ -46,6 +46,7 @@ bool zero_flag = true; // If it is in marking zero mode (default mode)
 bool finish_flag = false; // If machine has finished winding
 bool enable = 0; // Motor 1 on/ 2 off by default
 bool winding = 0; // Currently windiing flag
+bool move_4 = 0; // Move motor 4 flag
 
 /* i.e. uint8_t <variable_name>; */
 extern unsigned int overflow;
@@ -64,6 +65,7 @@ extern unsigned int mot_4_steps;
 extern unsigned int count_1;
 extern unsigned int count_3;
 unsigned int mot_4_step_count;
+unsigned int steps_4 = 0;
 
 /******************************************************************************/
 /* Function prototypes */
@@ -148,6 +150,21 @@ void main(void) {
                 unwind();
             } else if (palabra[0] == 'R') {
                 reset();
+            } else if (palabra[0] == 'E') {
+                if (palabra[1] == 'D') {
+                    // Move up N steps
+                    DIR_4 = true;
+                    steps_4 = ((palabra[2] - 48) * 10) + ((palabra[3] - 48));
+                    trans_Char(palabra[3]);
+                    move_4 = true;
+                } else if (palabra[1] == 'I') {
+                    // Move down N steps
+                    DIR_4 = false;
+                    steps_4 = ((palabra[2] - 48) * 10) + ((palabra[3] - 48));
+                    trans_Char(palabra[3]);
+                    move_4 = true;
+                }
+                
             }
 
         } else if (GODONE == 0) {

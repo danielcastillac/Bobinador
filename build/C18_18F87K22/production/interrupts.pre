@@ -4390,8 +4390,10 @@ unsigned int turns_count = 0;
 extern bool param_flag;
 extern bool zero_flag;
 extern bool winding;
+extern bool move_4;
 extern unsigned int length;
 extern unsigned int turns;
+extern unsigned int steps_4;
 
 
 
@@ -4445,25 +4447,35 @@ mot_3_steps = 0;
 }
 }
 
-# 117
+# 119
 } else if (PIR1bits.TMR1IF) {
 
 PIR1bits.TMR1IF = 0;
 TMR1 = 0xD8F0;
-if (MOT_3) {
-
-LATCbits.LC1 = !PORTCbits.RC1;
-}
-
-
-
 if (MOT_2) {
 
 LATAbits.LA5 = !PORTAbits.RA5;
 }
 
+if (MOT_3) {
 
+LATCbits.LC1 = !PORTCbits.RC1;
+}
 
+if (MOT_4) {
+
+if(move_4) {
+LATBbits.LB6 = !PORTBbits.RB6;
+
+if (mot_4_steps == 2*steps_4) {
+move_4 = 0;
+mot_4_steps = 0;
+}
+mot_4_steps++;
+}
+}
+
+# 151
 } else if (PIR1bits.RCIF) {
 
 PIR1bits.RCIF = 0;
@@ -4479,7 +4491,7 @@ n = 0;
 
 PIR1bits.ADIF = 0;
 
-# 154
+# 170
 ADC_value_press = ADRES;
 
 } else if (INTCON3bits.INT1IF) {

@@ -51,8 +51,10 @@ unsigned int turns_count = 0;
 extern bool param_flag;
 extern bool zero_flag;
 extern bool winding;
+extern bool move_4;
 extern unsigned int length;
 extern unsigned int turns;
+extern unsigned int steps_4;
 
 
 /* Function prototypes */
@@ -100,7 +102,7 @@ void interrupt high_isr(void) {
 
                 if (mot_3_steps == mot_3_step_count(length, 1)) {
                     // Change direction when mot_3 traveled length
-                    DIR_3 = !DIR_3;
+                    DIR_3 = !DIR_3; 
                     mot_3_steps = 0;
                 }
             }
@@ -118,17 +120,31 @@ void interrupt high_isr(void) {
         // Mark zero routine & unwind
         PIR1bits.TMR1IF = 0;
         TMR1 = 0xD8F0;
+        if (MOT_2) {
+            // Feeding motor control when unwinding
+            LATAbits.LA5 = !PORTAbits.RA5;
+        }
+        
         if (MOT_3) {
             // Zero marking control routine
             LATCbits.LC1 = !PORTCbits.RC1;
         }
         
-
-
-        if (MOT_2) {
-            // Feeding motor control when unwinding
-            LATAbits.LA5 = !PORTAbits.RA5;
+        if (MOT_4) {
+            // Pressure motor adjustment when marking zero
+            if(move_4) {
+                LATBbits.LB6 = !PORTBbits.RB6;
+                
+                if (mot_4_steps == 2*steps_4) {
+                    move_4 = false;
+                    mot_4_steps = 0;
+                }
+                mot_4_steps++;
+            }
         }
+
+
+
 
 
 
