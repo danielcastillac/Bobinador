@@ -78,6 +78,7 @@ void zero_mark();
 void unwind();
 void finish();
 void reset();
+void speed_select(unsigned int var);
 /******************************************************************************/
 
 void main(void) {
@@ -108,6 +109,7 @@ void main(void) {
                 turns = ((palabra[8] - 48) * 1000) + ((palabra[9] - 48) * 100) + ((palabra[10] - 48) * 10) + ((palabra[11] - 48)); // 4 digits
 
                 param_flag = true; // Machine has parameters
+                speed_select(caliber);
             } else if (palabra[0] == 'B') {
                 // Its controlling LED intensity
                 PWM_duty = ((palabra[1] - 48) * 10) + ((palabra[2] - 48));
@@ -154,14 +156,12 @@ void main(void) {
                 if (palabra[1] == 'D') {
                     // Move up N steps
                     DIR_4 = true;
-                    steps_4 = ((palabra[2] - 48) * 10) + ((palabra[3] - 48));
-                    trans_Char(palabra[3]);
+                    steps_4 = ((palabra[2] - 48) * 100) + ((palabra[3] - 48) * 10) + ((palabra[4] - 48));
                     move_4 = true;
                 } else if (palabra[1] == 'I') {
                     // Move down N steps
                     DIR_4 = false;
-                    steps_4 = ((palabra[2] - 48) * 10) + ((palabra[3] - 48));
-                    trans_Char(palabra[3]);
+                    steps_4 = ((palabra[2] - 48) * 100) + ((palabra[3] - 48) * 10) + ((palabra[4] - 48));
                     move_4 = true;
                 }
                 
@@ -172,6 +172,14 @@ void main(void) {
             __delay_ms(4); // Wait to next conversion
             //            ADCON0bits.CHS = !ADCON0bits.CHS; // Change channel
             GODONE = 1;
+            send[0] = 'A';
+            send[1] = '0' + (ADC_value_press / 1000);
+            send[2] = '0' + ((ADC_value_press % 1000) / 100);
+            send[3] = '0' + (((ADC_value_press % 1000) % 100) / 10);
+            send[4] = '0' + ((((ADC_value_press % 1000) % 100) / 10) % 10);
+            send[5] = '\n';
+            send_String(send);
+            
         }
 
     }
@@ -205,6 +213,8 @@ void zero_mark() {
     winding = true; // Enter winding mode
     MOT_1 = true;
     MOT_3 = true;
+    
+    
 }
 
 //unsigned long int real_turns(unsigned int turn) {
@@ -222,10 +232,14 @@ void unwind() {
 
 void finish() {
     // When finished winding, routine
-    T1CONbits.TMR1ON = 1; // Disable timer1 (marking zero)
-    T0CONbits.TMR0ON = 0; // Enable timer0 (winding control)
+    T1CONbits.TMR1ON = 1; // Enable timer1 (return pressure motor to default position)
+    T0CONbits.TMR0ON = 0; // Disable timer0 (winding control)
     MOT_1 = MOT_3 = 0; // Shutdown motors
     winding = false; // Exit winding mode
+    MOT_4 = true;
+    DIR_4 = true; // Up
+    move_4 = true;
+    
     finish_flag = true;
 }
 
@@ -233,4 +247,23 @@ void reset() {
     #asm 
     reset
     #endasm
+}
+
+void speed_select(unsigned int var) {
+    //  Select motor speed according to caliber
+    MOT_4 = true;
+    DIR_4 = false; // Down
+    switch (var) {
+        case 25:
+            // THIS ONE
+            count_1 = 2;
+            count_3 = 132;
+            steps_4 = 200;
+            break;
+        case 33:
+            
+            
+            steps_4 = 400;
+    }
+    move_4 = true;
 }

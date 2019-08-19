@@ -4420,6 +4420,7 @@ void zero_mark();
 void unwind();
 void finish();
 void reset();
+void speed_select(unsigned int var);
 
 
 void main(void) {
@@ -4450,6 +4451,7 @@ length = ((palabra[3] - 48) * 10000) + ((palabra[4] - 48) * 1000) + ((palabra[5]
 turns = ((palabra[8] - 48) * 1000) + ((palabra[9] - 48) * 100) + ((palabra[10] - 48) * 10) + ((palabra[11] - 48));
 
 param_flag = 1;
+speed_select(caliber);
 } else if (palabra[0] == 'B') {
 
 PWM_duty = ((palabra[1] - 48) * 10) + ((palabra[2] - 48));
@@ -4496,14 +4498,12 @@ reset();
 if (palabra[1] == 'D') {
 
 DIR_4 = 1;
-steps_4 = ((palabra[2] - 48) * 10) + ((palabra[3] - 48));
-trans_Char(palabra[3]);
+steps_4 = ((palabra[2] - 48) * 100) + ((palabra[3] - 48) * 10) + ((palabra[4] - 48));
 move_4 = 1;
 } else if (palabra[1] == 'I') {
 
 DIR_4 = 0;
-steps_4 = ((palabra[2] - 48) * 10) + ((palabra[3] - 48));
-trans_Char(palabra[3]);
+steps_4 = ((palabra[2] - 48) * 100) + ((palabra[3] - 48) * 10) + ((palabra[4] - 48));
 move_4 = 1;
 }
 
@@ -4514,6 +4514,14 @@ move_4 = 1;
 _delay((unsigned long)((4)*(8000000/4000.0)));
 
 GODONE = 1;
+send[0] = 'A';
+send[1] = '0' + (ADC_value_press / 1000);
+send[2] = '0' + ((ADC_value_press % 1000) / 100);
+send[3] = '0' + (((ADC_value_press % 1000) % 100) / 10);
+send[4] = '0' + ((((ADC_value_press % 1000) % 100) / 10) % 10);
+send[5] = '\n';
+send_String(send);
+
 }
 
 }
@@ -4547,9 +4555,11 @@ zero_flag = 0;
 winding = 1;
 MOT_1 = 1;
 MOT_3 = 1;
+
+
 }
 
-# 214
+# 224
 void unwind() {
 
 enable = !enable;
@@ -4565,13 +4575,36 @@ T1CONbits.TMR1ON = 1;
 T0CONbits.TMR0ON = 0;
 MOT_1 = MOT_3 = 0;
 winding = 0;
+MOT_4 = 1;
+DIR_4 = 1;
+move_4 = 1;
+
 finish_flag = 1;
 }
 
 void reset() {
 
-# 233
+# 247
 #asm
     reset
 #endasm 
     }
+
+void speed_select(unsigned int var) {
+
+MOT_4 = 1;
+DIR_4 = 0;
+switch (var) {
+case 25:
+
+count_1 = 2;
+count_3 = 132;
+steps_4 = 200;
+break;
+case 33:
+
+
+steps_4 = 400;
+}
+move_4 = 1;
+}
