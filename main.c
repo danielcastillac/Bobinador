@@ -160,6 +160,8 @@ void main(void) {
                 } else if (palabra[1] == '3') {
                     // Finish unwinding
                     unwind_flag == false;
+                    MOT_3 = false;
+                    MOT_2 = false;
                 }
             }                /* FOR DEBUGGING ONLY !!!!!!! */
             else if (palabra[0] == 'M') {
