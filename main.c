@@ -47,6 +47,7 @@ bool finish_flag = false; // If machine has finished winding
 bool enable = 0; // Motor 1 on/ 2 off by default
 bool winding = 0; // Currently windiing flag
 bool move_4 = 0; // Move motor 4 flag
+bool unwind_flag = 0;
 
 /* i.e. uint8_t <variable_name>; */
 extern unsigned int overflow;
@@ -66,6 +67,7 @@ extern unsigned int count_1;
 extern unsigned int count_3;
 unsigned int mot_4_step_count;
 unsigned int steps_4 = 0;
+unsigned int ADC_previous_value = 0;
 
 /******************************************************************************/
 /* Function prototypes */
@@ -79,6 +81,8 @@ void unwind();
 void finish();
 void reset();
 void speed_select(unsigned int var);
+unsigned int abs(int a);
+
 /******************************************************************************/
 
 void main(void) {
@@ -105,15 +109,15 @@ void main(void) {
             if (palabra[0] == 'A') {
                 // Its trasmiting the parameters
                 caliber = ((palabra[1] - 48) * 10) + ((palabra[2] - 48)); // 2 digits
-                length = ((palabra[3] - 48) * 10000) + ((palabra[4] - 48) * 1000) + ((palabra[5] - 48) * 100) + ((palabra[6] - 48) * 10) + ((palabra[7] - 48)); // 5 digits (int not float)
-                turns = ((palabra[8] - 48) * 1000) + ((palabra[9] - 48) * 100) + ((palabra[10] - 48) * 10) + ((palabra[11] - 48)); // 4 digits
+                length = ((palabra[3] - 48) * 1000) + ((palabra[4] - 48) * 100) + ((palabra[5] - 48) * 10) + ((palabra[6] - 48)); // 5 digits (int not float)
+                turns = ((palabra[7] - 48) * 1000) + ((palabra[8] - 48) * 100) + ((palabra[9] - 48) * 10) + ((palabra[10] - 48)); // 4 digits
 
                 param_flag = true; // Machine has parameters
                 speed_select(caliber);
             } else if (palabra[0] == 'B') {
                 // Its controlling LED intensity
                 PWM_duty = ((palabra[1] - 48) * 10) + ((palabra[2] - 48));
-            }  else if ((palabra[0] == 'D') && (zero_flag)) { // && !param_flag
+            } else if ((palabra[0] == 'D') && (zero_flag)) { // && !param_flag
                 // Move cart manually to mark zero
                 if (palabra[1] == '0') {
                     // Move cart right
@@ -133,9 +137,32 @@ void main(void) {
                         zero_mark();
                     }
                 }
-
-            /* FOR DEBUGGING ONLY !!!!!!! */
-            } else if (palabra[0] == 'M') {
+            } else if (palabra[0] == 'Q') {
+                // Tell app machine is currently winding
+                if (winding) {
+                    trans_Char('N');
+                } else {
+                    trans_Char('Y');
+                }
+            } else if ((palabra[0] == 'D') && (unwind_flag)) {
+                // Unwind cart control routine
+                if (palabra[1] == '0') {
+                    // Move cart right
+                    MOT_3 = true;
+                    DIR_3 = false;
+                } else if (palabra[1] == '1') {
+                    // Move cart left
+                    MOT_3 = true;
+                    DIR_3 = true;
+                } else if (palabra[1] == '2') {
+                    // Stop cart
+                    MOT_3 = false;
+                } else if (palabra[1] == '3') {
+                    // Finish unwinding
+                    unwind_flag == false;
+                }
+            }                /* FOR DEBUGGING ONLY !!!!!!! */
+            else if (palabra[0] == 'M') {
                 // Turn on/off given motor
                 if (palabra[1] == '1') {
                     MOT_1 = !MOT_1;
@@ -164,7 +191,7 @@ void main(void) {
                     steps_4 = ((palabra[2] - 48) * 100) + ((palabra[3] - 48) * 10) + ((palabra[4] - 48));
                     move_4 = true;
                 }
-                
+
             }
 
         } else if (GODONE == 0) {
@@ -172,14 +199,19 @@ void main(void) {
             __delay_ms(4); // Wait to next conversion
             //            ADCON0bits.CHS = !ADCON0bits.CHS; // Change channel
             GODONE = 1;
-            send[0] = 'A';
-            send[1] = '0' + (ADC_value_press / 1000);
-            send[2] = '0' + ((ADC_value_press % 1000) / 100);
-            send[3] = '0' + (((ADC_value_press % 1000) % 100) / 10);
-            send[4] = '0' + ((((ADC_value_press % 1000) % 100) / 10) % 10);
-            send[5] = '\n';
-            send_String(send);
-            
+            //            send[0] = 'A';
+            //            send[1] = '0' + (ADC_value_press / 1000);
+            //            send[2] = '0' + ((ADC_value_press % 1000) / 100);
+            //            send[3] = '0' + (((ADC_value_press % 1000) % 100) / 10);
+            //            send[4] = '0' + ((((ADC_value_press % 1000) % 100) / 10) % 10);
+            //            send[5] = '\n';
+            //            send_String(send);
+
+        }
+
+        if (abs(ADC_previous_value - ADC_value_press) <= 20) {
+            // Sudden pressure change routine
+            finish();
         }
 
     }
@@ -213,8 +245,8 @@ void zero_mark() {
     winding = true; // Enter winding mode
     MOT_1 = true;
     MOT_3 = true;
-    
-    
+
+
 }
 
 //unsigned long int real_turns(unsigned int turn) {
@@ -228,6 +260,7 @@ void unwind() {
     T0CONbits.TMR0ON = 0; // Disable timer0 (winding control)
     MOT_3 = 0;
     MOT_2 = 1;
+    unwind_flag = true;
 }
 
 void finish() {
@@ -239,14 +272,14 @@ void finish() {
     MOT_4 = true;
     DIR_4 = true; // Up
     move_4 = true;
-    
+
     finish_flag = true;
 }
 
 void reset() {
-    #asm 
+#asm 
     reset
-    #endasm
+#endasm
 }
 
 void speed_select(unsigned int var) {
@@ -261,9 +294,17 @@ void speed_select(unsigned int var) {
             steps_4 = 200;
             break;
         case 33:
-            
-            
+
+
             steps_4 = 400;
     }
     move_4 = true;
+}
+
+unsigned int abs(int a) {
+    if (a >= 0) {
+        return a;
+    } else {
+        return -a;
+    }
 }

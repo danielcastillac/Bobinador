@@ -55,6 +55,7 @@ extern bool move_4;
 extern unsigned int length;
 extern unsigned int turns;
 extern unsigned int steps_4;
+extern unsigned int ADC_previous_value;
 
 
 /* Function prototypes */
@@ -167,6 +168,7 @@ void interrupt high_isr(void) {
         //        } else if (ADCON0bits.CHS == 0b0001) {
         //            ADC_value_dist = ADRES;
         //        }
+        ADC_previous_value = ADC_value_press;
         ADC_value_press = ADRES;
 
     } else if (INTCON3bits.INT1IF) {
@@ -174,12 +176,12 @@ void interrupt high_isr(void) {
         INTCON3bits.INT1IF = 0;
         // PARAR MOVIMIENTO EN LA DIRECTION CUANDO SE RECIBA BANDERA
         if (winding) {
-            // If there is a problem, shut down every motor
-            MOT_1 = 0;
-            MOT_2 = 0;
-            MOT_3 = 0;
-            MOT_4 = 0;
-            //            trans_Char('1'); // Send failure alert to app
+            // If there is a problem, execute finish routine
+            finish();
+//            MOT_1 = 0;
+//            MOT_2 = 0;
+//            MOT_3 = 0;
+//            MOT_4 = 0;
         } else {
             // Is marking zero
             DIR_3 = !DIR_3;
@@ -190,12 +192,12 @@ void interrupt high_isr(void) {
         INTCON3bits.INT2IF = 0;
         // PARAR MOVIMIENTO EN LA DIRECTION CUANDO SE RECIBA BANDERA
         if (winding) {
-            // If there is a problem, shut down every motor
-            MOT_1 = 0;
-            MOT_2 = 0;
-            MOT_3 = 0;
-            MOT_4 = 0;
-            //            trans_Char('1'); // Send failure alert to app
+            // If there is a problem, execute finish routine
+            finish();
+//            MOT_1 = 0;
+//            MOT_2 = 0;
+//            MOT_3 = 0;
+//            MOT_4 = 0;
         } else {
             // Is marking zero
             DIR_3 = !DIR_3;
