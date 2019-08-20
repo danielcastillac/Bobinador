@@ -64,6 +64,7 @@ unsigned int mot_3_step_count(unsigned int l, unsigned int ms);
 //unsigned long int real_turns(unsigned int turn);
 void finish();
 
+
 /* High-priority service */
 
 void interrupt high_isr(void) {
@@ -87,7 +88,7 @@ void interrupt high_isr(void) {
                     mot_1_steps = 0; // Restart step counter
                     turns_count++;
                 }
-                if (turns_count == turns) {
+                if (turns_count == 8*turns) {
                     // Max number of turns reached
                     finish();
                 }

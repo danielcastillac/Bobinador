@@ -4405,6 +4405,7 @@ void finish();
 
 
 
+
 void interrupt high_isr(void) {
 if (INTCONbits.TMR0IF) {
 
@@ -4426,7 +4427,7 @@ if (mot_1_steps == 200) {
 mot_1_steps = 0;
 turns_count++;
 }
-if (turns_count == turns) {
+if (turns_count == 8*turns) {
 
 finish();
 }
@@ -4448,7 +4449,7 @@ mot_3_steps = 0;
 }
 }
 
-# 120
+# 121
 } else if (PIR1bits.TMR1IF) {
 
 PIR1bits.TMR1IF = 0;
@@ -4476,7 +4477,7 @@ mot_4_steps++;
 }
 }
 
-# 152
+# 153
 } else if (PIR1bits.RCIF) {
 
 PIR1bits.RCIF = 0;
@@ -4492,7 +4493,7 @@ n = 0;
 
 PIR1bits.ADIF = 0;
 
-# 171
+# 172
 ADC_previous_value = ADC_value_press;
 ADC_value_press = ADRES;
 

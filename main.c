@@ -69,6 +69,7 @@ unsigned int mot_4_step_count;
 unsigned int steps_4 = 0;
 unsigned int ADC_previous_value = 0;
 
+
 /******************************************************************************/
 /* Function prototypes */
 //int ADC_get(char channel);
@@ -82,6 +83,7 @@ void finish();
 void reset();
 void speed_select(unsigned int var);
 unsigned int abs(int a);
+
 
 /******************************************************************************/
 
@@ -144,7 +146,8 @@ void main(void) {
                 } else {
                     trans_Char('Y');
                 }
-            } else if ((palabra[0] == 'D') && (unwind_flag)) {
+            } 
+                else if ((palabra[0] == 'D') && (unwind_flag)) {
                 // Unwind cart control routine
                 if (palabra[1] == '0') {
                     // Move cart right
@@ -163,7 +166,8 @@ void main(void) {
                     MOT_3 = false;
                     MOT_2 = false;
                 }
-            }                /* FOR DEBUGGING ONLY !!!!!!! */
+            }
+            /* FOR DEBUGGING ONLY !!!!!!! */
             else if (palabra[0] == 'M') {
                 // Turn on/off given motor
                 if (palabra[1] == '1') {
@@ -201,20 +205,20 @@ void main(void) {
             __delay_ms(4); // Wait to next conversion
             //            ADCON0bits.CHS = !ADCON0bits.CHS; // Change channel
             GODONE = 1;
-            //            send[0] = 'A';
-            //            send[1] = '0' + (ADC_value_press / 1000);
-            //            send[2] = '0' + ((ADC_value_press % 1000) / 100);
-            //            send[3] = '0' + (((ADC_value_press % 1000) % 100) / 10);
-            //            send[4] = '0' + ((((ADC_value_press % 1000) % 100) / 10) % 10);
-            //            send[5] = '\n';
-            //            send_String(send);
+//                        send[0] = 'A';
+//                        send[1] = '0' + (ADC_value_press / 1000);
+//                        send[2] = '0' + ((ADC_value_press % 1000) / 100);
+//                        send[3] = '0' + (((ADC_value_press % 1000) % 100) / 10);
+//                        send[4] = '0' + ((((ADC_value_press % 1000) % 100) / 10) % 10);
+//                        send[5] = '\n';
+//                        send_String(send);
 
         }
 
-        if (abs(ADC_previous_value - ADC_value_press) <= 20) {
-            // Sudden pressure change routine
-            finish();
-        }
+//        if (abs(ADC_previous_value - ADC_value_press) <= 20) {
+//            // Sudden pressure change routine
+//            finish();
+//        }
 
     }
 }
