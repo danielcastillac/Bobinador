@@ -4573,7 +4573,7 @@ return (ms * l) / 2;
 
 void zero_mark() {
 
-DIR_3 = 1;
+DIR_3 = 0;
 T1CONbits.TMR1ON = 0;
 T0CONbits.TMR0ON = 1;
 zero_flag = 0;
