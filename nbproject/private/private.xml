@@ -5,6 +5,8 @@
         <group>
             <file>file:/D:/Ingenieria_fisica/10_semestre/Taller%20V/PROYECTO/Bobinador/interrupts.c</file>
             <file>file:/D:/Ingenieria_fisica/10_semestre/Taller%20V/PROYECTO/Bobinador/main.c</file>
+            <file>file:/D:/Ingenieria_fisica/10_semestre/Taller%20V/PROYECTO/Bobinador/configuration_bits.c</file>
+            <file>file:/D:/Ingenieria_fisica/10_semestre/Taller%20V/PROYECTO/Bobinador/system.c</file>
             <file>file:/D:/Ingenieria_fisica/10_semestre/Taller%20V/PROYECTO/Bobinador/user.c</file>
         </group>
     </open-files>

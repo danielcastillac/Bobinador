@@ -122,11 +122,11 @@ void main(void) {
             } else if ((palabra[0] == 'D') && (zero_flag)) { // && !param_flag
                 // Move cart manually to mark zero
                 if (palabra[1] == '0') {
-                    // Move cart right
+                    // Move cart left
                     MOT_3 = true;
                     DIR_3 = false;
                 } else if (palabra[1] == '1') {
-                    // Move cart left
+                    // Move cart right
                     MOT_3 = true;
                     DIR_3 = true;
                 } else if (palabra[1] == '2') {
@@ -244,7 +244,7 @@ unsigned int mot_3_step_count(unsigned int l, unsigned int ms) {
 
 void zero_mark() {
     // Post-zero marked routine
-    DIR_3 = 0; // Start to the right
+    DIR_3 = 1; // Start to the right
     T1CONbits.TMR1ON = 0; // Disable timer1 (marking zero)
     T0CONbits.TMR0ON = 1; // Enable timer0 (winding control)
     zero_flag = false; // Exit zero marking mode

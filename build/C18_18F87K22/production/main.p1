@@ -3853,9 +3853,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 245: void zero_mark() {
 [e :U _zero_mark ]
 [f ]
-[; ;main.c: 247: DIR_3 = 0;
+[; ;main.c: 247: DIR_3 = 1;
 "247
-[e = _DIR_3 -> -> 0 `i `uc ]
+[e = _DIR_3 -> -> 1 `i `uc ]
 [; ;main.c: 248: T1CONbits.TMR1ON = 0;
 "248
 [e = . . _T1CONbits 1 0 -> -> 0 `i `uc ]
