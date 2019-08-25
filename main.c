@@ -166,6 +166,11 @@ void main(void) {
                     MOT_3 = false;
                     MOT_2 = false;
                 }
+            } else if (palabra[0] == 'F') {
+                // End winding
+                if (winding) {
+                    finish();
+                }
             }
             /* FOR DEBUGGING ONLY !!!!!!! */
             else if (palabra[0] == 'M') {

@@ -4505,6 +4505,11 @@ unwind_flag == 0;
 MOT_3 = 0;
 MOT_2 = 0;
 }
+} else if (palabra[0] == 'F') {
+
+if (winding) {
+finish();
+}
 }
 
 else if (palabra[0] == 'M') {
@@ -4545,10 +4550,10 @@ _delay((unsigned long)((4)*(8000000/4000.0)));
 
 GODONE = 1;
 
-# 216
+# 221
 }
 
-# 223
+# 228
 }
 }
 
@@ -4584,7 +4589,7 @@ MOT_3 = 1;
 
 }
 
-# 262
+# 267
 void unwind() {
 
 enable = !enable;
@@ -4610,7 +4615,7 @@ finish_flag = 1;
 
 void reset() {
 
-# 286
+# 291
 #asm
     reset
 #endasm 
