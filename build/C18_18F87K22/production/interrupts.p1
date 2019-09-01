@@ -139,10 +139,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _steps_4 `ui ~T0 @X0 0 e ]
 "4459 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [v _RCREG `Vuc ~T0 @X0 0 e@4014 ]
-"4447
-[v _TXREG `Vuc ~T0 @X0 0 e@4013 ]
-"8962
-[v _TXIF `Vb ~T0 @X0 0 e@31988 ]
 "58 interrupts.c
 [v _ADC_previous_value `ui ~T0 @X0 0 e ]
 "5602 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
@@ -3622,16 +3618,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 "158
 [e $ ! == -> _RCREG `ui -> 10 `ui 340  ]
 {
-[; ;interrupts.c: 159: TXREG = palabra[0];
-"159
-[e = _TXREG *U + &U _palabra * -> -> -> 0 `i `ui `ux -> -> # *U &U _palabra `ui `ux ]
-[; ;interrupts.c: 160: while (TXIF == 0);
-"160
-[e $U 341  ]
-[e :U 342 ]
-[e :U 341 ]
-[e $ == -> _TXIF `i -> 0 `i 342  ]
-[e :U 343 ]
 [; ;interrupts.c: 161: recibi = 1;
 "161
 [e = _recibi -> -> 1 `i `uc ]
@@ -3645,9 +3631,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [; ;interrupts.c: 163: }
 [; ;interrupts.c: 164: } else if (PIR1bits.ADIF) {
-[e $U 344  ]
+[e $U 341  ]
 [e :U 339 ]
-[e $ ! != -> . . _PIR1bits 0 6 `i -> -> -> 0 `i `Vuc `i 345  ]
+[e $ ! != -> . . _PIR1bits 0 6 `i -> -> -> 0 `i `Vuc `i 342  ]
 {
 [; ;interrupts.c: 166: PIR1bits.ADIF = 0;
 "166
@@ -3661,16 +3647,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 "175
 }
 [; ;interrupts.c: 175: } else if (INTCON3bits.INT1IF) {
-[e $U 346  ]
-[e :U 345 ]
-[e $ ! != -> . . _INTCON3bits 0 0 `i -> -> -> 0 `i `Vuc `i 347  ]
+[e $U 343  ]
+[e :U 342 ]
+[e $ ! != -> . . _INTCON3bits 0 0 `i -> -> -> 0 `i `Vuc `i 344  ]
 {
 [; ;interrupts.c: 177: INTCON3bits.INT1IF = 0;
 "177
 [e = . . _INTCON3bits 0 0 -> -> 0 `i `uc ]
 [; ;interrupts.c: 179: if (winding) {
 "179
-[e $ ! != -> _winding `i -> -> -> 0 `i `uc `i 348  ]
+[e $ ! != -> _winding `i -> -> -> 0 `i `uc `i 345  ]
 {
 [; ;interrupts.c: 181: finish();
 "181
@@ -3678,29 +3664,29 @@ Version 3.2 HI-TECH Software Intermediate Code
 "186
 }
 [; ;interrupts.c: 186: } else {
-[e $U 349  ]
-[e :U 348 ]
+[e $U 346  ]
+[e :U 345 ]
 {
 [; ;interrupts.c: 188: DIR_3 = !DIR_3;
 "188
 [e = _DIR_3 -> -> ! != -> _DIR_3 `i -> -> -> 0 `i `uc `i `i `uc ]
 "189
 }
-[e :U 349 ]
+[e :U 346 ]
 "191
 }
 [; ;interrupts.c: 189: }
 [; ;interrupts.c: 191: } else if (INTCON3bits.INT2IF) {
-[e $U 350  ]
-[e :U 347 ]
-[e $ ! != -> . . _INTCON3bits 0 1 `i -> -> -> 0 `i `Vuc `i 351  ]
+[e $U 347  ]
+[e :U 344 ]
+[e $ ! != -> . . _INTCON3bits 0 1 `i -> -> -> 0 `i `Vuc `i 348  ]
 {
 [; ;interrupts.c: 193: INTCON3bits.INT2IF = 0;
 "193
 [e = . . _INTCON3bits 0 1 -> -> 0 `i `uc ]
 [; ;interrupts.c: 195: if (winding) {
 "195
-[e $ ! != -> _winding `i -> -> -> 0 `i `uc `i 352  ]
+[e $ ! != -> _winding `i -> -> -> 0 `i `uc `i 349  ]
 {
 [; ;interrupts.c: 197: finish();
 "197
@@ -3708,22 +3694,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 "202
 }
 [; ;interrupts.c: 202: } else {
-[e $U 353  ]
-[e :U 352 ]
+[e $U 350  ]
+[e :U 349 ]
 {
 [; ;interrupts.c: 204: DIR_3 = !DIR_3;
 "204
 [e = _DIR_3 -> -> ! != -> _DIR_3 `i -> -> -> 0 `i `uc `i `i `uc ]
 "205
 }
-[e :U 353 ]
+[e :U 350 ]
 "207
 }
-[e :U 351 ]
+[e :U 348 ]
 "208
-[e :U 350 ]
-[e :U 346 ]
-[e :U 344 ]
+[e :U 347 ]
+[e :U 343 ]
+[e :U 341 ]
 [e :U 338 ]
 [e :U 331 ]
 [; ;interrupts.c: 205: }

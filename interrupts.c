@@ -156,8 +156,8 @@ void interrupt high_isr(void) {
         palabra[n] = RCREG; // Save recieve char in buffer variable
         n++;
         if (RCREG == '\n') {
-            TXREG = palabra[0]; // Retransmit to check connection
-            while (TXIF == 0);
+//            TXREG = palabra[0]; // Retransmit to check connection
+//            while (TXIF == 0);
             recibi = 1;
             n = 0;
         }

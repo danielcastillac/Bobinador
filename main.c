@@ -143,8 +143,10 @@ void main(void) {
                 // Tell app machine is currently winding
                 if (winding) {
                     trans_Char('N');
+                    trans_Char('\n');
                 } else {
                     trans_Char('Y');
+                    trans_Char('\n');
                 }
             } 
                 else if ((palabra[0] == 'D') && (unwind_flag)) {

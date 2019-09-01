@@ -4482,8 +4482,10 @@ zero_mark();
 
 if (winding) {
 trans_Char('N');
+trans_Char('\n');
 } else {
 trans_Char('Y');
+trans_Char('\n');
 }
 }
 else if ((palabra[0] == 'D') && (unwind_flag)) {
@@ -4550,10 +4552,10 @@ _delay((unsigned long)((4)*(8000000/4000.0)));
 
 GODONE = 1;
 
-# 221
+# 223
 }
 
-# 228
+# 230
 }
 }
 
@@ -4589,7 +4591,7 @@ MOT_3 = 1;
 
 }
 
-# 267
+# 269
 void unwind() {
 
 enable = !enable;
@@ -4615,7 +4617,7 @@ finish_flag = 1;
 
 void reset() {
 
-# 291
+# 293
 #asm
     reset
 #endasm 

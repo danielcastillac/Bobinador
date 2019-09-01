@@ -4484,8 +4484,8 @@ PIR1bits.RCIF = 0;
 palabra[n] = RCREG;
 n++;
 if (RCREG == '\n') {
-TXREG = palabra[0];
-while (TXIF == 0);
+
+
 recibi = 1;
 n = 0;
 }
